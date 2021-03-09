@@ -1,6 +1,6 @@
 import React from "react";
 import { AuthContext } from "./AuthContext";
-import { getUser } from "../service/auth.service";
+import { getUser } from "../service/user.service";
 
 export function useAuth() {
   return React.useContext(AuthContext);
