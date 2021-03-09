@@ -1,5 +1,5 @@
 import React from "react";
-import { login, logout, signup } from "../service/auth.service";
+import { login, logout, signup } from "../../service/auth.service";
 import {
   getLocalUser,
   saveUser,

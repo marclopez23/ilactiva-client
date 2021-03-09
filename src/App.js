@@ -1,11 +1,20 @@
 import React from "react";
-import "./App.scss";
+import { Switch, Route } from "react-router-dom";
+import Login from "./Views/Login/Login.js";
+import SignUp from "./Views/SignUp/SignUp";
+
+import AnonRoute from "./components/Routes/AnonRoute";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">App</header>
-    </div>
+    <Switch>
+      <AnonRoute exact path="/login">
+        <Login />
+      </AnonRoute>
+      <AnonRoute exact path="/signup">
+        <SignUp />
+      </AnonRoute>
+    </Switch>
   );
 }
 
