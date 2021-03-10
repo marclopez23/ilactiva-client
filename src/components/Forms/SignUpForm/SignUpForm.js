@@ -13,7 +13,7 @@ const SignUpForm = ({ onSubmit }) => {
 
   const [info, setInfo] = useState(initialState);
   const [step, setStep] = useState(1);
-
+  console.log(info);
   const handleCategory = (info) => {
     setInfo((state) => ({ ...state, category: [...state.category, info] }));
   };
@@ -39,8 +39,8 @@ const SignUpForm = ({ onSubmit }) => {
     <article>
       <form action="" onSubmit={handleSubmit}>
         {step === 1 && (
-          <div>
-            <label htmlFor="email">¿Comó te llamas?</label>
+          <div className="personal-info">
+            <label htmlFor="name">¿Comó te llamas?</label>
             <input
               type="text"
               name="name"
@@ -70,7 +70,7 @@ const SignUpForm = ({ onSubmit }) => {
           </div>
         )}
         {step === 2 && (
-          <div>
+          <div className="location">
             <label htmlFor="direction">¿En que distrito vives?</label>
             <select
               name="direction"
@@ -78,7 +78,11 @@ const SignUpForm = ({ onSubmit }) => {
               value={info.direction}
               onChange={handleChange}
               required
+              defaultValue={"DEFAULT"}
             >
+              <option value="DEFAULT" disabled>
+                Escoge una opción
+              </option>
               <option value="Ciutat Vella">Ciutat Vella</option>
               <option value="Eixample">Eixample</option>
               <option value="Sants-Montjuïc">Sants-Montjuïc</option>
@@ -93,7 +97,8 @@ const SignUpForm = ({ onSubmit }) => {
           </div>
         )}
         {step === 3 && (
-          <div>
+          <div className="category">
+            <h2>¿en que eventos te gustaria participar?</h2>
             <h3 onClick={() => handleCategory("talleres")}>Talleres</h3>
             <h3 onClick={() => handleCategory("deporte")}>Deporte</h3>
             <h3 onClick={() => handleCategory("exposiciones")}>Exposiciones</h3>

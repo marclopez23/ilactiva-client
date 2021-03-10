@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./SignUp.scss";
 import { useAuth } from "../../context/Auth/AuthContext.utils";
 import SignUpForm from "../../components/Forms/SignUpForm/SignUpForm";
+import SignUpCommerce from "../../components/Forms/SignUpCommerce/SignUpCommerce";
 
 const SignUp = () => {
   const { handleSignup } = useAuth();
@@ -25,7 +26,7 @@ const SignUp = () => {
     <main>
       {showForm ? (
         !isCommerce ? (
-          <p>Comercio</p>
+          <SignUpCommerce onSubmit={signupHandler} />
         ) : (
           <SignUpForm onSubmit={signupHandler} />
         )
