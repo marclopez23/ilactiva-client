@@ -32,7 +32,7 @@ function AuthProvider({ children }) {
       saveUser(loggedUser);
       setState({ user: { ...loggedUser, isLogged: true } });
     } catch (e) {
-      console.error(e);
+      console.error("error", e);
     }
   }, []);
 

@@ -12,17 +12,17 @@ const SignUpForm = ({ onSubmit }) => {
   };
   const [info, setInfo] = useState(initialState);
   const [step, setStep] = useState(1);
-  const [categories, setCategory] = useState([]);
+
   console.log(info);
-  const handleCategory = (category) => {
-    setCategory((state) => [...state, category]);
+  const handleCategory = (info) => {
+    setInfo((state) => ({ ...state, category: [...state.category, info] }));
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (step === 4) {
-      onSubmit(info);
-      setInfo({ email: "", password: "" });
+      onSubmit({ ...info });
+      setInfo(initialState);
       setStep(1);
     } else {
       setStep((state) => (state = state + 1));
@@ -93,9 +93,9 @@ const SignUpForm = ({ onSubmit }) => {
       )}
       {step === 3 && (
         <div>
-          <button onClick={() => handleCategory("1")}>Category 1</button>
-          <button onClick={() => handleCategory("2")}>Category 2</button>
-          <button onClick={() => handleCategory("3")}>Category 3</button>
+          <h3 onClick={() => handleCategory("1")}>Category 1</h3>
+          <h3 onClick={() => handleCategory("2")}>Category 2</h3>
+          <h3 onClick={() => handleCategory("3")}>Category 3</h3>
         </div>
       )}
       {step < 4 ? (
