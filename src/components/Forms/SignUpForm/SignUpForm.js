@@ -14,8 +14,14 @@ const SignUpForm = ({ onSubmit }) => {
   const [info, setInfo] = useState(initialState);
   const [step, setStep] = useState(1);
   console.log(info);
-  const handleCategory = (info) => {
-    setInfo((state) => ({ ...state, category: [...state.category, info] }));
+  const handleCategory = (cat) => {
+    if (info.category.includes(cat)) {
+      const newArr = info.category.filter((item) => item !== cat);
+      console.log(newArr);
+      setInfo((state) => ({ ...state, category: [...newArr] }));
+    } else {
+      setInfo((state) => ({ ...state, category: [...state.category, cat] }));
+    }
   };
 
   const handleSubmit = (event) => {
@@ -78,11 +84,8 @@ const SignUpForm = ({ onSubmit }) => {
               value={info.direction}
               onChange={handleChange}
               required
-              defaultValue={"DEFAULT"}
             >
-              <option value="DEFAULT" disabled>
-                Escoge una opción
-              </option>
+              <option disabled={info.direction}>Escoge una opción</option>
               <option value="Ciutat Vella">Ciutat Vella</option>
               <option value="Eixample">Eixample</option>
               <option value="Sants-Montjuïc">Sants-Montjuïc</option>
@@ -107,7 +110,19 @@ const SignUpForm = ({ onSubmit }) => {
         {step < 4 ? (
           <button>Next</button>
         ) : (
-          <input type="submit" value="Signup" />
+          <article className="confirmation">
+            <h2>Resumen de tus datos:</h2>
+            <p>Nombre: {info.name}</p>
+            <p>Correo electrónico: {info.email}</p>
+            <p>Vives en: {info.direction}</p>
+            <p>Te interesan eventos sobre:</p>
+            <ul>
+              {info.category.map((value) => (
+                <li key={value}>{value}</li>
+              ))}
+            </ul>
+            <input type="submit" value="Resgistrarme" />
+          </article>
         )}
       </form>
     </article>

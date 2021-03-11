@@ -31,14 +31,14 @@ const SignUpForm = ({ onSubmit }) => {
   };
 
   const deleteTags = (tagClicked) => {
-    const newTags = info.tags.filter((tag) => !tagClicked);
+    const newTags = info.tags.filter((tag) => tag !== tagClicked);
     setInfo((state) => ({ ...state, tags: newTags }));
   };
 
   const deleteSchedule = (scheduleClicked) => {
     console.log(scheduleClicked);
     const newSchedule = info.schedule.filter(
-      (schedule) => schedule === !scheduleClicked
+      (schedule) => schedule !== scheduleClicked
     );
     console.log(newSchedule);
     setInfo((state) => ({ ...state, schedule: newSchedule }));
@@ -51,7 +51,7 @@ const SignUpForm = ({ onSubmit }) => {
       setInfo(initialState);
       setStep(1);
     } else {
-      setStep((state) => (state = state + 1));
+      setStep((state) => (state += 1));
     }
   };
   const handleText = (event) => {
@@ -110,9 +110,8 @@ const SignUpForm = ({ onSubmit }) => {
               type="text"
               name="schedule"
               id="schedule"
-              value={info.text}
+              value={text}
               onChange={handleText}
-              required
             />
             <button onClick={(event) => saveIt("schedule", event)}>Save</button>
             <div className="horario">
@@ -131,11 +130,8 @@ const SignUpForm = ({ onSubmit }) => {
               value={info.neighbourhood}
               onChange={handleChange}
               required
-              defaultValue={"DEFAULT"}
             >
-              <option value="DEFAULT" disabled>
-                Escoge una opción
-              </option>
+              <option disabled={info.direction}>Escoge una opción</option>
               <option value="Ciutat Vella">Ciutat Vella</option>
               <option value="Eixample">Eixample</option>
               <option value="Sants-Montjuïc">Sants-Montjuïc</option>
@@ -167,11 +163,8 @@ const SignUpForm = ({ onSubmit }) => {
               value={info.category}
               onChange={handleChange}
               required
-              defaultValue={"DEFAULT"}
             >
-              <option value="DEFAULT" disabled>
-                Escoge una opción
-              </option>
+              <option disabled={info.direction}>Escoge una opción</option>
               <option value="talleres">Talleres</option>
               <option value="deporte">Deporte</option>
               <option value="exposiciones">Exposiciones</option>

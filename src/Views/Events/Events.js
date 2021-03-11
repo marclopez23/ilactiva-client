@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { getEvents } from "../../service/event.service";
+import { useEvents } from "../../context/Events/EventsContext.utils";
 
 const Events = () => {
-  const [events, setEvents] = useState([]);
-  console.log(events);
+  const [eventsList, setEvents] = useState([]);
+  const { events } = useEvents(); 
   useEffect(() => {
-    const fetchEvents = getEvents().then(({ data }) => setEvents(data));
+    setEvents(events);
   }, []);
-  return <h1>HOla</h1>;
+  return <h1>hola</h1>;
 };
 
 export default Events;
