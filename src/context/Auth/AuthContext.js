@@ -1,5 +1,5 @@
 import React from "react";
-import { login, logout, signup } from "../service/auth.service";
+import { login, logout, signup } from "../../service/auth.service";
 import {
   getLocalUser,
   saveUser,
@@ -32,7 +32,7 @@ function AuthProvider({ children }) {
       saveUser(loggedUser);
       setState({ user: { ...loggedUser, isLogged: true } });
     } catch (e) {
-      console.error(e);
+      console.error("error", e);
     }
   }, []);
 
