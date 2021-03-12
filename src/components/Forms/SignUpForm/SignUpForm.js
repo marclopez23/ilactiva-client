@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../Form.scss";
+import { uploadFileService } from "../../../service/upload.service";
 
 const SignUpForm = ({ onSubmit }) => {
   const initialState = {
@@ -9,11 +10,24 @@ const SignUpForm = ({ onSubmit }) => {
     direction: "",
     category: "",
     profileImg: "",
+    file: "",
   };
 
   const [info, setInfo] = useState(initialState);
   const [step, setStep] = useState(1);
-  console.log(info);
+  const [imageReady, setImageReady] = useState(false);
+  const handleUpload = async (e) => {
+    setImageReady(false);
+    console.log(e.target.files[0]);
+    const uploadData = new FormData();
+    uploadData.append("image", e.target.files[0]);
+
+    const { data } = await uploadFileService(uploadData);
+    console.log("File uploaded :>> ", data);
+    setInfo({ ...info, profileImg: data });
+    setImageReady(true);
+  };
+
   const handleCategory = (cat) => {
     if (info.category.includes(cat)) {
       const newArr = info.category.filter((item) => item !== cat);
@@ -30,6 +44,7 @@ const SignUpForm = ({ onSubmit }) => {
       onSubmit({ ...info });
       setInfo(initialState);
       setStep(1);
+      setImageReady(false);
     } else {
       setStep((state) => (state = state + 1));
     }
@@ -46,6 +61,14 @@ const SignUpForm = ({ onSubmit }) => {
       <form action="" onSubmit={handleSubmit}>
         {step === 1 && (
           <div className="personal-info">
+            <label htmlFor="file">Foto de Perfil</label>
+            <input
+              type="file"
+              name="file"
+              id="file"
+              value={info.file}
+              onChange={handleUpload}
+            />
             <label htmlFor="name">¿Comó te llamas?</label>
             <input
               type="text"
@@ -121,7 +144,7 @@ const SignUpForm = ({ onSubmit }) => {
                 <li key={value}>{value}</li>
               ))}
             </ul>
-            <input type="submit" value="Resgistrarme" />
+            <input type="submit" value="Resgistrarme" disabled={!imageReady} />
           </article>
         )}
       </form>

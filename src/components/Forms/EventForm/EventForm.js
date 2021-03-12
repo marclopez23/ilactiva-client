@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../Form.scss";
+import { uploadFileService } from "../../../service/upload.service";
 
 const EventForm = ({ onSubmit }) => {
   const initialState = {
@@ -10,10 +11,23 @@ const EventForm = ({ onSubmit }) => {
     free: false,
     price: 0,
     date: "",
+    file: "",
   };
   const [info, setInfo] = useState(initialState);
   const [itsFree, setFree] = useState(false);
   console.log(info);
+  const [imageReady, setImageReady] = useState(false);
+  const handleUpload = async (e) => {
+    setImageReady(false);
+    console.log(e.target.files[0]);
+    const uploadData = new FormData();
+    uploadData.append("image", e.target.files[0]);
+
+    const { data } = await uploadFileService(uploadData);
+    console.log("File uploaded :>> ", data);
+    setInfo({ ...info, eventImg: data });
+    setImageReady(true);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(info);
@@ -111,7 +125,16 @@ const EventForm = ({ onSubmit }) => {
           />
         </>
       )}
-      <input type="submit" value="Crear Evento" />
+      <label htmlFor="file">Foto de Evento</label>
+      <input
+        type="file"
+        name="file"
+        id="file"
+        value={info.file}
+        onChange={handleUpload}
+      />
+
+      <input type="submit" value="Crear Evento" disabled={!imageReady} />
     </form>
   );
 };

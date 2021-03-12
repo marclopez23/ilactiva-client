@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../Form.scss";
+import { uploadFileService } from "../../../service/upload.service";
 
 const SignUpForm = ({ onSubmit }) => {
   const initialState = {
@@ -9,7 +10,8 @@ const SignUpForm = ({ onSubmit }) => {
     direction: "",
     neighbourhood: "",
     category: "",
-    profileImg: "",
+    profileImg:
+      "https://res.cloudinary.com/dziruresn/image/upload/v1615567759/illactiva/commerce-avatar.jpg",
     description: "",
     tags: [],
     schedule: [],
@@ -17,13 +19,26 @@ const SignUpForm = ({ onSubmit }) => {
     facebook: "",
     twitter: "",
     isCommerce: true,
+    file: "",
+    web: "",
   };
 
   const [info, setInfo] = useState(initialState);
   const [step, setStep] = useState(1);
   const [text, setText] = useState("");
-  console.log(info);
+  const [imageReady, setImageReady] = useState(false);
 
+  const handleUpload = async (e) => {
+    setImageReady(false);
+    console.log(e.target.files[0]);
+    const uploadData = new FormData();
+    uploadData.append("image", e.target.files[0]);
+
+    const { data } = await uploadFileService(uploadData);
+    console.log("File uploaded :>> ", data);
+    setInfo({ ...info, profileImg: data });
+    setImageReady(true);
+  };
   const saveIt = (key, e) => {
     e.preventDefault();
     setInfo((state) => ({ ...state, [key]: [...state[key], text] }));
@@ -70,6 +85,15 @@ const SignUpForm = ({ onSubmit }) => {
       <form action="" onSubmit={handleSubmit}>
         {step === 1 && (
           <div className="personal-info">
+            <img src={info.profileImg} alt="logo" width="200" height="200" />
+            <label htmlFor="file">Sube tu logo</label>
+            <input
+              type="file"
+              name="file"
+              id="file"
+              value={info.file}
+              onChange={handleUpload}
+            />
             <label htmlFor="name">¿Comó se llama tu negocio?</label>
             <input
               type="text"
@@ -206,9 +230,17 @@ const SignUpForm = ({ onSubmit }) => {
               onChange={handleChange}
             />
             <p>Si quieres dinos cuales són las redes de tu negocio</p>
+            <label htmlFor="web">Web</label>
+            <input
+              type="url"
+              name="web"
+              id="web"
+              value={info.web}
+              onChange={handleChange}
+            />
             <label htmlFor="facebook">Facebook</label>
             <input
-              type="text"
+              type="url"
               name="facebook"
               id="facebook"
               value={info.facebook}
@@ -216,7 +248,7 @@ const SignUpForm = ({ onSubmit }) => {
             />
             <label htmlFor="twitter">Twitter</label>
             <input
-              type="text"
+              type="url"
               name="twitter"
               id="twitter"
               value={info.twitter}
@@ -224,7 +256,7 @@ const SignUpForm = ({ onSubmit }) => {
             />
             <label htmlFor="instagram">Instagram</label>
             <input
-              type="text"
+              type="url"
               name="instagram"
               id="instagram"
               value={info.instagram}
@@ -235,7 +267,7 @@ const SignUpForm = ({ onSubmit }) => {
         {step < 5 ? (
           <button>Next</button>
         ) : (
-          <input type="submit" value="Signup" />
+          <input type="submit" value="Signup" disabled={!imageReady} />
         )}
       </form>
     </article>
