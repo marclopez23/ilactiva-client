@@ -24,7 +24,7 @@ function App() {
         <AnonRoute exact path="/iniciar-sesion">
           <Login />
         </AnonRoute>
-        <AnonRoute exact path="/resgistarse">
+        <AnonRoute exact path="/registrarme">
           <SignUp />
         </AnonRoute>
         <Route exact path="/eventos/:id">

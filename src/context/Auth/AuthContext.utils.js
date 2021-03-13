@@ -20,6 +20,7 @@ export function defaultUser() {
     name: "",
     isLogged: false,
     avatar: "",
+    neighbourhood: "",
   };
 }
 

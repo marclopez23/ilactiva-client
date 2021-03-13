@@ -1,0 +1,23 @@
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/responsive.scss";
+
+.header {
+  background-color: $verdePrimario;
+  color: $blanco;
+  padding: 2.5rem 2rem;
+  @include toggle;
+  -webkit-clip-path: url(#my-clip-path);
+  clip-path: url(#my-clip-path);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  box-sizing: border-box;
+}
+
+.svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+}

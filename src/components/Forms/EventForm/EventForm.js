@@ -12,6 +12,8 @@ const EventForm = ({ onSubmit }) => {
     price: 0,
     date: "",
     file: "",
+    hour: "",
+    place: "",
   };
   const [info, setInfo] = useState(initialState);
   const [itsFree, setFree] = useState(false);
@@ -95,12 +97,30 @@ const EventForm = ({ onSubmit }) => {
         <option value="charlas">Charlas</option>
         <option value="otros">Otros</option>
       </select>
-      <label htmlFor="date">Date</label>
+      <label htmlFor="date">¿Que día lo organizas?</label>
       <input
         type="date"
         name="date"
         id="date"
         value={info.date}
+        onChange={handleChange}
+        required
+      />
+      <label htmlFor="date">¿A que hora sera?</label>
+      <input
+        type="time"
+        name="hour"
+        id="hour"
+        value={info.hour}
+        onChange={handleChange}
+        required
+      />
+      <label htmlFor="date">¿Dónde?</label>
+      <input
+        type="text"
+        name="place"
+        id="place"
+        value={info.place}
         onChange={handleChange}
         required
       />

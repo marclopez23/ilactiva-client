@@ -1,14 +1,14 @@
 @mixin cardEvento {
-  box-shadow: 1px 10px 10px rgba(102, 62, 51, 0.02),
-    8px 12px 14px rgba(102, 62, 51, 0.12);
+  box-shadow: 1px 10px 10px rgba(102, 62, 51, 0.02);
+  filter: 8px 12px 14px rgba(102, 62, 51, 0.12);
 }
 
 @mixin categoria {
-  box-shadow: 1px 10px 10px rgba(102, 62, 51, 0.02),
-    8px 12px 14px rgba(102, 62, 51, 0.12);
+  filter: 1px 10px 10px rgba(102, 62, 51, 0.02);
+  filter: 8px 12px 14px rgba(102, 62, 51, 0.12);
 }
 
 @mixin toggle {
-  filter: drop-shadow(0px 4px 4px rgba(50, 50, 71, 0.08)),
-    drop-shadow(0px 4px 8px rgba(50, 50, 71, 0.06));
+  filter: drop-shadow(0px 4px 4px rgba(50, 50, 71, 0.08));
+  filter: drop-shadow(0px 4px 8px rgba(50, 50, 71, 0.06));
 }

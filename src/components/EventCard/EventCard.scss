@@ -1,0 +1,32 @@
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/shadows.scss";
+
+.eventCard {
+  background-color: $blanco;
+  border-radius: 4px;
+  margin: 1rem 0 1rem 1rem;
+  width: 250px;
+  height: 268px;
+
+  @include cardEvento;
+  .eventImg {
+    height: 140px;
+    background-position: center;
+    background-size: cover;
+  }
+  .detail {
+    color: $gris;
+  }
+  .place {
+    color: $verdePrimario;
+  }
+}
+
+.last {
+  margin-right: 1rem;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
