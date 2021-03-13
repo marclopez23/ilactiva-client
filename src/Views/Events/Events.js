@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useEvents } from "../../context/Events/EventsContext.utils";
+import "./Events.scss";
 
 const Events = () => {
   const [eventsList, setEvents] = useState([]);
-  const { events } = useEvents(); 
+  const { events } = useEvents();
   useEffect(() => {
     setEvents(events);
   }, []);
-  return <h1>hola</h1>;
+  return (<main>
+    
+  </main>);
 };
 
 export default Events;

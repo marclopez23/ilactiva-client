@@ -1,0 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sarabun:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+
+//Mobile Styles
+
+html {
+  font-family: "Sarabun", sans-serif;
+}
+
+@mixin headline {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 2rem;
+}
+
+@mixin title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+@mixin subheader {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+@mixin body2 {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+@mixin body1 {
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+@mixin caption {
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+@mixin cardTitle {
+  line-height: 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@mixin botonLabel {
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+@mixin link {
+  font-size: 1rem;
+  font-weight: 600;
+}

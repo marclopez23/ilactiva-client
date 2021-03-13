@@ -16,7 +16,7 @@ const EventForm = ({ onSubmit }) => {
   const [info, setInfo] = useState(initialState);
   const [itsFree, setFree] = useState(false);
   console.log(info);
-  const [imageReady, setImageReady] = useState(false);
+  const [imageReady, setImageReady] = useState(true);
   const handleUpload = async (e) => {
     setImageReady(false);
     console.log(e.target.files[0]);

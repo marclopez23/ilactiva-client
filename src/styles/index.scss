@@ -1,0 +1,13 @@
+@import "./vars/color.scss";
+@import "./vars/font.scss";
+@import "./vars/shadows.scss";
+
+html {
+  background-color: $blancoSucio;
+  color: $negroPrimario;
+}
+
+.wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+}

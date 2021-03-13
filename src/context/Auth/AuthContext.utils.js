@@ -17,7 +17,9 @@ export function defaultUser() {
   return {
     id: null,
     email: "",
+    name: "",
     isLogged: false,
+    avatar: "",
   };
 }
 
