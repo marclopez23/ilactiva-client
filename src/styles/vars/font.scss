@@ -53,9 +53,10 @@ html {
   font-weight: 600;
 }
 
-.botonLabel {
+@mixin label {
   font-size: 1rem;
   font-weight: 600;
+  color: $negroPrimario;
 }
 
 .link {

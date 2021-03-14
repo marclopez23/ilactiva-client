@@ -1,0 +1,13 @@
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/shadows.scss";
+
+ .eventImg {
+    height: 30vh;
+    background-position: center;
+    background-size: cover;
+}
+
+h3{
+    text-transform: capitalize;
+}

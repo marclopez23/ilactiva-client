@@ -1,11 +1,11 @@
 @mixin cardEvento {
   box-shadow: 1px 10px 10px rgba(102, 62, 51, 0.02);
-  filter: drop-shadow(8px 12px 14px rgba(102, 62, 51, 0.12));
+  filter: drop-shadow(3px 4px 7px rgba(102, 62, 51, 0.12))
 }
 
 @mixin categoria {
-  filter: drop-shadow(1px 10px 10px rgba(102, 62, 51, 0.02));
-  filter: drop-shadow(8px 12px 14px rgba(102, 62, 51, 0.12));
+  filter: drop-shadow(3px 4px 7px rgba(102, 62, 51, 0.12));
+  filter: drop-shadow(3px 4px 7px rgba(102, 62, 51, 0.12));
 }
 
 @mixin toggle {

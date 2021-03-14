@@ -1,10 +1,57 @@
+@import "../../../styles/vars/color.scss";
+@import "../../../styles/mixins/buttons.scss";
 .categories {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   margin: 0 auto;
   padding: 1rem 2rem;
+  padding-bottom: 25%;
   .article {
     width: 50%;
   }
 }
+
+ .date, .info{
+  margin: 1rem;
+  padding-bottom: 25%;
+}
+
+#price, #maxUser{
+  width: 33%;
+}
+
+.check{
+  margin-bottom: 1rem;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  input{
+    margin: 0 0.5rem;
+    width: 20px;
+    height: 20px;
+  }
+
+  
+
+}
+
+.confirmation{
+ 
+    .send{
+      @include primaryButton;
+    }
+
+    .button{
+    padding: 1rem;
+    position: fixed;
+    background-color: #fcf5f3;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    box-sizing: border-box;
+    z-index: 1000;
+    }
+  }
+
+

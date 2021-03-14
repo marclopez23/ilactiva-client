@@ -40,7 +40,7 @@ function EventProvider({ children }) {
   }, []);
 
   return (
-    <EventContext.Provider value={{ events, bringEvent, newEvent }}>
+    <EventContext.Provider value={{ events, bringEvent, newEvent, setEvents }}>
       {children}
     </EventContext.Provider>
   );
