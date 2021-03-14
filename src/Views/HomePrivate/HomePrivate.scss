@@ -1,0 +1,32 @@
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/shadows.scss";
+
+.contenido {
+  h4 {
+    margin: 0 1rem;
+    .marker {
+      margin-right: 0.5rem;
+    }
+    span {
+      color: $verdePrimario;
+    }
+  }
+  .proximas {
+    margin-top: 2rem;
+    .topSection {
+      margin: 0 1rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .eventsList {
+      display: flex;
+      overflow: scroll;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

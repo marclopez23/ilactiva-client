@@ -20,6 +20,7 @@ function AuthProvider({ children }) {
     try {
       const { data: loggedUser } = await login(user);
       saveUser(loggedUser);
+      console.log(loggedUser);
       setState({ user: { ...loggedUser, isLogged: true } });
     } catch (e) {
       console.error(e);
