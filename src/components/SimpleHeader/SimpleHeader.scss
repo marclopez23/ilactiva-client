@@ -1,0 +1,17 @@
+@import "../../styles/vars/color.scss";
+
+.simpleHeader {
+  padding: 1rem;
+  position: fixed;
+  background-color: $blancoSucio;
+  width: 100%;
+  top: 0;
+  box-sizing: border-box;
+  z-index: 1000;
+  .close {
+    float: right;
+  }
+  h1 {
+    clear: both;
+  }
+}

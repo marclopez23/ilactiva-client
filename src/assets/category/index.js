@@ -1,0 +1,10 @@
+export { default as talleres } from "./talleres.svg"
+export { default as charlas } from "./charlas.svg";
+export { default as cine } from "./cine.svg";
+export { default as deportes } from "./deportes.svg";
+export { default as exposiciones } from "./exposiciones.svg";
+export { default as infantil } from "./infantil.svg";
+export { default as musica } from "./musica.svg";
+export { default as quedadas } from "./quedadas.svg";
+export { default as visitas } from "./visitas.svg";
+export { default as espectaculos } from "./espectaculos.svg";
