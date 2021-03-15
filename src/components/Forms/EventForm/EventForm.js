@@ -84,10 +84,11 @@ const EventForm = ({ onSubmit }) => {
     setInfo({ ...info, eventImg: data });
     setImageReady(true);
   };
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (step === 4) {
-      const newEvent = onSubmit({ ...info });
+      const newEvent = await onSubmit({ ...info });
+      console.log(newEvent);
       setInfo(initialState);
       setStep(1);
       setEvents((state) => [...state, newEvent]);

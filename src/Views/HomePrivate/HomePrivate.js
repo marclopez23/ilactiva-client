@@ -25,7 +25,7 @@ const HomePrivate = () => {
     <main>
       <Header
         headline={"¿Qué te apetece hacer?"}
-        subheader={`¡Hola, ${user.name.substring(0, user.name.indexOf(" "))}!`}
+        subheader={`¡Hola, ${user.name}!`}
       />
       <section className="contenido" style={{ marginTop: topMargin }}>
         <h4>

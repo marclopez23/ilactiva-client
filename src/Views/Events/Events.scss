@@ -1,3 +1,52 @@
 @import "../../styles/vars/font.scss";
 @import "../../styles/vars/color.scss";
 @import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/buttons.scss";
+
+.eventPage{ 
+.svgImg {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.eventImg{
+    -webkit-clip-path: url(#eventImg);
+  clip-path: url(#eventImg);
+}
+    .creator{
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+        .infoCreator{
+            display: flex;
+            align-items: center;
+            .creatorImg{
+                width: 50px;
+                clip-path: circle(23px at 24px 24px);
+                margin-right: 0.5rem;
+            }
+            .caption{
+                color: $verdePrimario
+            
+        }
+        
+        }
+        .follow{
+                @include primaryButton;
+                height: fit-content;
+                padding: 0.5rem 1rem;
+            }
+    }
+    .content{
+        .mainInfo{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .subheader{
+            color: $gris;
+        }
+    }
+}

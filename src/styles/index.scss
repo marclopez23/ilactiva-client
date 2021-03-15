@@ -16,3 +16,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
+
+main, section, div, article, body {
+  box-sizing: border-box;
+}

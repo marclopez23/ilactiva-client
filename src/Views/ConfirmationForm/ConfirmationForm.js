@@ -36,6 +36,7 @@ const ConfirmationForm = ({ info }) => {
           {maxUsers}
         </p>
         <p className="body1">{free ? "Evento Gratuito" : `Coste ${price}€`}</p>
+        <p className="body1">{description}</p>
       </section>
     </>
   );

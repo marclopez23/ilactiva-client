@@ -29,10 +29,9 @@ function EventProvider({ children }) {
 
   const newEvent = useCallback(async (info) => {
     try {
-      console.log(info);
       const postEvent = await createEvent(info);
       const { event: newEvent } = postEvent.data;
-      console.log(newEvent._id);
+      return newEvent;
     } catch (e) {
       console.log(e);
       return "Algo ha salido mal, porfavor vuelve a intentarlo";
