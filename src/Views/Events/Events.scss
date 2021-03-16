@@ -12,6 +12,17 @@
 .eventImg{
     -webkit-clip-path: url(#eventImg);
   clip-path: url(#eventImg);
+  .cross {
+    width: fit-content;
+    float: right;
+    padding: 1rem;
+    background-color: $blancoSucio;
+   clip-path: circle(18px at 33px 34px);
+    img.close {
+    float: right;
+}
+}
+  
 }
     .creator{
         padding: 1rem;
@@ -23,7 +34,7 @@
             display: flex;
             align-items: center;
             .creatorImg{
-                width: 50px;
+                width: 58px;
                 clip-path: circle(23px at 24px 24px);
                 margin-right: 0.5rem;
             }

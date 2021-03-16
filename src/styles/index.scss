@@ -2,6 +2,11 @@
 @import "./vars/font.scss";
 @import "./vars/shadows.scss";
 
+* {
+  box-sizing: border-box;
+  margin: unset;
+}
+
 html {
   background-color: $blancoSucio;
   color: $negroPrimario;
@@ -17,6 +22,6 @@ body {
   margin: 0 auto;
 }
 
-main, section, div, article, body {
+/*main, section, div, article, body {
   box-sizing: border-box;
-}
+}*/

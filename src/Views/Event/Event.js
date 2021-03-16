@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { Link, Route } from "react-router-dom";
+import { Link, Route, useHistory } from "react-router-dom";
+import cruz from "../../assets/cruz.svg";
 import { useParams } from "react-router-dom";
 import { useEvents } from "../../context/Events/EventsContext.utils";
+import { useAuth } from "../../context/Auth/AuthContext.utils";
 
 const Event = () => {
   const [event, setEvent] = useState({});
   const [creator, setCreator] = useState({});
   const { bringEvent } = useEvents();
   const { id } = useParams();
+  const history = useHistory();
+  const { user } = useAuth();
   useEffect(() => {
     const fetchEvent = bringEvent(id).then(({ data }) => {
       setEvent(data.event);
@@ -24,7 +28,16 @@ const Event = () => {
       <section
         className="eventImg"
         style={{ backgroundImage: `url(${event.eventImg})` }}
-      ></section>
+      >
+        <div className="cross">
+          <img
+            src={cruz}
+            className="close"
+            alt="close"
+            onClick={() => history.goBack()}
+          />
+        </div>
+      </section>
       <section className="creator">
         <div className="infoCreator">
           <img src={creator.profileImg} alt="creador" className="creatorImg" />
@@ -33,7 +46,11 @@ const Event = () => {
             <p className="caption">Organizador/a</p>
           </div>
         </div>
-        <button className="follow">Seguir</button>
+        {creator._id === user.id ? (
+          <button className="follow">Editar</button>
+        ) : (
+          <button className="follow">Seguir</button>
+        )}
       </section>
       <section className="content">
         <div className="mainInfo">
