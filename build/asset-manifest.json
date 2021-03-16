@@ -1,0 +1,36 @@
+{
+  "files": {
+    "main.css": "/static/css/main.bcef369e.chunk.css",
+    "main.js": "/static/js/main.75035ed4.chunk.js",
+    "main.js.map": "/static/js/main.75035ed4.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.d127ac51.js",
+    "runtime-main.js.map": "/static/js/runtime-main.d127ac51.js.map",
+    "static/js/2.83232ff8.chunk.js": "/static/js/2.83232ff8.chunk.js",
+    "static/js/2.83232ff8.chunk.js.map": "/static/js/2.83232ff8.chunk.js.map",
+    "static/js/3.78d440a6.chunk.js": "/static/js/3.78d440a6.chunk.js",
+    "static/js/3.78d440a6.chunk.js.map": "/static/js/3.78d440a6.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.bcef369e.chunk.css.map": "/static/css/main.bcef369e.chunk.css.map",
+    "static/js/2.83232ff8.chunk.js.LICENSE.txt": "/static/js/2.83232ff8.chunk.js.LICENSE.txt",
+    "static/media/charlas.2cdaa17c.svg": "/static/media/charlas.2cdaa17c.svg",
+    "static/media/chevron-left.3c968282.svg": "/static/media/chevron-left.3c968282.svg",
+    "static/media/chevron-right.2bb259c8.svg": "/static/media/chevron-right.2bb259c8.svg",
+    "static/media/cine.4401fd1c.svg": "/static/media/cine.4401fd1c.svg",
+    "static/media/cruz.d8a5b8a8.svg": "/static/media/cruz.d8a5b8a8.svg",
+    "static/media/deportes.fee80912.svg": "/static/media/deportes.fee80912.svg",
+    "static/media/espectaculos.f10925ce.svg": "/static/media/espectaculos.f10925ce.svg",
+    "static/media/exposiciones.3a5f9002.svg": "/static/media/exposiciones.3a5f9002.svg",
+    "static/media/infantil.01ab3020.svg": "/static/media/infantil.01ab3020.svg",
+    "static/media/marker.58180bf6.svg": "/static/media/marker.58180bf6.svg",
+    "static/media/musica.c866cfd2.svg": "/static/media/musica.c866cfd2.svg",
+    "static/media/quedadas.5e447471.svg": "/static/media/quedadas.5e447471.svg",
+    "static/media/talleres.ffe47298.svg": "/static/media/talleres.ffe47298.svg",
+    "static/media/visitas.4c4f73ad.svg": "/static/media/visitas.4c4f73ad.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d127ac51.js",
+    "static/js/2.83232ff8.chunk.js",
+    "static/css/main.bcef369e.chunk.css",
+    "static/js/main.75035ed4.chunk.js"
+  ]
+}
