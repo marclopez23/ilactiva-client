@@ -4,6 +4,7 @@ import {
   getEvents,
   editEvent,
   deleteEvent,
+  joinEvent,
   createEvent,
 } from "../../service/event.service";
 
@@ -38,8 +39,21 @@ function EventProvider({ children }) {
     }
   }, []);
 
+  const registerEvent = useCallback(async (id) => {
+    try {
+      const enterEvent = await joinEvent(id);
+      console.log(enterEvent);
+      return enterEvent;
+    } catch (e) {
+      console.log(e);
+      return "Algo ha salido mal, porfavor vuelve a intentarlo";
+    }
+  }, []);
+
   return (
-    <EventContext.Provider value={{ events, bringEvent, newEvent, setEvents }}>
+    <EventContext.Provider
+      value={{ events, bringEvent, newEvent, setEvents, registerEvent }}
+    >
       {children}
     </EventContext.Provider>
   );

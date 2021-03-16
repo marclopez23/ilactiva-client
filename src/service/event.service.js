@@ -14,3 +14,5 @@ export const editEvent = (id, info) => eventApi.patch(`/edit/${id}`, info);
 export const deleteEvent = (id) => eventApi.delete(`delete/${id}`);
 
 export const createEvent = (info) => eventApi.post("/create", info);
+
+export const joinEvent = (id) => eventApi.patch(`/join/${id}`);

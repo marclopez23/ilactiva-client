@@ -49,7 +49,12 @@ function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user: state.user, handleLogin, handleLogout, handleSignup }}
+      value={{
+        user: state.user,
+        handleLogin,
+        handleLogout,
+        handleSignup,
+      }}
     >
       {children}
     </AuthContext.Provider>

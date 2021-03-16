@@ -4,7 +4,8 @@ import cruz from "../../assets/cruz.svg";
 import { useParams } from "react-router-dom";
 import { useEvents } from "../../context/Events/EventsContext.utils";
 import { useAuth } from "../../context/Auth/AuthContext.utils";
-
+import Button from "../../components/Button/Button";
+import "./Event.scss";
 import marker from "../../assets/marker.svg";
 
 const Event = () => {
@@ -14,6 +15,8 @@ const Event = () => {
   const { id } = useParams();
   const history = useHistory();
   const { user } = useAuth();
+  const { registerEvent } = useEvents();
+
   useEffect(() => {
     const fetchEvent = bringEvent(id).then(({ data }) => {
       setEvent(data.event);
@@ -78,11 +81,12 @@ const Event = () => {
             <p className="caption">Organizador/a</p>
           </div>
         </div>
-        {creator._id === user.id ? (
-          <button className="follow">Editar</button>
-        ) : (
-          <button className="follow">Seguir</button>
-        )}
+        {user.isLogged &&
+          (creator._id === user.id ? (
+            <button className="follow">Editar</button>
+          ) : (
+            <button className="follow">Seguir</button>
+          ))}
       </section>
       <section className="content">
         <div className="mainInfo">
@@ -111,6 +115,25 @@ const Event = () => {
         </svg>
         <h2 className="cardTitle">Descripción del evento</h2>
         <p className="body1">{event.description}</p>
+      </section>
+      <section className="fixedButton">
+        {user.isLogged &&
+          (creator._id === user.id ? (
+            <Button copy="¡Eliminar!" primary={true} />
+          ) : (
+            <Button
+              copy="¡Apuntarme!"
+              primary={true}
+              onClick={() => registerEvent(id)}
+            />
+          ))}
+        {!user.isLogged && (
+          <Route>
+            <Link to="/iniciar-sesion" className="primary">
+              Inicia sesión para apuntarte
+            </Link>
+          </Route>
+        )}
       </section>
     </main>
   );
