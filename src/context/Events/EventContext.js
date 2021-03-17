@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
+import { saveUser, useAuth } from "../../context/Auth/AuthContext.utils";
 import {
   getEvent,
   getEvents,
@@ -12,7 +13,7 @@ export const EventContext = createContext({});
 
 function EventProvider({ children }) {
   const [events, setEvents] = useState([]);
-
+  const { user, setUser } = useAuth();
   useEffect(() => {
     const fetchEvents = getEvents().then(({ data }) => {
       setEvents([...data]);
@@ -32,6 +33,8 @@ function EventProvider({ children }) {
     try {
       const postEvent = await createEvent(info);
       const { event: newEvent } = postEvent.data;
+      console.log(newEvent);
+      setEvents((state) => [...state, newEvent]);
       return newEvent;
     } catch (e) {
       console.log(e);
@@ -42,7 +45,22 @@ function EventProvider({ children }) {
   const registerEvent = useCallback(async (id) => {
     try {
       const enterEvent = await joinEvent(id);
-      console.log(enterEvent);
+      let newEventsList = [];
+      console.log(user);
+      if (user.eventsJoined.length > 0 && user.eventsJoined.indexOf(id) > -1) {
+        const index = user.eventsJoined.indexOf(id);
+        newEventsList = user.eventsJoined.splice(index, 1);
+      } else {
+        console.log("adeu");
+        newEventsList = [...user.eventsJoined];
+      }
+      console.log(newEventsList);
+      setUser((state) => ({
+        ...state,
+        eventsJoined: newEventsList,
+      }));
+      saveUser({ ...user, eventsJoined: newEventsList });
+      console.log(user);
       return enterEvent;
     } catch (e) {
       console.log(e);

@@ -10,11 +10,11 @@ import EventProvider from "./context/Events/EventContext";
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <EventProvider>
-        <AuthProvider>
+      <AuthProvider>
+        <EventProvider>
           <App />
-        </AuthProvider>
-      </EventProvider>
+        </EventProvider>
+      </AuthProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

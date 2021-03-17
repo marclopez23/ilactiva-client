@@ -53,6 +53,7 @@ const Event = () => {
     const month = date.getUTCMonth();
     return `${dias[day]} ${monthDay} de ${mes[month]}`;
   };
+
   return (
     <main className="eventPage">
       <svg className="svgImg">
@@ -118,6 +119,7 @@ const Event = () => {
       </section>
       <section className="fixedButton">
         {user.isLogged &&
+          !user.eventsJoined.includes(id) &&
           (creator._id === user.id ? (
             <Button copy="¡Eliminar!" primary={true} />
           ) : (
@@ -127,6 +129,13 @@ const Event = () => {
               onClick={() => registerEvent(id)}
             />
           ))}
+        {user.isLogged && user.eventsJoined.includes(id) && (
+          <Button
+            copy="Desapuntarme"
+            primary={true}
+            onClick={() => registerEvent(id)}
+          />
+        )}
         {!user.isLogged && (
           <Route>
             <Link to="/iniciar-sesion" className="primary">

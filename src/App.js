@@ -9,6 +9,7 @@ import Home from "./Views/Home/Home";
 import HomePrivate from "./Views/HomePrivate/HomePrivate";
 import AnonRoute from "./components/Routes/AnonRoute";
 import PrivateRoute from "./components/Routes/PrivateRoute";
+import EventConfirmation from "./Views/EventConfirmation/EventConfirmation";
 import Menu from "./components/Menu/Menu";
 import { useAuth } from "./context/Auth/AuthContext.utils";
 
@@ -27,6 +28,9 @@ function App() {
         <AnonRoute exact path="/registrarme">
           <SignUp />
         </AnonRoute>
+        <PrivateRoute exact path="/eventos/creado/">
+          <EventConfirmation />
+        </PrivateRoute>
         <Route exact path="/eventos/:id">
           <Event />
         </Route>

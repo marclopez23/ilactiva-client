@@ -1,0 +1,33 @@
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/buttons.scss";
+
+.confirmationPage {
+  .headerConfirm {
+    padding: 1rem;
+    .close {
+      float: right;
+    }
+    h1 {
+      margin: 3rem 0;
+    }
+  }
+  .fixedButton {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    padding: 2em 1em;
+
+    a {
+      padding: 1rem 1rem 2rem 1rem;
+      @include primaryButton;
+      color: $blanco;
+      display: block;
+      text-align: center;
+      padding: 1rem;
+    }
+  }
+}
