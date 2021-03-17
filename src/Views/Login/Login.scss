@@ -1,0 +1,31 @@
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/buttons.scss";
+
+.login {
+  .logo {
+    width: 40%;
+    display: block;
+    margin: 2rem auto;
+  }
+  .illustration {
+    width: 100%;
+    margin: 2rem 0 2rem 0;
+  }
+  article {
+    padding: 1rem;
+    input[type="submit"] {
+      @include primaryButton;
+    }
+
+    .field-icon {
+      float: right;
+      margin-right: 0.75rem;
+      margin-top: -47px;
+      width: 32px;
+      position: relative;
+      z-index: 2;
+    }
+  }
+}

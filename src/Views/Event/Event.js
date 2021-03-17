@@ -83,7 +83,7 @@ const Event = () => {
         </div>
         {user.isLogged &&
           (creator._id === user.id ? (
-            <button className="follow">Editar</button>
+            <Button copy="Editar" primary={true} className="follow" />
           ) : (
             <button className="follow">Seguir</button>
           ))}
