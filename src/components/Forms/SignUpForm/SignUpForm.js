@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Form.scss";
 import { uploadFileService } from "../../../service/upload.service";
+import "./SignUpForm.scss";
+import SimpleHeader from "../../SimpleHeader/SimpleHeader";
+import hide from "../../../assets/hide.svg";
+import unhide from "../../../assets/unhide.svg";
+import FormFooter from "../../FormFooter/FormFooter";
 
 const SignUpForm = ({ onSubmit }) => {
   const initialState = {
@@ -16,6 +21,26 @@ const SignUpForm = ({ onSubmit }) => {
   const [info, setInfo] = useState(initialState);
   const [step, setStep] = useState(1);
   const [imageReady, setImageReady] = useState(false);
+  const [topMargin, setTop] = useState(0);
+  const [icon, setIcon] = useState(unhide);
+  const [inputType, setType] = useState("password");
+  const maxStep = 3;
+
+  const handleIcon = () => {
+    if (icon === unhide) {
+      setIcon(hide);
+      setType("text");
+    } else {
+      setIcon(unhide);
+      setType("password");
+    }
+  };
+
+  useEffect(() => {
+    const headerHeight = document.querySelector(".simpleHeader").offsetHeight;
+    setTop(100);
+  }, [topMargin]);
+
   const handleUpload = async (e) => {
     setImageReady(false);
     console.log(e.target.files[0]);
@@ -38,6 +63,13 @@ const SignUpForm = ({ onSubmit }) => {
     }
   };
 
+  const handleBack = (event) => {
+    event.preventDefault();
+    if (step > 0) {
+      setStep((state) => (state = state - 1));
+    }
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if (step === 4) {
@@ -57,11 +89,17 @@ const SignUpForm = ({ onSubmit }) => {
     }));
   };
   return (
-    <article>
+    <article className="signForm" style={{ marginTop: topMargin }}>
+      <SimpleHeader title="Cuéntanos sobre tí" />
       <form action="" onSubmit={handleSubmit}>
         {step === 1 && (
           <div className="personal-info">
-            <label htmlFor="file">Foto de Perfil</label>
+            <div
+              id="file"
+              style={{
+                backgroundImage: `"url("${info.profileImg}")"`,
+              }}
+            ></div>
             <input
               type="file"
               name="file"
@@ -69,6 +107,7 @@ const SignUpForm = ({ onSubmit }) => {
               value={info.file}
               onChange={handleUpload}
             />
+
             <label htmlFor="name">¿Comó te llamas?</label>
             <input
               type="text"
@@ -87,15 +126,31 @@ const SignUpForm = ({ onSubmit }) => {
               onChange={handleChange}
               required
             />
-            <label htmlFor="password">Contraseña</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={info.password}
-              onChange={handleChange}
-              required
-            />
+            <div className="password">
+              <label htmlFor="password">Contraseña</label>
+              <input
+                type={inputType}
+                name="password"
+                id="password"
+                value={info.password}
+                onChange={handleChange}
+                required
+              />
+              <img
+                className="field-icon"
+                src={icon}
+                alt=""
+                onClick={() => handleIcon()}
+              />
+            </div>
+            <FormFooter
+              back={false}
+              handleBack={handleBack}
+              step={step}
+              next={"Siguiente"}
+              onClick={handleSubmit}
+              maxStep={maxStep}
+            ></FormFooter>
           </div>
         )}
         {step === 2 && (
@@ -120,6 +175,14 @@ const SignUpForm = ({ onSubmit }) => {
               <option value="Sant Andreu">Sant Andreu</option>
               <option value="Sant Martí">Sant Martí</option>
             </select>
+            <FormFooter
+              back={true}
+              handleBack={handleBack}
+              step={step}
+              next={"Siguiente"}
+              onClick={handleSubmit}
+              maxStep={maxStep}
+            ></FormFooter>
           </div>
         )}
         {step === 3 && (
@@ -128,11 +191,17 @@ const SignUpForm = ({ onSubmit }) => {
             <h3 onClick={() => handleCategory("talleres")}>Talleres</h3>
             <h3 onClick={() => handleCategory("deporte")}>Deporte</h3>
             <h3 onClick={() => handleCategory("exposiciones")}>Exposiciones</h3>
+            <FormFooter
+              back={true}
+              handleBack={handleBack}
+              step={step}
+              next={"Siguiente"}
+              onClick={handleSubmit}
+              maxStep={maxStep}
+            ></FormFooter>
           </div>
         )}
-        {step < 4 ? (
-          <button>Next</button>
-        ) : (
+        {step > 4 && (
           <article className="confirmation">
             <h2>Resumen de tus datos:</h2>
             <p>Nombre: {info.name}</p>

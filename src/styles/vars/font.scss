@@ -66,4 +66,7 @@ html {
   text-decoration: underline;
   font-size: 1rem;
   font-weight: 600;
+  &:visited {
+    color: $salmon;
+  }
 }

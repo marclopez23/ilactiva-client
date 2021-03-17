@@ -1,0 +1,40 @@
+@import "../../../styles/vars/color.scss";
+@import "../../../styles/vars/font.scss";
+@import "../../../styles/vars/shadows.scss";
+@import "../../../styles/mixins/buttons.scss";
+
+.signForm {
+  margin: 1rem;
+  #file {
+    border: none;
+    height: unset;
+    color: #ffffff;
+    background-color: $salmonLight;
+    border: 1px solid $salmon;
+    border-radius: 500px;
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 1rem auto;
+    &::before {
+      content: " ";
+      background-image: url("../../../assets/addPhoto.svg");
+
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 20px;
+      padding: 15px;
+      display: block;
+      margin: 0.75rem auto;
+    }
+  }
+  .field-icon {
+    float: right;
+    margin-right: 0.75rem;
+    margin-top: -47px;
+    width: 32px;
+    position: relative;
+    z-index: 2;
+  }
+}
