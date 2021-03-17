@@ -94,20 +94,23 @@ const SignUpForm = ({ onSubmit }) => {
       <form action="" onSubmit={handleSubmit}>
         {step === 1 && (
           <div className="personal-info">
-            <div
-              id="file"
-              style={{
-                backgroundImage: `"url("${info.profileImg}")"`,
-              }}
-            ></div>
-            <input
-              type="file"
-              name="file"
-              id="file"
-              value={info.file}
-              onChange={handleUpload}
-            />
-
+            {info.profileImg === "" && !imageReady ? (
+              <input
+                type="file"
+                name="file"
+                id="file"
+                value={info.file}
+                onChange={handleUpload}
+              />
+            ) : (
+              <img
+                src={info.profileImg}
+                alt="logo"
+                width="200"
+                height="200"
+                id="file"
+              />
+            )}
             <label htmlFor="name">¿Comó te llamas?</label>
             <input
               type="text"
