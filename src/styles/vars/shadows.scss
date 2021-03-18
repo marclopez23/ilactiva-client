@@ -1,6 +1,6 @@
 @mixin cardEvento {
   box-shadow: 1px 10px 10px rgba(102, 62, 51, 0.02);
-  filter: drop-shadow(3px 4px 7px rgba(102, 62, 51, 0.12))
+  filter: drop-shadow(3px 4px 7px rgba(102, 62, 51, 0.12));
 }
 
 @mixin categoria {
@@ -11,4 +11,10 @@
 @mixin toggle {
   filter: drop-shadow(0px 4px 4px rgba(50, 50, 71, 0.08));
   filter: drop-shadow(0px 4px 8px rgba(50, 50, 71, 0.06));
+}
+
+@mixin fotoComodin {
+  box-shadow: 20px 30px 30px rgba(102, 62, 51, 0.06),
+    10px 20px 20px rgba(102, 62, 51, 0.04),
+    1px 10px 10px rgba(102, 62, 51, 0.02);
 }

@@ -2,7 +2,16 @@ import React from "react";
 import "./FormFooter.scss";
 import chevronRight from "../../assets/chevron-right.svg";
 import chevronLeft from "../../assets/chevron-left.svg";
-const FormFooter = ({ back, step, next, onClick, maxStep, handleBack }) => {
+const FormFooter = ({
+  back,
+  step,
+  next,
+  onClick,
+  maxStep,
+  handleBack,
+  disable,
+}) => {
+  console.log(disable);
   return (
     <article className="formFooter">
       {back && (
@@ -14,7 +23,7 @@ const FormFooter = ({ back, step, next, onClick, maxStep, handleBack }) => {
       <p className="steps">
         {step}/{maxStep}
       </p>
-      <button className="next" onClick={onClick}>
+      <button className="next" onClick={onClick} disabled={disable}>
         {next} <img src={chevronRight} alt="" />
       </button>
     </article>

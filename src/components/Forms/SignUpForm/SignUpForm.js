@@ -18,6 +18,19 @@ const SignUpForm = ({ onSubmit }) => {
     file: "",
   };
 
+  const distritos = [
+    "Ciutat Vella",
+    "Eixample",
+    "Sants-Montjuïc",
+    "Les Corts",
+    "Sarrià-Sant Gervasi",
+    "Gràcia",
+    "Horta - Guinardó",
+    "Nou Barris",
+    "Sant Andreu",
+    "Sant Martí",
+  ];
+
   const [info, setInfo] = useState(initialState);
   const [step, setStep] = useState(1);
   const [imageReady, setImageReady] = useState(false);
@@ -25,7 +38,7 @@ const SignUpForm = ({ onSubmit }) => {
   const [icon, setIcon] = useState(unhide);
   const [inputType, setType] = useState("password");
   const maxStep = 3;
-
+  console.log(info);
   const handleIcon = () => {
     if (icon === unhide) {
       setIcon(hide);
@@ -88,12 +101,29 @@ const SignUpForm = ({ onSubmit }) => {
       [name]: value,
     }));
   };
+  const handleFirst = () => {
+    if (
+      info.profileImg !== "" &&
+      info.name !== "" &&
+      info.email !== "" &&
+      info.password !== ""
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const handleSecond = () => {
+    return info.direction.length === 0;
+  };
+
   return (
     <article className="signForm" style={{ marginTop: topMargin }}>
-      <SimpleHeader title="Cuéntanos sobre tí" />
       <form action="" onSubmit={handleSubmit}>
         {step === 1 && (
           <div className="personal-info">
+            <SimpleHeader title="Cuéntanos sobre tí" />
             {info.profileImg === "" && !imageReady ? (
               <input
                 type="file"
@@ -146,6 +176,13 @@ const SignUpForm = ({ onSubmit }) => {
                 onClick={() => handleIcon()}
               />
             </div>
+            <article className="requeriments">
+              <ul className="body1">
+                <li>Tiene que contener una mayúscula</li>
+                <li>Tiene que contener un número</li>
+                <li>Tiene que tener 8 carácteres como mínimo</li>
+              </ul>
+            </article>
             <FormFooter
               back={false}
               handleBack={handleBack}
@@ -153,31 +190,24 @@ const SignUpForm = ({ onSubmit }) => {
               next={"Siguiente"}
               onClick={handleSubmit}
               maxStep={maxStep}
+              disable={handleFirst()}
             ></FormFooter>
           </div>
         )}
         {step === 2 && (
           <div className="location">
-            <label htmlFor="direction">¿En que distrito vives?</label>
-            <select
-              name="direction"
-              id="direction"
-              value={info.direction}
-              onChange={handleChange}
-              required
-            >
-              <option disabled={info.direction}>Escoge una opción</option>
-              <option value="Ciutat Vella">Ciutat Vella</option>
-              <option value="Eixample">Eixample</option>
-              <option value="Sants-Montjuïc">Sants-Montjuïc</option>
-              <option value="Les Corts">Les Corts</option>
-              <option value="Sarrià-Sant Gervasi">Sarrià-Sant Gervasi</option>
-              <option value="Gràcia">Gràcia</option>
-              <option value="Horta - Guinardó">Horta - Guinardó</option>
-              <option value="Nou Barris">Nou Barris</option>
-              <option value="Sant Andreu">Sant Andreu</option>
-              <option value="Sant Martí">Sant Martí</option>
-            </select>
+            <SimpleHeader title="¿En que distrito vives?" />
+            {distritos.map((distrito) => (
+              <article
+                className="distrito"
+                onClick={() =>
+                  setInfo((state) => ({ ...state, direction: distrito }))
+                }
+                key={distrito}
+              >
+                <p className="title">{distrito}</p>
+              </article>
+            ))}
             <FormFooter
               back={true}
               handleBack={handleBack}
@@ -185,6 +215,7 @@ const SignUpForm = ({ onSubmit }) => {
               next={"Siguiente"}
               onClick={handleSubmit}
               maxStep={maxStep}
+              disable={handleSecond()}
             ></FormFooter>
           </div>
         )}

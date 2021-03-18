@@ -4,11 +4,14 @@
 
 .selectType {
   margin: 5rem 1rem;
+  overflow: visible;
 
   .userTypeCard {
-    margin-top: 1rem;
+    cursor: pointer;
+    margin-top: 2rem;
     padding: 1rem;
     border-radius: 12px;
+    @include fotoComodin;
     .title {
       text-transform: none;
     }

@@ -11,7 +11,6 @@ const SignUp = () => {
   const { handleSignup } = useAuth();
   const [isCommerce, setCommerce] = useState();
   const [showForm, setForm] = useState(false);
-  console.log(isCommerce);
   const handleUserType = (type) => {
     const isNeighbour =
       type === "vecino" ? setCommerce(true) : setCommerce(false);

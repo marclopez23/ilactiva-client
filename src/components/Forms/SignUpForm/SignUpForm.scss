@@ -5,7 +5,9 @@
 
 .signForm {
   margin: 1rem;
+  padding-bottom: 4rem;
   #file {
+    cursor: pointer;
     border: none;
     height: unset;
     color: #ffffff;
@@ -36,5 +38,17 @@
     width: 32px;
     position: relative;
     z-index: 2;
+  }
+  .location {
+    .distrito {
+      width: 100%;
+      text-align: center;
+      padding: 1rem;
+      margin: 1rem auto;
+      background-color: $salmon;
+      border-radius: 4px;
+      color: $blanco;
+      @include toggle;
+    }
   }
 }
