@@ -11,6 +11,7 @@ import AnonRoute from "./components/Routes/AnonRoute";
 import PrivateRoute from "./components/Routes/PrivateRoute";
 import EventConfirmation from "./Views/EventConfirmation/EventConfirmation";
 import Menu from "./components/Menu/Menu";
+import Profile from "./Views/Profile/Profile";
 import { useAuth } from "./context/Auth/AuthContext.utils";
 
 function App() {
@@ -19,6 +20,9 @@ function App() {
     <>
       <Menu />
       <Switch>
+        <PrivateRoute exact path="/perfil">
+          <Profile />
+        </PrivateRoute>
         <PrivateRoute exact path="/eventos/crear">
           <CreateEvent />
         </PrivateRoute>

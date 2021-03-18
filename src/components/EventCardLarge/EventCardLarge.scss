@@ -1,0 +1,32 @@
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/buttons.scss";
+
+.eventoLarge {
+  background-color: $blanco;
+  border-radius: 12px;
+  margin: 1rem;
+  display: flex;
+  @include cardEvento;
+  cursor: pointer;
+  .imgEvent {
+    width: 40%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+  .eventInfo {
+    width: 60%;
+    padding: 1rem;
+    .date,
+    .hour {
+      color: $gris;
+      margin: unset;
+      padding: unset;
+    }
+    .place {
+      color: $verdePrimario;
+    }
+  }
+}

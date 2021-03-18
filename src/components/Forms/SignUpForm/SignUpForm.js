@@ -6,6 +6,19 @@ import SimpleHeader from "../../SimpleHeader/SimpleHeader";
 import hide from "../../../assets/hide.svg";
 import unhide from "../../../assets/unhide.svg";
 import FormFooter from "../../FormFooter/FormFooter";
+import CategorySelector from "../../CategorySelector/CategorySelector";
+import {
+  talleres,
+  charlas,
+  cine,
+  deportes,
+  exposiciones,
+  infantil,
+  musica,
+  quedadas,
+  visitas,
+  espectaculos,
+} from "../../../assets/category/index";
 
 const SignUpForm = ({ onSubmit }) => {
   const initialState = {
@@ -29,6 +42,19 @@ const SignUpForm = ({ onSubmit }) => {
     "Nou Barris",
     "Sant Andreu",
     "Sant Martí",
+  ];
+
+  const categories = [
+    { category: "talleres", img: talleres },
+    { category: "charlas", img: charlas },
+    { category: "cine", img: cine },
+    { category: "deportes", img: deportes },
+    { category: "exposiciones", img: exposiciones },
+    { category: "infantil", img: infantil },
+    { category: "música", img: musica },
+    { category: "quedadas", img: quedadas },
+    { category: "Visitas y tours", img: visitas },
+    { category: "espectaculos", img: espectaculos },
   ];
 
   const [info, setInfo] = useState(initialState);
@@ -67,6 +93,7 @@ const SignUpForm = ({ onSubmit }) => {
   };
 
   const handleCategory = (cat) => {
+    console.log(cat);
     if (info.category.includes(cat)) {
       const newArr = info.category.filter((item) => item !== cat);
       console.log(newArr);
@@ -101,21 +128,23 @@ const SignUpForm = ({ onSubmit }) => {
       [name]: value,
     }));
   };
-  const handleFirst = () => {
-    if (
-      info.profileImg !== "" &&
-      info.name !== "" &&
-      info.email !== "" &&
-      info.password !== ""
-    ) {
-      return false;
-    } else {
-      return true;
+  const handleNext = () => {
+    if (step === 1) {
+      if (
+        info.profileImg !== "" &&
+        info.name !== "" &&
+        info.email !== "" &&
+        info.password !== ""
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    } else if (step === 2) {
+      return info.direction.length === 0;
+    } else if (step === 3) {
+      return info.category.length === 0;
     }
-  };
-
-  const handleSecond = () => {
-    return info.direction.length === 0;
   };
 
   return (
@@ -190,7 +219,7 @@ const SignUpForm = ({ onSubmit }) => {
               next={"Siguiente"}
               onClick={handleSubmit}
               maxStep={maxStep}
-              disable={handleFirst()}
+              disable={handleNext()}
             ></FormFooter>
           </div>
         )}
@@ -199,7 +228,9 @@ const SignUpForm = ({ onSubmit }) => {
             <SimpleHeader title="¿En que distrito vives?" />
             {distritos.map((distrito) => (
               <article
-                className="distrito"
+                className={`distrito${
+                  distrito === info.direction ? " active" : ""
+                }`}
                 onClick={() =>
                   setInfo((state) => ({ ...state, direction: distrito }))
                 }
@@ -215,16 +246,23 @@ const SignUpForm = ({ onSubmit }) => {
               next={"Siguiente"}
               onClick={handleSubmit}
               maxStep={maxStep}
-              disable={handleSecond()}
+              disable={handleNext()}
             ></FormFooter>
           </div>
         )}
         {step === 3 && (
           <div className="category">
-            <h2>¿en que eventos te gustaria participar?</h2>
-            <h3 onClick={() => handleCategory("talleres")}>Talleres</h3>
-            <h3 onClick={() => handleCategory("deporte")}>Deporte</h3>
-            <h3 onClick={() => handleCategory("exposiciones")}>Exposiciones</h3>
+            <SimpleHeader title="¿En que actividades te gustaria participar?" />
+            <article className="categoriesDiv">
+              {categories.map(({ category, img }) => (
+                <CategorySelector
+                  title={category}
+                  img={img}
+                  onClick={() => handleCategory(category)}
+                  key={category}
+                />
+              ))}
+            </article>
             <FormFooter
               back={true}
               handleBack={handleBack}
@@ -232,22 +270,41 @@ const SignUpForm = ({ onSubmit }) => {
               next={"Siguiente"}
               onClick={handleSubmit}
               maxStep={maxStep}
+              disable={handleNext()}
             ></FormFooter>
           </div>
         )}
-        {step > 4 && (
+        {step === 4 && (
           <article className="confirmation">
-            <h2>Resumen de tus datos:</h2>
-            <p>Nombre: {info.name}</p>
-            <p>Correo electrónico: {info.email}</p>
-            <p>Vives en: {info.direction}</p>
-            <p>Te interesan eventos sobre:</p>
+            <SimpleHeader title="Resumen de tus datos" />
+            <img
+              src={info.profileImg}
+              alt="logo"
+              width="200"
+              height="200"
+              id="file"
+            />
+            <h4 className="cardTitle">Nombre:</h4>
+            <p>{info.name}</p>
+            <h4 className="cardTitle">Correo electrónico:</h4>
+            <p>{info.email}</p>
+            <h4 className="cardTitle">Vives en:</h4>
+            <p>{info.direction}</p>
+            <h4 className="cardTitle">Te interesan actividades sobre:</h4>
+
             <ul>
               {info.category.map((value) => (
-                <li key={value}>{value}</li>
+                <li className="categoria" key={value}>{value}</li>
               ))}
             </ul>
-            <input type="submit" value="Resgistrarme" disabled={!imageReady} />
+            <div className="button">
+              <input
+                className="send"
+                type="submit"
+                value="Resgistrarme"
+                disabled={!imageReady}
+              />
+            </div>
           </article>
         )}
       </form>

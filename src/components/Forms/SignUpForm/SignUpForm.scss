@@ -50,5 +50,45 @@
       color: $blanco;
       @include toggle;
     }
+    .active {
+      background-color: $verdePrimario;
+    }
+  }
+
+  .categoriesDiv {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    .article {
+      width: 50%;
+    }
+    .confirmation {
+      .cardTitle {
+        margin-top: 1rem;
+      }
+
+      .categoria {
+        margin-top: 1rem;
+        text-transform: capitalize;
+      }
+
+      .send {
+        @include primaryButton;
+      }
+
+      .button {
+        padding: 1rem;
+        position: fixed;
+        background-color: #fcf5f3;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        box-sizing: border-box;
+        z-index: 1000;
+      }
+    }
   }
 }
