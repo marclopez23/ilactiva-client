@@ -3,17 +3,18 @@
 @import "../../styles/vars/shadows.scss";
 @import "../../styles/mixins/buttons.scss";
 
+.fotoPerfil {
+  border-radius: 500px;
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 1rem auto;
+}
+
 .perfil {
   .header {
     padding: 2rem;
     text-align: center;
-    .fotoPerfil {
-      border-radius: 500px;
-      width: 100px;
-      height: 100px;
-      display: block;
-      margin: 1rem auto;
-    }
   }
   .userInfo {
     margin: 1rem;

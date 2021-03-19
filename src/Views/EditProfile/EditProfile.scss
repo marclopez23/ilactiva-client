@@ -1,0 +1,58 @@
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/color.scss";
+@import "../../styles/mixins/buttons.scss";
+
+.editProfile {
+  padding-top: 1rem;
+  #file {
+    cursor: pointer;
+    transform: translate(4rem, -4rem);
+    border: none;
+    height: unset;
+    color: #ffffff;
+    background-color: $salmonLight;
+    border: 1px solid $salmon;
+    border-radius: 500px;
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 1rem auto;
+    &::before {
+      content: " ";
+      background-image: url("./../../assets/addPhoto.svg");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 25px;
+      padding: 3px;
+      display: block;
+      margin: 0.75rem auto;
+    }
+    &::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+  }
+  form {
+    margin-top: -4rem;
+  }
+  .fotoPerfil {
+    border: 1px solid $salmon;
+    width: 150px;
+    height: 150px;
+  }
+  margin: 1rem;
+  .categoriesDiv {
+    display: flex;
+    flex-wrap: wrap;
+    .categorySelector {
+      margin: 0.5rem auto;
+      width: 30%;
+      h3.titleMedium {
+        font-size: 1rem;
+      }
+    }
+  }
+  .enviar {
+    @include primaryButton;
+  }
+}

@@ -12,6 +12,7 @@ import PrivateRoute from "./components/Routes/PrivateRoute";
 import EventConfirmation from "./Views/EventConfirmation/EventConfirmation";
 import Menu from "./components/Menu/Menu";
 import Profile from "./Views/Profile/Profile";
+import EditProfile from "./Views/EditProfile/EditProfile";
 import { useAuth } from "./context/Auth/AuthContext.utils";
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
     <>
       <Menu />
       <Switch>
+        <PrivateRoute exact path="/perfil/editar/:id">
+          <EditProfile />
+        </PrivateRoute>
         <PrivateRoute exact path="/perfil">
           <Profile />
         </PrivateRoute>

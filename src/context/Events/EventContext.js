@@ -50,16 +50,15 @@ function EventProvider({ children }) {
       if (user.eventsJoined.length > 0 && user.eventsJoined.indexOf(id) > -1) {
         const index = user.eventsJoined.indexOf(id);
         newEventsList = user.eventsJoined.splice(index, 1);
+        console.log(newEventsList);
       } else {
-        console.log("adeu");
-        newEventsList = [...user.eventsJoined];
+        newEventsList = [...user.eventsJoined, id];
       }
-      console.log(newEventsList);
+      console.log("evvenots", newEventsList);
       setUser((state) => ({
         ...state,
         eventsJoined: newEventsList,
       }));
-      saveUser({ ...user, eventsJoined: newEventsList });
       console.log(user);
       return enterEvent;
     } catch (e) {

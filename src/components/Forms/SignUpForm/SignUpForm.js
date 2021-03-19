@@ -76,7 +76,6 @@ const SignUpForm = ({ onSubmit }) => {
   };
 
   useEffect(() => {
-    const headerHeight = document.querySelector(".simpleHeader").offsetHeight;
     setTop(100);
   }, [topMargin]);
 
