@@ -9,6 +9,16 @@ import editar from "../../assets/editar.svg";
 import compartir from "../../assets/compartir.svg";
 
 const Profile = () => {
+  if (document.querySelector(".perfil")) {
+    window.onscroll = function (e) {
+      if (50 < this.scrollY) {
+        return setShow("none");
+      }
+      this.oldScroll = this.scrollY;
+      return setShow("block");
+    };
+  }
+  const [show, setShow] = useState("block");
   const [user, setUser] = useState({});
   const [topMargin, setTop] = useState(0);
   console.log(user);
@@ -30,6 +40,7 @@ const Profile = () => {
           </clipPath>
         </svg>
         <img
+          style={{ display: show }}
           src={user.profileImg}
           alt="logo"
           width="200"
