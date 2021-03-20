@@ -5,7 +5,7 @@ const Button = ({ onClick, copy, primary }) => {
   return (
     <button
       className={primary ? "primary" : "secondary"}
-      onClick={() => onClick()}
+      onClick={onClick ? () => onClick() : undefined}
     >
       {copy}
     </button>

@@ -1,0 +1,24 @@
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/responsive.scss";
+
+.navbarContainer {
+  padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    border: 1px solid $verdePrimario;
+    background-color: $blancoSucio;
+    border-radius: 12px;
+    @include fotoComodin;
+  }
+  @include desktop {
+    display: none;
+  }
+}

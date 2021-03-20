@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useCallback } from "react";
 import { saveUser, useAuth } from "../../context/Auth/AuthContext.utils";
+import { useHistory } from "react-router-dom";
 import {
   getEvent,
   getEvents,
@@ -12,6 +13,7 @@ import {
 export const EventContext = createContext({});
 
 function EventProvider({ children }) {
+  const history = useHistory();
   const [events, setEvents] = useState([]);
   const { user, setUser } = useAuth();
   useEffect(() => {
@@ -42,34 +44,65 @@ function EventProvider({ children }) {
     }
   }, []);
 
-  const registerEvent = useCallback(async (id) => {
+  const registerEvent = async (id) => {
     try {
       const enterEvent = await joinEvent(id);
-      let newEventsList = [];
-      console.log(user);
-      if (user.eventsJoined.length > 0 && user.eventsJoined.indexOf(id) > -1) {
-        const index = user.eventsJoined.indexOf(id);
-        newEventsList = user.eventsJoined.splice(index, 1);
-        console.log(newEventsList);
-      } else {
-        newEventsList = [...user.eventsJoined, id];
+      const currentEventIndex = user.eventsJoined.includes(id);
+      console.log(currentEventIndex);
+      if (currentEventIndex) {
+        setUser((state) => ({
+          ...state,
+          user: {
+            ...state.user,
+            eventsJoined: state.user.eventsJoined.filter(
+              (event) => event !== id
+            ),
+          },
+        }));
+        return;
       }
-      console.log("evvenots", newEventsList);
       setUser((state) => ({
         ...state,
-        eventsJoined: newEventsList,
+        user: {
+          ...state.user,
+          eventsJoined: state.user.eventsJoined.concat(enterEvent._id),
+        },
       }));
-      console.log(user);
-      return enterEvent;
     } catch (e) {
       console.log(e);
       return "Algo ha salido mal, porfavor vuelve a intentarlo";
     }
-  }, []);
+  };
+
+  const quitEvent = async (id) => {
+    try {
+      const deleted = await deleteEvent(id);
+      setUser((state) => ({
+        ...state,
+        user: {
+          ...state.user,
+          eventsCreated: state.user.eventsCreated.filter(
+            (event) => event !== id
+          ),
+        },
+      }));
+      setEvents((state) => state.filter((evento) => evento._id !== id));
+      history.goBack();
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
     <EventContext.Provider
-      value={{ events, bringEvent, newEvent, setEvents, registerEvent }}
+      value={{
+        events,
+        bringEvent,
+        newEvent,
+        setEvents,
+        registerEvent,
+        quitEvent,
+      }}
     >
       {children}
     </EventContext.Provider>

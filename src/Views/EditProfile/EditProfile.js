@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { getUser } from "../../service/user.service";
 import "./EditProfile.scss";
 import SimpleHeader from "../../components/SimpleHeader/SimpleHeader";
 import { edit } from "../../service/user.service";
 import { uploadFileService } from "../../service/upload.service";
+import { useAuth } from "../../context/Auth/AuthContext.utils";
 import {
   talleres,
   charlas,
@@ -31,6 +33,8 @@ const categories = [
 ];
 
 const EditProfile = () => {
+  const history = useHistory();
+  const { setUser } = useAuth();
   useEffect(() => {
     getUser().then(
       ({
@@ -85,17 +89,24 @@ const EditProfile = () => {
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    const editedUser = await edit(info);
-    console.log(editedUser);
-    setInfo(editedUser);
+    try {
+      event.preventDefault();
+      const { data } = await edit(info);
+      setInfo(data.user);
+      setUser((state) => ({
+        user: { ...state.user, ...data.user },
+      }));
+      history.goBack();
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   return (
     <main className="editProfile" style={{ marginTop: topMargin }}>
       <SimpleHeader title="Editar información" />
       <img
-        src={info.profileImg}
+        src={info.profileImg || ""}
         alt="logo"
         width="200"
         height="200"
@@ -114,7 +125,7 @@ const EditProfile = () => {
           type="text"
           name="name"
           id="name"
-          value={info.name}
+          value={info.name || ""}
           onChange={handleChange}
           required
         />
@@ -123,7 +134,7 @@ const EditProfile = () => {
           type="text"
           name="email"
           id="email"
-          value={info.email}
+          value={info.email || ""}
           onChange={handleChange}
           required
         />
@@ -131,7 +142,7 @@ const EditProfile = () => {
         <select
           name="neighbourhood"
           id="neighbourhood"
-          value={info.neighbourhood}
+          value={info.neighbourhood || ""}
           onChange={handleChange}
           required
         >

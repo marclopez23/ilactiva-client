@@ -1,7 +1,8 @@
 @import "../../styles/vars/color.scss";
 @import "../../styles/mixins/buttons.scss";
 
-.eventPage {
+.eventPage,
+.editEvent {
   .svgImg {
     position: absolute;
     width: 0;
@@ -97,6 +98,43 @@
       display: block;
       text-align: center;
       padding: 1rem;
+    }
+  }
+  .overlay {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+
+    left: 0;
+    z-index: 99;
+    transition: background-color 0.5s;
+  }
+  .hub {
+    text-align: center;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: $blanco;
+    padding: 3rem 1rem;
+    -webkit-box-shadow: 0px -8px 16px -6px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px -8px 16px -6px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px -8px 16px -6px rgba(0, 0, 0, 0.25);
+    border-radius: 12px 12px 0 0;
+    transition: bottom 1s;
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4rem;
+      button {
+        width: 48%;
+      }
+    }
+    .noDelete {
+      @include secondaryButton;
+    }
+    .delete {
+      @include primaryButton;
     }
   }
 }

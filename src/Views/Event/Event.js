@@ -1,24 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Link, Route, useHistory } from "react-router-dom";
+import { Link, Route, useHistory, useParams } from "react-router-dom";
 import cruz from "../../assets/cruz.svg";
-import { useParams } from "react-router-dom";
 import { useEvents } from "../../context/Events/EventsContext.utils";
 import { useAuth } from "../../context/Auth/AuthContext.utils";
+import { followCommerce } from "../../service/user.service";
 import Button from "../../components/Button/Button";
 import "./Event.scss";
 import marker from "../../assets/marker.svg";
 
 const Event = () => {
   const [event, setEvent] = useState({});
+  const [showHub, setHub] = useState(false);
   const [creator, setCreator] = useState({});
-  const { bringEvent } = useEvents();
+  const { bringEvent, registerEvent, quitEvent } = useEvents();
   const { id } = useParams();
   const history = useHistory();
   const { user } = useAuth();
-  const { registerEvent } = useEvents();
 
   useEffect(() => {
-    const fetchEvent = bringEvent(id).then(({ data }) => {
+    bringEvent(id).then(({ data }) => {
       setEvent(data.event);
       setCreator(data.event.creator);
     });
@@ -53,7 +53,6 @@ const Event = () => {
     const month = date.getUTCMonth();
     return `${dias[day]} ${monthDay} de ${mes[month]}`;
   };
-
   return (
     <main className="eventPage">
       <svg className="svgImg">
@@ -82,12 +81,16 @@ const Event = () => {
             <p className="caption">Organizador/a</p>
           </div>
         </div>
-        {user.isLogged &&
-          (creator._id === user.id ? (
-            <Button copy="Editar" primary={true} className="follow" />
-          ) : (
-            <button className="follow">Seguir</button>
-          ))}
+        {user.isLogged && creator._id === user.id && (
+          <Route>
+            <Link to={`/eventos/${event._id}/editar`}>
+              <Button copy="Editar" primary={true} className="follow" />
+            </Link>
+          </Route>
+        )}
+        {event.onModel !== "User" && creator._id !== user.id && (
+          <button className="follow">Seguir</button>
+        )}
       </section>
       <section className="content">
         <div className="mainInfo">
@@ -121,7 +124,11 @@ const Event = () => {
         {user.isLogged &&
           !user.eventsJoined.includes(id) &&
           (creator._id === user.id ? (
-            <Button copy="¡Eliminar!" primary={true} />
+            <Button
+              copy="¡Eliminar!"
+              primary={true}
+              onClick={() => setHub(true)}
+            />
           ) : (
             <Button
               copy="¡Apuntarme!"
@@ -143,6 +150,30 @@ const Event = () => {
             </Link>
           </Route>
         )}
+      </section>
+      <section
+        className="overlay"
+        style={{
+          top: showHub ? 0 : "-100vh",
+          backgroundColor: showHub ? "#000000c7" : "#00000000",
+        }}
+        onClick={() => setHub(false)}
+      ></section>
+      <section
+        className="hub"
+        style={{
+          bottom: showHub ? 0 : "-300px",
+        }}
+      >
+        <h2 className="title">¿Seguro que quieres eliminar este evento?</h2>
+        <div className="buttons">
+          <button className="noDelete" onClick={() => setHub(false)}>
+            No
+          </button>
+          <button className="delete" onClick={() => quitEvent(id)}>
+            Si
+          </button>
+        </div>
       </section>
     </main>
   );

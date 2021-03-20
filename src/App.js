@@ -13,7 +13,10 @@ import EventConfirmation from "./Views/EventConfirmation/EventConfirmation";
 import Menu from "./components/Menu/Menu";
 import Profile from "./Views/Profile/Profile";
 import EditProfile from "./Views/EditProfile/EditProfile";
+import Navbar from "./components/Navbar/Navbar";
 import { useAuth } from "./context/Auth/AuthContext.utils";
+import UserEvents from "./Views/UserEvents/UserEvents";
+import EditEvent from "./Views/EditEvent/EditEvent";
 
 function App() {
   const { user } = useAuth();
@@ -21,13 +24,17 @@ function App() {
     <>
       <Menu />
       <Switch>
+        <PrivateRoute exact path="/eventos/creados/:id">
+          <UserEvents />
+        </PrivateRoute>
         <PrivateRoute exact path="/perfil/editar/:id">
           <EditProfile />
         </PrivateRoute>
         <PrivateRoute exact path="/perfil">
           <Profile />
+          <Navbar />
         </PrivateRoute>
-        <PrivateRoute exact path="/eventos/crear">
+        <PrivateRoute exact path="/crear-evento">
           <CreateEvent />
         </PrivateRoute>
         <AnonRoute exact path="/iniciar-sesion">
@@ -42,13 +49,18 @@ function App() {
         <Route exact path="/eventos/:id">
           <Event />
         </Route>
+        <Route exact path="/eventos/:id/editar">
+          <EditEvent />
+        </Route>
         <Route exact path="/eventos">
           <Events />
+          <Navbar />
         </Route>
         {user.isLogged ? (
           <>
             <PrivateRoute exact path="/">
               <HomePrivate />
+              <Navbar />
             </PrivateRoute>
           </>
         ) : (

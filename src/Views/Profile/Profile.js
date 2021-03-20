@@ -3,6 +3,7 @@ import "./Profile.scss";
 import { getUser } from "../../service/user.service";
 import ListButton from "../../components/ListButton/ListButton";
 import { Route, Link } from "react-router-dom";
+import { useAuth } from "../../context/Auth/AuthContext.utils";
 import eventosCreados from "../../assets/eventosCreados.svg";
 import eventos from "../../assets/eventos.svg";
 import editar from "../../assets/editar.svg";
@@ -18,16 +19,16 @@ const Profile = () => {
       return setShow("block");
     };
   }
+  const { handleLogout } = useAuth();
   const [show, setShow] = useState("block");
   const [user, setUser] = useState({});
   const [topMargin, setTop] = useState(0);
-  console.log(user);
   useEffect(() => {
     const headerHeight = document.querySelector(".header").offsetHeight;
     setTop(headerHeight + 46);
   }, []);
   useEffect(() => {
-    getUser().then(({ data: { user } }) =>
+    const currentUser = getUser().then(({ data: { user } }) =>
       setUser({ ...user, hashedPassword: "not for you" })
     );
   }, []);
@@ -75,7 +76,7 @@ const Profile = () => {
           <Link to={`eventos/creados/${user._id}`}>
             <ListButton
               icon={eventosCreados}
-              text={"Eventos Creados"}
+              text={"Actividades creadas"}
             ></ListButton>
           </Link>
         </Route>
@@ -92,6 +93,9 @@ const Profile = () => {
             ></ListButton>
           </Link>
         </Route>
+        <button className="logout" onClick={() => handleLogout()}>
+          Cerrar sessión
+        </button>
       </section>
     </main>
   );

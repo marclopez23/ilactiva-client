@@ -10,7 +10,6 @@ const Login = () => {
   const loginHandler = async (user) => {
     try {
       const logUser = await handleLogin(user);
-      console.log("logged");
     } catch (e) {
       console.error(e);
     }

@@ -42,21 +42,23 @@ const HomePrivate = () => {
             </Route>
           </div>
           <div className="eventsList">
-            {eventsList.map((evento, index) =>
-              index === eventsList.length - 1 ? (
-                <EventCard
-                  key={evento._id}
-                  evento={evento}
-                  cssClass="eventCard last"
-                />
-              ) : (
-                <EventCard
-                  key={evento._id}
-                  evento={evento}
-                  cssClass="eventCard"
-                />
-              )
-            )}
+            {eventsList
+              .slice(0, 9)
+              .map((evento, index) =>
+                index === 8 || index === eventsList.length - 1 ? (
+                  <EventCard
+                    key={evento._id}
+                    evento={evento}
+                    cssClass="eventCard last"
+                  />
+                ) : (
+                  <EventCard
+                    key={evento._id}
+                    evento={evento}
+                    cssClass="eventCard"
+                  />
+                )
+              )}
           </div>
         </article>
       </section>
