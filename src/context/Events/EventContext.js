@@ -22,14 +22,15 @@ function EventProvider({ children }) {
     });
   }, []);
 
-  const bringEvent = useCallback(async (id) => {
+  const bringEvent = async (id) => {
     try {
+      console.log("hola");
       const fetchEvent = await getEvent(id);
       return fetchEvent;
     } catch (e) {
       console.log(e);
     }
-  }, []);
+  };
 
   const newEvent = useCallback(async (info) => {
     try {
@@ -44,30 +45,33 @@ function EventProvider({ children }) {
     }
   }, []);
 
-  const registerEvent = async (id) => {
+  const registerEvent = async (eventId) => {
     try {
-      const enterEvent = await joinEvent(id);
-      const currentEventIndex = user.eventsJoined.includes(id);
-      console.log(currentEventIndex);
+      const {
+        data: { event: evento },
+      } = await joinEvent(eventId);
+      const currentEventIndex = user.eventsJoined.includes(eventId);
+      console.log("id", evento._id);
+
       if (currentEventIndex) {
         setUser((state) => ({
           ...state,
           user: {
             ...state.user,
             eventsJoined: state.user.eventsJoined.filter(
-              (event) => event !== id
+              (event) => event !== eventId
             ),
           },
         }));
-        return;
+      } else {
+        setUser((state) => ({
+          ...state,
+          user: {
+            ...state.user,
+            eventsJoined: state.user.eventsJoined.concat(evento._id),
+          },
+        }));
       }
-      setUser((state) => ({
-        ...state,
-        user: {
-          ...state.user,
-          eventsJoined: state.user.eventsJoined.concat(enterEvent._id),
-        },
-      }));
     } catch (e) {
       console.log(e);
       return "Algo ha salido mal, porfavor vuelve a intentarlo";
@@ -93,6 +97,19 @@ function EventProvider({ children }) {
     }
   };
 
+  const eventEdit = async (id, info) => {
+    try {
+      const {
+        data: { updatedEvent },
+      } = await editEvent(id, info);
+      console.log(updatedEvent);
+      const newList = events.filter((event) => event._id !== id);
+      setEvents([...newList, updatedEvent]);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <EventContext.Provider
       value={{
@@ -102,6 +119,7 @@ function EventProvider({ children }) {
         setEvents,
         registerEvent,
         quitEvent,
+        eventEdit,
       }}
     >
       {children}

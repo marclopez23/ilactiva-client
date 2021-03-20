@@ -57,7 +57,7 @@ const EventForm = ({ onSubmit }) => {
   ];
 
   const [info, setInfo] = useState(initialState);
-  const [itsFree, setFree] = useState(false);
+  //const [itsFree, setFree] = useState(false);
   const [step, setStep] = useState(1);
   const [makeRedirect, setRedirect] = useState(false);
   const [imageReady, setImageReady] = useState(true);
@@ -111,8 +111,7 @@ const EventForm = ({ onSubmit }) => {
         price: 0,
       }));
     }
-    console.log(checked);
-    setFree(checked);
+    //setFree(checked);
     setInfo((state) => ({
       ...state,
       [name]: checked,
@@ -240,7 +239,7 @@ const EventForm = ({ onSubmit }) => {
                 type="checkbox"
                 name="free"
                 id="free"
-                value={info.title}
+                value={info.free}
                 onChange={handleFree}
               />
             </div>
