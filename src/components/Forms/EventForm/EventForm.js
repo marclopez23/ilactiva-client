@@ -124,6 +124,29 @@ const EventForm = ({ onSubmit }) => {
       [name]: value,
     }));
   };
+
+  const handleNext = () => {
+    if (step === 1) {
+      return info.category === "";
+    } else if (step === 2) {
+      return !(info.date !== "" && info.hour !== "" && info.end !== "");
+    } else if (step === 3) {
+      console.log(
+        info.eventImg !== "" &&
+          info.title !== "" &&
+          info.description !== "" &&
+          info.maxUser !== "" &&
+          info.direction !== ""
+      );
+      return info.eventImg !== "" &&
+        info.name !== "" &&
+        info.description !== "" &&
+        info.maxUser !== "" &&
+        info.direction !== ""
+        ? false
+        : true;
+    }
+  };
   return (
     <>
       {makeRedirect && <Redirect to={`/eventos/creado/`} />}
@@ -145,6 +168,7 @@ const EventForm = ({ onSubmit }) => {
               next={"Siguiente"}
               onClick={handleSubmit}
               maxStep={maxStep}
+              disable={handleNext()}
             ></FormFooter>
           </article>
         )}
@@ -186,6 +210,7 @@ const EventForm = ({ onSubmit }) => {
               next={"Siguiente"}
               onClick={handleSubmit}
               maxStep={maxStep}
+              disable={handleNext()}
             ></FormFooter>
           </article>
         )}
@@ -272,6 +297,7 @@ const EventForm = ({ onSubmit }) => {
               next={"Finalizar"}
               onClick={handleSubmit}
               maxStep={maxStep}
+              disable={handleNext()}
             ></FormFooter>
           </article>
         )}
