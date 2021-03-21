@@ -1,0 +1,29 @@
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/buttons.scss";
+
+.commerceCard {
+  background-color: $blanco;
+  border-radius: 12px;
+  width: 175px;
+  margin-left: 1rem;
+  padding: 1rem;
+  img {
+    width: 75px;
+    height: 75px;
+    display: block;
+    margin: 0 auto;
+    border: 2px solid $salmonLight;
+    border-radius: 500px;
+  }
+  h3 {
+    text-align: center;
+    margin: 1rem 0;
+  }
+  button {
+    @include primaryButton;
+    display: block;
+    width: 100%;
+  }
+}

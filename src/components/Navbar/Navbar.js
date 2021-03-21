@@ -1,13 +1,17 @@
 import React from "react";
 import NavbarItem from "./NavbarItem/NavbarItem";
+import { useAuth } from "../../context/Auth/AuthContext.utils";
 import "./Navbar.scss";
 import { crear, buscar, eventos, perfil, home } from "../../assets/menu/";
 const Navbar = () => {
+  const {
+    user: { id },
+  } = useAuth();
   const sections = [
     { icon: home, link: "/" },
     { icon: buscar, link: "/buscar" },
     { icon: crear, link: "/crear-evento" },
-    { icon: eventos, link: "/eventos/usuario/:id" },
+    { icon: eventos, link: `/eventos/usuario/${id}` },
     { icon: perfil, link: "/perfil" },
   ];
 

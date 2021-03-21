@@ -4,6 +4,7 @@ import cruz from "../../assets/cruz.svg";
 import { useParams, useHistory } from "react-router-dom";
 import { uploadFileService } from "../../service/upload.service";
 import "../Event/Event.scss";
+import "./EditEvent.scss";
 import SimpleHeader from "../../components/SimpleHeader/SimpleHeader";
 
 const EditEvent = () => {
@@ -92,27 +93,20 @@ const EditEvent = () => {
           <path d="M0,0.879 V0 H0.112 H0.469 H1 V0.706 V1 H0.07 C0.055,1,0.041,0.989,0.031,0.97 L0.01,0.926 C0.003,0.912,0,0.896,0,0.879"></path>
         </clipPath>
       </svg>
+      <SimpleHeader title="Editar información" />
       <section
         className="eventImg"
         style={{ backgroundImage: `url(${event.eventImg})` }}
       >
-        <div className="cross">
-          <img
-            src={cruz}
-            className="close"
-            alt="close"
-            onClick={() => history.goBack()}
-          />
-        </div>
+        <input
+          type="file"
+          name="file"
+          id="file"
+          value={event.file || ""}
+          onChange={handleUpload}
+        />
       </section>
-      <SimpleHeader title="Editar información" />
-      <input
-        type="file"
-        name="file"
-        id="file"
-        value={event.file || ""}
-        onChange={handleUpload}
-      />
+
       <form action="">
         <label htmlFor="tite">Título del evento:</label>
         <input

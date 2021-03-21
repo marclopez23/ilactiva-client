@@ -1,0 +1,41 @@
+@import "../../styles/vars/color.scss";
+@import "../../styles/mixins/buttons.scss";
+
+.editEvent {
+  margin-top: 100px;
+  #file {
+    cursor: pointer;
+    transform: translate(9rem, 10rem);
+    border: none;
+    height: unset;
+    color: #ffffff;
+    background-color: #fceae0;
+    border: 1px solid #f68069;
+    border-radius: 500px;
+    width: 55px;
+    height: 55px;
+    display: block;
+    margin: 1rem auto;
+    &::before {
+      content: " ";
+      background-image: url("./../../assets/addPhoto.svg");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 25px;
+      padding: 4px;
+      display: block;
+      margin: 0.82rem auto;
+    }
+    &::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+  }
+  form {
+    margin: 1rem;
+
+    .send {
+      @include primaryButton;
+    }
+  }
+}

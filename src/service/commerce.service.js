@@ -5,6 +5,6 @@ const commerceApi = axios.create({
   withCredentials: true,
 });
 
-export const getCommerces = (query) => commerceApi.get(`?${query}`);
+export const getCommerces = () => commerceApi.get(`/`);
 
 export const getCommerce = (id) => commerceApi.get(`/${id}`);
