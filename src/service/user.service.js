@@ -9,7 +9,4 @@ export const getUser = () => userApi.get("/");
 
 export const edit = (info) => userApi.patch("/edit", info);
 
-export const followCommerce = (id) => userApi.patch(`/following/${id}`);
-
-
-
+export const followCommerce = (id) => userApi.patch(`/follow/${id}`);

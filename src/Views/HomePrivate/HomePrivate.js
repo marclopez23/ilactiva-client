@@ -20,16 +20,27 @@ const HomePrivate = () => {
   const { user } = useAuth();
   const [topMargin, setTop] = useState(0);
   useEffect(() => {
-    setEvents(events.filter((event) => new Date() < new Date(event.date)));
+    setEvents(
+      events.filter(
+        (event) =>
+          new Date() < new Date(event.date) && event.creator !== user.id
+      )
+    );
     setLiked(
-      events
-        .filter((event) => new Date() < new Date(event.date))
-        .filter((evento) => user.category.includes(evento.category))
+      events.filter(
+        (event) =>
+          new Date() < new Date(event.date) &&
+          event.creator !== user.id &&
+          user.category.includes(event.category)
+      )
     );
     setCommerceEvents(
-      events
-        .filter((event) => new Date() < new Date(event.date))
-        .filter((evento) => evento.onModel === "Commerce")
+      events.filter(
+        (event) =>
+          new Date() < new Date(event.date) &&
+          event.creator !== user.id &&
+          event.onModel === "Commerce"
+      )
     );
   }, [events]);
 
@@ -39,7 +50,9 @@ const HomePrivate = () => {
   }, []);
 
   useEffect(() => {
-    getCommerces().then(({ data: { commerces } }) => setCommerces(commerces));
+    getCommerces().then(({ data: { commerces } }) =>
+      setCommerces(commerces.filter((commerce) => commerce._id !== user.id))
+    );
   }, []);
 
   return (
@@ -124,6 +137,7 @@ const HomePrivate = () => {
           <div className="eventsList">
             {commerces
               .slice(0, 9)
+              .filter((commerce) => !user.following.includes(commerce._id))
               .map((commerce, index) =>
                 index === 8 || index === commerces.length - 1 ? (
                   <CommerceCard
@@ -156,18 +170,11 @@ const HomePrivate = () => {
           ) : (
             <Empty txt="Ningún comercio en tu zona ha creado eventos" />
           )}
-          {commerceEvents.slice(0, 3).map((evento) => (
-            <EventCardLarge
-              key={evento._id}
-              event={evento}
-              cssClass="eventCard"
-            />
-          ))}
         </article>
         {commerceEvents.length > 0 && (
           <article className="more">
             <Route>
-              <Link>
+              <Link to="/">
                 <button className="more">Descubre más</button>
               </Link>
             </Route>

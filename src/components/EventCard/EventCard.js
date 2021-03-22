@@ -2,7 +2,6 @@ import React from "react";
 import { Route, Link } from "react-router-dom";
 import "./EventCard.scss";
 const EventCard = ({ evento, cssClass }) => {
-  console.log(evento.title);
   const { title, date, hour, place, _id, eventImg } = evento;
   const handleDate = (dateEvent) => {
     const dias = {

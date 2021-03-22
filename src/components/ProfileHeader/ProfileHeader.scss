@@ -1,17 +1,17 @@
-@import "../../styles/vars/font.scss";
 @import "../../styles/vars/color.scss";
 @import "../../styles/vars/shadows.scss";
-@import "../../styles/mixins/responsive.scss";
 
-.header {
+.perfilHeader {
+  padding: 2rem;
+  text-align: center;
   background-color: $verdePrimario;
   color: $blanco;
-  padding: 2.5rem 2rem;
   -webkit-clip-path: url(#my-clip-path);
   clip-path: url(#my-clip-path);
   position: fixed;
   width: 100%;
   top: 0;
+  left: 0;
   box-sizing: border-box;
 }
 

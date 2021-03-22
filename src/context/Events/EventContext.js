@@ -63,6 +63,10 @@ function EventProvider({ children }) {
             ),
           },
         }));
+        saveUser({
+          ...user,
+          eventsJoined: user.eventsJoined.filter((event) => event !== eventId),
+        });
       } else {
         setUser((state) => ({
           ...state,
@@ -71,6 +75,10 @@ function EventProvider({ children }) {
             eventsJoined: state.user.eventsJoined.concat(evento._id),
           },
         }));
+        saveUser({
+          ...user,
+          eventsJoined: user.eventsJoined.concat(evento._id),
+        });
       }
     } catch (e) {
       console.log(e);

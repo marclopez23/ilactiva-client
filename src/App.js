@@ -17,6 +17,7 @@ import Navbar from "./components/Navbar/Navbar";
 import { useAuth } from "./context/Auth/AuthContext.utils";
 import UserEvents from "./Views/UserEvents/UserEvents";
 import EditEvent from "./Views/EditEvent/EditEvent";
+import CommercePage from "./Views/CommercePage/CommercePage";
 
 function App() {
   const { user } = useAuth();
@@ -49,8 +50,11 @@ function App() {
         <Route exact path="/eventos/:id">
           <Event />
         </Route>
-        <Route exact path="/eventos/:id/editar">
+        <PrivateRoute exact path="/eventos/:id/editar">
           <EditEvent />
+        </PrivateRoute>
+        <Route exact path="/comercios/:id">
+          <CommercePage />
         </Route>
         <Route exact path="/eventos">
           <Events />

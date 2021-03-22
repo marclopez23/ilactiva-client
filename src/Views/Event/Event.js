@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, Route, useHistory, useParams } from "react-router-dom";
 import cruz from "../../assets/cruz.svg";
 import { useEvents } from "../../context/Events/EventsContext.utils";
-import { useAuth } from "../../context/Auth/AuthContext.utils";
+import { useAuth, saveUser } from "../../context/Auth/AuthContext.utils";
 import { followCommerce } from "../../service/user.service";
 import Button from "../../components/Button/Button";
 import "./Event.scss";
@@ -15,7 +15,33 @@ const Event = () => {
   const { bringEvent, registerEvent, quitEvent } = useEvents();
   const { id } = useParams();
   const history = useHistory();
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
+  let newInfo = user;
+  const handleFollow = async () => {
+    try {
+      await followCommerce(creator._id);
+      const currentFollowing = newInfo.following.includes(creator._id);
+      currentFollowing
+        ? (newInfo = {
+            ...newInfo,
+            following: newInfo.following.filter(
+              (commerceId) => commerceId !== creator._id
+            ),
+          })
+        : (newInfo = {
+            ...newInfo,
+            following: [...newInfo.following, creator._id],
+          });
+      console.log({ ...user, following: newInfo.following });
+      saveUser({ ...user, following: newInfo.following });
+      setUser((state) => ({
+        ...state,
+        user: { ...state.user, following: newInfo.following },
+      }));
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   useEffect(() => {
     bringEvent(id).then(({ data }) => {
@@ -89,7 +115,11 @@ const Event = () => {
           </Route>
         )}
         {event.onModel !== "User" && creator._id !== user.id && (
-          <button className="follow">Seguir</button>
+          <button className="follow" onClick={() => handleFollow()}>
+            {user.following.includes(creator._id)
+              ? "Dejar de Seguir"
+              : "Seguir"}
+          </button>
         )}
       </section>
       <section className="content">

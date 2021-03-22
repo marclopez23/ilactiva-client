@@ -5,7 +5,7 @@ import { Route, Link } from "react-router-dom";
 const CommerceCard = ({ commerce, cssClass }) => {
   return (
     <Route>
-      <Link>
+      <Link to={`/comercios/${commerce._id}`}>
         <article className={cssClass}>
           <img src={commerce.profileImg} alt={commerce.name} />
           <h3 className="cardTitle">{commerce.name}</h3>

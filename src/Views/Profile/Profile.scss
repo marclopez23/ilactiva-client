@@ -12,10 +12,6 @@
 }
 
 .perfil {
-  .header {
-    padding: 2rem;
-    text-align: center;
-  }
   .userInfo {
     margin: 1rem;
     padding-bottom: 6rem;
@@ -25,17 +21,6 @@
     ul {
       &:first-child {
         margin-left: 0;
-      }
-      .categoria {
-        margin: 1rem 0.25rem;
-        background-color: $salmonLight;
-        border: 1px solid $salmon;
-        color: $salmon;
-        display: inline-block;
-        border-radius: 4px;
-        width: fit-content;
-        padding: 0.25rem;
-        text-transform: capitalize;
       }
     }
     .listButton {
