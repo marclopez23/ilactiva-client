@@ -52,10 +52,10 @@ function App() {
         <PrivateRoute exact path="/eventos/creado/">
           <EventConfirmation />
         </PrivateRoute>
-        <Route exact path="/eventos/:id">
+        <Route exact path="/evento/:id">
           <Event />
         </Route>
-        <PrivateRoute exact path="/eventos/:id/editar">
+        <PrivateRoute exact path="/evento/:id/editar">
           <EditEvent />
         </PrivateRoute>
         <PrivateRoute exact path="/comercios/seguidos">

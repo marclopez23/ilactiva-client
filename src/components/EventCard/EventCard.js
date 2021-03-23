@@ -35,7 +35,7 @@ const EventCard = ({ evento, cssClass }) => {
   };
   return (
     <Route>
-      <Link to={`/eventos/${_id}`}>
+      <Link to={`/evento/${_id}`}>
         <article className={cssClass}>
           <div
             className="eventImg"

@@ -39,6 +39,7 @@ const UserEvents = () => {
             user: { eventsJoined },
           },
         }) => {
+          console.log(eventsJoined);
           setNext([
             ...eventsJoined.filter(
               (event) => new Date() < new Date(event.date)
@@ -51,8 +52,9 @@ const UserEvents = () => {
           ]);
         }
       );
+      console.log(nextEvents);
     }
-  }, []);
+  }, [query]);
   useEffect(() => {
     setTop(100);
   }, [topMargin]);

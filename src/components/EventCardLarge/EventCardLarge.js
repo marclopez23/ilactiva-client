@@ -35,7 +35,7 @@ const EventCardLarge = ({ event }) => {
   };
   return (
     <Route>
-      <Link to={`/eventos/${event._id}`}>
+      <Link to={`/evento/${event._id}`}>
         <article className="eventoLarge">
           <div
             className="imgEvent"
