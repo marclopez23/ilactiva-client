@@ -1,0 +1,21 @@
+@import "../../styles/vars/color.scss";
+
+.listButton {
+  display: flex;
+  border-radius: 12px;
+  align-items: center;
+  background-color: $blanco;
+  cursor: pointer;
+  padding: 1rem;
+  .icon {
+    width: 20%;
+    img {
+      display: block;
+
+      width: 60%;
+    }
+  }
+  .subheader {
+    width: 75%;
+  }
+}

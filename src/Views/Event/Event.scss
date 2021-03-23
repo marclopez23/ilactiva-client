@@ -1,0 +1,140 @@
+@import "../../styles/vars/color.scss";
+@import "../../styles/mixins/buttons.scss";
+
+.eventPage,
+.editEvent {
+  .svgImg {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+  .eventImg {
+    -webkit-clip-path: url(#eventImg);
+    clip-path: url(#eventImg);
+    .cross {
+      width: fit-content;
+      float: right;
+      padding: 1rem;
+      background-color: $blancoSucio;
+      clip-path: circle(18px at 33px 34px);
+      img.close {
+        float: right;
+      }
+    }
+  }
+  .creator {
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    .infoCreator {
+      display: flex;
+      align-items: center;
+      .creatorImg {
+        width: 58px;
+        clip-path: circle(23px at 24px 24px);
+        margin-right: 0.5rem;
+      }
+      .caption {
+        color: $verdePrimario;
+      }
+    }
+    .follow {
+      @include primaryButton;
+      height: fit-content;
+      padding: 0.5rem 1rem;
+    }
+  }
+  .content {
+    .categoria {
+      text-transform: capitalize;
+      color: $verdePrimario;
+    }
+    .subheader {
+      color: $gris;
+    }
+    .fecha {
+      margin-top: 1rem;
+    }
+    .hora {
+      color: $gris;
+    }
+    .lugar {
+      margin-top: 1rem;
+      img {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+  .descripcion {
+    padding: 1rem;
+    -webkit-clip-path: url(#descriptionImg);
+    clip-path: url(#descriptionImg);
+    background-color: $blanco;
+    height: 50vh;
+    h2 {
+      margin-bottom: 1rem;
+    }
+  }
+  .fixedButton {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    padding: 1rem 1rem 2rem 1rem;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.235) 100%
+    );
+    button {
+      height: 48px;
+      width: 100%;
+    }
+    a {
+      color: $blanco;
+      display: block;
+      text-align: center;
+      padding: 1rem;
+    }
+  }
+  .overlay {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+
+    left: 0;
+    z-index: 99;
+    transition: background-color 0.5s;
+  }
+  .hub {
+    text-align: center;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: $blanco;
+    padding: 3rem 1rem;
+    -webkit-box-shadow: 0px -8px 16px -6px rgba(0, 0, 0, 0.25);
+    -moz-box-shadow: 0px -8px 16px -6px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px -8px 16px -6px rgba(0, 0, 0, 0.25);
+    border-radius: 12px 12px 0 0;
+    transition: bottom 1s;
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 4rem;
+      button {
+        width: 48%;
+      }
+    }
+    .noDelete {
+      @include secondaryButton;
+    }
+    .delete {
+      @include primaryButton;
+    }
+  }
+}

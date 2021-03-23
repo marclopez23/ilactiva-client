@@ -1,23 +1,84 @@
 import React, { useEffect, useState } from "react";
-import { Link, Route, useHistory } from "react-router-dom";
+import { Link, Route, useHistory, useParams } from "react-router-dom";
 import cruz from "../../assets/cruz.svg";
-import { useParams } from "react-router-dom";
 import { useEvents } from "../../context/Events/EventsContext.utils";
-import { useAuth } from "../../context/Auth/AuthContext.utils";
+import { useAuth, saveUser } from "../../context/Auth/AuthContext.utils";
+import { followCommerce } from "../../service/user.service";
+import Button from "../../components/Button/Button";
+import "./Event.scss";
+import marker from "../../assets/marker.svg";
 
 const Event = () => {
   const [event, setEvent] = useState({});
+  const [showHub, setHub] = useState(false);
   const [creator, setCreator] = useState({});
-  const { bringEvent } = useEvents();
+  const { bringEvent, registerEvent, quitEvent } = useEvents();
   const { id } = useParams();
   const history = useHistory();
-  const { user } = useAuth();
+  const { user, setUser } = useAuth();
+  let newInfo = user;
+  const handleFollow = async () => {
+    try {
+      await followCommerce(creator._id);
+      const currentFollowing = newInfo.following.includes(creator._id);
+      currentFollowing
+        ? (newInfo = {
+            ...newInfo,
+            following: newInfo.following.filter(
+              (commerceId) => commerceId !== creator._id
+            ),
+          })
+        : (newInfo = {
+            ...newInfo,
+            following: [...newInfo.following, creator._id],
+          });
+      console.log({ ...user, following: newInfo.following });
+      saveUser({ ...user, following: newInfo.following });
+      setUser((state) => ({
+        ...state,
+        user: { ...state.user, following: newInfo.following },
+      }));
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   useEffect(() => {
-    const fetchEvent = bringEvent(id).then(({ data }) => {
+    bringEvent(id).then(({ data }) => {
       setEvent(data.event);
       setCreator(data.event.creator);
     });
   }, []);
+  const handleDate = (dateEvent) => {
+    const dias = {
+      0: "Domingo",
+      1: "Lunes",
+      2: "Martes",
+      3: "Miércoles",
+      4: "Jueves",
+      5: "Viernes",
+      6: "Sábado",
+    };
+    const mes = {
+      0: "Enero",
+      1: "Febrero",
+      2: "Marzo",
+      3: "Abril",
+      4: "Mayo",
+      5: "Junio",
+      6: "Julio",
+      7: "Agosto",
+      8: "Septiembre",
+      9: "Octubre",
+      10: "Noviembre",
+      11: "Diciembre",
+    };
+    let date = new Date(dateEvent);
+    const day = date.getUTCDay();
+    const monthDay = date.getUTCDate();
+    const month = date.getUTCMonth();
+    return `${dias[day]} ${monthDay} de ${mes[month]}`;
+  };
   return (
     <main className="eventPage">
       <svg className="svgImg">
@@ -46,34 +107,103 @@ const Event = () => {
             <p className="caption">Organizador/a</p>
           </div>
         </div>
-        {creator._id === user.id ? (
-          <button className="follow">Editar</button>
-        ) : (
-          <button className="follow">Seguir</button>
+        {user.isLogged && creator._id === user.id && (
+          <Route>
+            <Link to={`/eventos/${event._id}/editar`}>
+              <Button copy="Editar" primary={true} className="follow" />
+            </Link>
+          </Route>
+        )}
+        {event.onModel !== "User" && creator._id !== user.id && (
+          <button className="follow" onClick={() => handleFollow()}>
+            {user.following.includes(creator._id)
+              ? "Dejar de Seguir"
+              : "Seguir"}
+          </button>
         )}
       </section>
       <section className="content">
         <div className="mainInfo">
           <h1 className="title">{event.title}</h1>
-          <p className="caption categoria">{event.category}</p>
         </div>
-
         <p className="subheader">
           {event.free ? "Evento Gratuito" : `Coste ${event.price}€`}
         </p>
-
-        <p className="body1">
-          {event.date} de {event.hour} a {event.end}
+        <p className="body1 categoria">{event.category}</p>
+        <div>
+          <p className="body1 fecha">{handleDate(event.date)}</p>
+          <p className="body1 hora">
+            {event.hour} a {event.end}
+          </p>
+        </div>
+        <p className="lugar">
+          <img src={marker} alt="" className="marker" />
+          <span className="body1">{event.place}</span>
         </p>
-        <p className="body1">
-          <span className="body2">Lugar: </span>
-          {event.place}
-        </p>
-        <p className="body1">
-          <span className="body2">Nª de asistentes: </span>
-          {event.maxUsers}
-        </p>
+      </section>
+      <section className="descripcion">
+        <svg className="svgImg">
+          <clipPath id="descriptionImg" clipPathUnits="objectBoundingBox">
+            <path d="M0.998,0.109 V1 H0.885 H0.529 H-0.002 V0.294 V0 H0.923 C0.941,0,0.957,0.011,0.966,0.028 L0.992,0.082 C0.996,0.09,0.998,0.1,0.998,0.109"></path>
+          </clipPath>
+        </svg>
+        <h2 className="cardTitle">Descripción del evento</h2>
         <p className="body1">{event.description}</p>
+      </section>
+      <section className="fixedButton">
+        {user.isLogged &&
+          !user.eventsJoined.includes(id) &&
+          (creator._id === user.id ? (
+            <Button
+              copy="¡Eliminar!"
+              primary={true}
+              onClick={() => setHub(true)}
+            />
+          ) : (
+            <Button
+              copy="¡Apuntarme!"
+              primary={true}
+              onClick={() => registerEvent(id)}
+            />
+          ))}
+        {user.isLogged && user.eventsJoined.includes(id) && (
+          <Button
+            copy="Desapuntarme"
+            primary={true}
+            onClick={() => registerEvent(id)}
+          />
+        )}
+        {!user.isLogged && (
+          <Route>
+            <Link to="/iniciar-sesion" className="primary">
+              Inicia sesión para apuntarte
+            </Link>
+          </Route>
+        )}
+      </section>
+      <section
+        className="overlay"
+        style={{
+          top: showHub ? 0 : "-100vh",
+          backgroundColor: showHub ? "#000000c7" : "#00000000",
+        }}
+        onClick={() => setHub(false)}
+      ></section>
+      <section
+        className="hub"
+        style={{
+          bottom: showHub ? 0 : "-300px",
+        }}
+      >
+        <h2 className="title">¿Seguro que quieres eliminar este evento?</h2>
+        <div className="buttons">
+          <button className="noDelete" onClick={() => setHub(false)}>
+            No
+          </button>
+          <button className="delete" onClick={() => quitEvent(id)}>
+            Si
+          </button>
+        </div>
       </section>
     </main>
   );

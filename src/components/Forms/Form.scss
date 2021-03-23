@@ -2,19 +2,20 @@
 @import "../../styles/vars/font.scss";
 @import "../../styles/vars/shadows.scss";
 
-form{
-    
-   label{
-       display: block;
-       @include label;
-       span{
-           color: $gris;
-           font-size: 0.875rem;
-           font-weight: 400;
-       }
-   } 
-   input, textarea{
-       box-sizing: border-box;
+form {
+  label {
+    display: block;
+    @include label;
+    span {
+      color: $gris;
+      font-size: 0.875rem;
+      font-weight: 400;
+    }
+  }
+  input,
+  textarea,
+  select {
+    box-sizing: border-box;
     background: $blanco;
     border: 1px solid $salmon;
     border-radius: 5px;
@@ -22,8 +23,8 @@ form{
     margin: 1rem 0;
     width: 100%;
     font-family: "Sarabun", sans-serif;
-   }
-   #file{
+  }
+  #file {
     border: none;
     height: unset;
     color: $blanco;
@@ -35,7 +36,7 @@ form{
     &::before {
       content: "Subir imagen";
       color: $blanco;
-     margin: 37%;
+      margin: 37%;
     }
-   }
+  }
 }

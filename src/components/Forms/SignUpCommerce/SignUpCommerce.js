@@ -80,6 +80,7 @@ const SignUpForm = ({ onSubmit }) => {
       [name]: value,
     }));
   };
+  console.log(info);
   return (
     <article>
       <form action="" onSubmit={handleSubmit}>
@@ -190,7 +191,7 @@ const SignUpForm = ({ onSubmit }) => {
             >
               <option disabled={info.direction}>Escoge una opción</option>
               <option value="talleres">Talleres</option>
-              <option value="deporte">Deporte</option>
+              <option value="deportes">Deportes</option>
               <option value="exposiciones">Exposiciones</option>
               <option value="Visitas y tours">Visitas y tours</option>
               <option value="infatil">Infatil</option>

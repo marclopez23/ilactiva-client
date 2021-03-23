@@ -1,0 +1,94 @@
+@import "../../../styles/vars/color.scss";
+@import "../../../styles/vars/font.scss";
+@import "../../../styles/vars/shadows.scss";
+@import "../../../styles/mixins/buttons.scss";
+
+.signForm {
+  margin: 1rem;
+  padding-bottom: 4rem;
+  #file {
+    cursor: pointer;
+    border: none;
+    height: unset;
+    color: #ffffff;
+    background-color: $salmonLight;
+    border: 1px solid $salmon;
+    border-radius: 500px;
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 1rem auto;
+    &::before {
+      content: " ";
+      background-image: url("../../../assets/addPhoto.svg");
+
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 20px;
+      padding: 15px;
+      display: block;
+      margin: 0.75rem auto;
+    }
+  }
+  .field-icon {
+    float: right;
+    margin-right: 0.75rem;
+    margin-top: -47px;
+    width: 32px;
+    position: relative;
+    z-index: 2;
+  }
+  .location {
+    .distrito {
+      width: 100%;
+      text-align: center;
+      padding: 1rem;
+      margin: 1rem auto;
+      background-color: $salmon;
+      border-radius: 4px;
+      color: $blanco;
+      @include toggle;
+    }
+    .active {
+      background-color: $verdePrimario;
+    }
+  }
+
+  .categoriesDiv {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    .article {
+      width: 50%;
+    }
+    .confirmation {
+      .cardTitle {
+        margin-top: 1rem;
+      }
+
+      .categoria {
+        margin-top: 1rem;
+        text-transform: capitalize;
+      }
+
+      .send {
+        @include primaryButton;
+      }
+
+      .button {
+        padding: 1rem;
+        position: fixed;
+        background-color: #fcf5f3;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        box-sizing: border-box;
+        z-index: 1000;
+      }
+    }
+  }
+}

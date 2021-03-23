@@ -1,0 +1,31 @@
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/shadows.scss";
+
+.selectType {
+  margin: 5rem 1rem;
+  overflow: visible;
+
+  .userTypeCard {
+    cursor: pointer;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 12px;
+    @include fotoComodin;
+    .title {
+      text-transform: none;
+    }
+    p {
+      width: 80%;
+    }
+    img {
+      float: right;
+    }
+  }
+  .vecino {
+    background-color: $amarilloLight;
+  }
+  .comercio {
+    background-color: $salmonLight;
+  }
+}

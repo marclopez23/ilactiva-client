@@ -1,0 +1,63 @@
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/buttons.scss";
+
+.fotoPerfil {
+  border-radius: 500px;
+  width: 100px;
+  height: 100px;
+  display: block;
+  margin: 1rem auto;
+}
+
+.perfil {
+  .svgImg {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+  .userInfo {
+    margin: 1rem;
+    padding-bottom: 6rem;
+    h4 {
+      margin-top: 1rem;
+    }
+    ul {
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+    .listButton {
+      margin-top: 1rem;
+    }
+  }
+  .logout {
+    @include primaryButton;
+    width: 100%;
+    margin: 2rem 0 1rem 0;
+  }
+
+  .tags,
+  .horario,
+  .direccion,
+  .descripcion {
+    margin: 1rem 0;
+  }
+  .tags {
+    ul {
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+  .direccion {
+    margin-bottom: 2rem;
+    div {
+      display: flex;
+      img {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}

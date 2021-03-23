@@ -4,7 +4,6 @@
 @import "../../styles/mixins/responsive.scss";
 
 nav {
-  display: flex;
   padding: 1em;
   align-items: center;
   justify-content: space-between;
@@ -22,6 +21,6 @@ nav {
     }
   }
   @include desktop {
-    display: f;
+    display: flex;
   }
 }

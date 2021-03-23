@@ -1,6 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Form.scss";
 import { uploadFileService } from "../../../service/upload.service";
+import "./SignUpForm.scss";
+import SimpleHeader from "../../SimpleHeader/SimpleHeader";
+import hide from "../../../assets/hide.svg";
+import unhide from "../../../assets/unhide.svg";
+import FormFooter from "../../FormFooter/FormFooter";
+import CategorySelector from "../../CategorySelector/CategorySelector";
+import {
+  talleres,
+  charlas,
+  cine,
+  deportes,
+  exposiciones,
+  infantil,
+  musica,
+  quedadas,
+  visitas,
+  espectaculos,
+} from "../../../assets/category/index";
 
 const SignUpForm = ({ onSubmit }) => {
   const initialState = {
@@ -13,9 +31,54 @@ const SignUpForm = ({ onSubmit }) => {
     file: "",
   };
 
+  const distritos = [
+    "Ciutat Vella",
+    "Eixample",
+    "Sants-Montjuïc",
+    "Les Corts",
+    "Sarrià-Sant Gervasi",
+    "Gràcia",
+    "Horta - Guinardó",
+    "Nou Barris",
+    "Sant Andreu",
+    "Sant Martí",
+  ];
+
+  const categories = [
+    { category: "talleres", img: talleres },
+    { category: "charlas", img: charlas },
+    { category: "cine", img: cine },
+    { category: "deportes", img: deportes },
+    { category: "exposiciones", img: exposiciones },
+    { category: "infantil", img: infantil },
+    { category: "música", img: musica },
+    { category: "quedadas", img: quedadas },
+    { category: "Visitas y tours", img: visitas },
+    { category: "espectaculos", img: espectaculos },
+  ];
+
   const [info, setInfo] = useState(initialState);
   const [step, setStep] = useState(1);
   const [imageReady, setImageReady] = useState(false);
+  const [topMargin, setTop] = useState(0);
+  const [icon, setIcon] = useState(unhide);
+  const [inputType, setType] = useState("password");
+  const maxStep = 3;
+  console.log(info);
+  const handleIcon = () => {
+    if (icon === unhide) {
+      setIcon(hide);
+      setType("text");
+    } else {
+      setIcon(unhide);
+      setType("password");
+    }
+  };
+
+  useEffect(() => {
+    setTop(100);
+  }, [topMargin]);
+
   const handleUpload = async (e) => {
     setImageReady(false);
     console.log(e.target.files[0]);
@@ -29,12 +92,20 @@ const SignUpForm = ({ onSubmit }) => {
   };
 
   const handleCategory = (cat) => {
+    console.log(cat);
     if (info.category.includes(cat)) {
       const newArr = info.category.filter((item) => item !== cat);
       console.log(newArr);
       setInfo((state) => ({ ...state, category: [...newArr] }));
     } else {
       setInfo((state) => ({ ...state, category: [...state.category, cat] }));
+    }
+  };
+
+  const handleBack = (event) => {
+    event.preventDefault();
+    if (step > 0) {
+      setStep((state) => (state = state - 1));
     }
   };
 
@@ -56,19 +127,48 @@ const SignUpForm = ({ onSubmit }) => {
       [name]: value,
     }));
   };
+  const handleNext = () => {
+    if (step === 1) {
+      if (
+        info.profileImg !== "" &&
+        info.name !== "" &&
+        info.email !== "" &&
+        info.password !== ""
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    } else if (step === 2) {
+      return info.direction.length === 0;
+    } else if (step === 3) {
+      return info.category.length === 0;
+    }
+  };
+
   return (
-    <article>
+    <article className="signForm" style={{ marginTop: topMargin }}>
       <form action="" onSubmit={handleSubmit}>
         {step === 1 && (
           <div className="personal-info">
-            <label htmlFor="file">Foto de Perfil</label>
-            <input
-              type="file"
-              name="file"
-              id="file"
-              value={info.file}
-              onChange={handleUpload}
-            />
+            <SimpleHeader title="Cuéntanos sobre tí" />
+            {info.profileImg === "" && !imageReady ? (
+              <input
+                type="file"
+                name="file"
+                id="file"
+                value={info.file}
+                onChange={handleUpload}
+              />
+            ) : (
+              <img
+                src={info.profileImg}
+                alt="logo"
+                width="200"
+                height="200"
+                id="file"
+              />
+            )}
             <label htmlFor="name">¿Comó te llamas?</label>
             <input
               type="text"
@@ -87,64 +187,123 @@ const SignUpForm = ({ onSubmit }) => {
               onChange={handleChange}
               required
             />
-            <label htmlFor="password">Contraseña</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={info.password}
-              onChange={handleChange}
-              required
-            />
+            <div className="password">
+              <label htmlFor="password">Contraseña</label>
+              <input
+                type={inputType}
+                name="password"
+                id="password"
+                value={info.password}
+                onChange={handleChange}
+                required
+              />
+              <img
+                className="field-icon"
+                src={icon}
+                alt=""
+                onClick={() => handleIcon()}
+              />
+            </div>
+            <article className="requeriments">
+              <ul className="body1">
+                <li>Tiene que contener una mayúscula</li>
+                <li>Tiene que contener un número</li>
+                <li>Tiene que tener 8 carácteres como mínimo</li>
+              </ul>
+            </article>
+            <FormFooter
+              back={false}
+              handleBack={handleBack}
+              step={step}
+              next={"Siguiente"}
+              onClick={handleSubmit}
+              maxStep={maxStep}
+              disable={handleNext()}
+            ></FormFooter>
           </div>
         )}
         {step === 2 && (
           <div className="location">
-            <label htmlFor="direction">¿En que distrito vives?</label>
-            <select
-              name="direction"
-              id="direction"
-              value={info.direction}
-              onChange={handleChange}
-              required
-            >
-              <option disabled={info.direction}>Escoge una opción</option>
-              <option value="Ciutat Vella">Ciutat Vella</option>
-              <option value="Eixample">Eixample</option>
-              <option value="Sants-Montjuïc">Sants-Montjuïc</option>
-              <option value="Les Corts">Les Corts</option>
-              <option value="Sarrià-Sant Gervasi">Sarrià-Sant Gervasi</option>
-              <option value="Gràcia">Gràcia</option>
-              <option value="Horta - Guinardó">Horta - Guinardó</option>
-              <option value="Nou Barris">Nou Barris</option>
-              <option value="Sant Andreu">Sant Andreu</option>
-              <option value="Sant Martí">Sant Martí</option>
-            </select>
+            <SimpleHeader title="¿En que distrito vives?" />
+            {distritos.map((distrito) => (
+              <article
+                className={`distrito${
+                  distrito === info.direction ? " active" : ""
+                }`}
+                onClick={() =>
+                  setInfo((state) => ({ ...state, direction: distrito }))
+                }
+                key={distrito}
+              >
+                <p className="title">{distrito}</p>
+              </article>
+            ))}
+            <FormFooter
+              back={true}
+              handleBack={handleBack}
+              step={step}
+              next={"Siguiente"}
+              onClick={handleSubmit}
+              maxStep={maxStep}
+              disable={handleNext()}
+            ></FormFooter>
           </div>
         )}
         {step === 3 && (
           <div className="category">
-            <h2>¿en que eventos te gustaria participar?</h2>
-            <h3 onClick={() => handleCategory("talleres")}>Talleres</h3>
-            <h3 onClick={() => handleCategory("deporte")}>Deporte</h3>
-            <h3 onClick={() => handleCategory("exposiciones")}>Exposiciones</h3>
+            <SimpleHeader title="¿En que actividades te gustaria participar?" />
+            <article className="categoriesDiv">
+              {categories.map(({ category, img }) => (
+                <CategorySelector
+                  title={category}
+                  img={img}
+                  onClick={() => handleCategory(category)}
+                  key={category}
+                />
+              ))}
+            </article>
+            <FormFooter
+              back={true}
+              handleBack={handleBack}
+              step={step}
+              next={"Siguiente"}
+              onClick={handleSubmit}
+              maxStep={maxStep}
+              disable={handleNext()}
+            ></FormFooter>
           </div>
         )}
-        {step < 4 ? (
-          <button>Next</button>
-        ) : (
+        {step === 4 && (
           <article className="confirmation">
-            <h2>Resumen de tus datos:</h2>
-            <p>Nombre: {info.name}</p>
-            <p>Correo electrónico: {info.email}</p>
-            <p>Vives en: {info.direction}</p>
-            <p>Te interesan eventos sobre:</p>
+            <SimpleHeader title="Resumen de tus datos" />
+            <img
+              src={info.profileImg}
+              alt="logo"
+              width="200"
+              height="200"
+              id="file"
+            />
+            <h4 className="cardTitle">Nombre:</h4>
+            <p>{info.name}</p>
+            <h4 className="cardTitle">Correo electrónico:</h4>
+            <p>{info.email}</p>
+            <h4 className="cardTitle">Vives en:</h4>
+            <p>{info.direction}</p>
+            <h4 className="cardTitle">Te interesan actividades sobre:</h4>
+
             <ul>
               {info.category.map((value) => (
-                <li key={value}>{value}</li>
+                <li className="categoria" key={value}>{value}</li>
               ))}
             </ul>
-            <input type="submit" value="Resgistrarme" disabled={!imageReady} />
+            <div className="button">
+              <input
+                className="send"
+                type="submit"
+                value="Resgistrarme"
+                disabled={!imageReady}
+              />
+            </div>
           </article>
         )}
       </form>

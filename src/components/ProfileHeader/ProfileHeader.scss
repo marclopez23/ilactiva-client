@@ -1,0 +1,22 @@
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/shadows.scss";
+
+.perfilHeader {
+  padding: 2rem;
+  text-align: center;
+  background-color: $verdePrimario;
+  color: $blanco;
+  -webkit-clip-path: url(#my-clip-path);
+  clip-path: url(#my-clip-path);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+}
+
+.svg {
+  position: absolute;
+  width: 0;
+  height: 0;
+}

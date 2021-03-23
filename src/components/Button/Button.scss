@@ -1,0 +1,12 @@
+@import "../../styles/vars/font.scss";
+@import "../../styles/vars/color.scss";
+@import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/buttons.scss";
+
+.primary {
+  @include primaryButton;
+}
+
+.secondary {
+  @include secondaryButton;
+}

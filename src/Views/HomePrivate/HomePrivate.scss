@@ -1,9 +1,11 @@
 @import "../../styles/vars/font.scss";
 @import "../../styles/vars/color.scss";
 @import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/buttons.scss";
 
-.contenido {
-  h4 {
+.contenidoHome {
+  padding-bottom: 6rem;
+  .barrio {
     margin: 0 1rem;
     .marker {
       margin-right: 0.5rem;
@@ -12,12 +14,15 @@
       color: $verdePrimario;
     }
   }
-  .proximas {
-    margin-top: 2rem;
+  .proximas,
+  .gustar,
+  .comercios {
+    margin-top: 1rem;
     .topSection {
       margin: 0 1rem;
       display: flex;
       justify-content: space-between;
+      align-items: center;
     }
     .eventsList {
       display: flex;
@@ -27,6 +32,27 @@
     }
     ::-webkit-scrollbar {
       display: none;
+    }
+  }
+  .comercios {
+    padding: 1.5rem 0 2rem 0;
+    margin: 1rem 0;
+    background-color: $salmonLight;
+    .title {
+      margin: 0 1rem 1rem 1rem;
+    }
+  }
+  .eventosComercio {
+    h2 {
+      margin: 0 1rem;
+    }
+  }
+  .more {
+    padding: 1rem;
+    margin-bottom: 3.5rem;
+    button {
+      @include secondaryButton;
+      width: 100%;
     }
   }
 }

@@ -9,8 +9,17 @@ import Home from "./Views/Home/Home";
 import HomePrivate from "./Views/HomePrivate/HomePrivate";
 import AnonRoute from "./components/Routes/AnonRoute";
 import PrivateRoute from "./components/Routes/PrivateRoute";
+import EventConfirmation from "./Views/EventConfirmation/EventConfirmation";
 import Menu from "./components/Menu/Menu";
+import Profile from "./Views/Profile/Profile";
+import EditProfile from "./Views/EditProfile/EditProfile";
+import Navbar from "./components/Navbar/Navbar";
 import { useAuth } from "./context/Auth/AuthContext.utils";
+import UserEvents from "./Views/UserEvents/UserEvents";
+import EditEvent from "./Views/EditEvent/EditEvent";
+import CommercePage from "./Views/CommercePage/CommercePage";
+import MoreEvents from "./Views/MoreEvents/MoreEvents";
+import FollowedCommerces from "./Views/FollowedCommerces/FollowedCommerces";
 
 function App() {
   const { user } = useAuth();
@@ -18,7 +27,20 @@ function App() {
     <>
       <Menu />
       <Switch>
-        <PrivateRoute exact path="/eventos/crear">
+        <PrivateRoute exact path="/eventos/:query/:cuando">
+          <MoreEvents />
+        </PrivateRoute>
+        <PrivateRoute exact path="/eventos/:query/">
+          <UserEvents />
+        </PrivateRoute>
+        <PrivateRoute exact path="/perfil/editar/:id">
+          <EditProfile />
+        </PrivateRoute>
+        <PrivateRoute exact path="/perfil">
+          <Profile />
+          <Navbar />
+        </PrivateRoute>
+        <PrivateRoute exact path="/crear-evento">
           <CreateEvent />
         </PrivateRoute>
         <AnonRoute exact path="/iniciar-sesion">
@@ -27,16 +49,30 @@ function App() {
         <AnonRoute exact path="/registrarme">
           <SignUp />
         </AnonRoute>
-        <Route exact path="/eventos/:id">
+        <PrivateRoute exact path="/eventos/creado/">
+          <EventConfirmation />
+        </PrivateRoute>
+        <Route exact path="/evento/:id">
           <Event />
+        </Route>
+        <PrivateRoute exact path="/evento/:id/editar">
+          <EditEvent />
+        </PrivateRoute>
+        <PrivateRoute exact path="/comercios/seguidos">
+          <FollowedCommerces />
+        </PrivateRoute>
+        <Route exact path="/comercios/:id">
+          <CommercePage />
         </Route>
         <Route exact path="/eventos">
           <Events />
+          <Navbar />
         </Route>
         {user.isLogged ? (
           <>
             <PrivateRoute exact path="/">
               <HomePrivate />
+              <Navbar />
             </PrivateRoute>
           </>
         ) : (

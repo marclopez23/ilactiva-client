@@ -2,7 +2,7 @@ import React from "react";
 import "./Menu.scss";
 import { Route, Link } from "react-router-dom";
 import { useAuth } from "../../context/Auth/AuthContext.utils";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.svg";
 
 const Menu = () => {
   const { user } = useAuth();
