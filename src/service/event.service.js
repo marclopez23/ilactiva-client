@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const eventApi = axios.create({
-  baseURL: `http://localhost:4000/events`,
+  baseURL: process.env.REACT_APP_API + `/events`,
   withCredentials: true,
 });
 
