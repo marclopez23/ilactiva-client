@@ -1,0 +1,16 @@
+@import "../../styles/mixins/buttons.scss";
+
+.eventsList {
+  h2 {
+    margin: 2rem 1rem 1.5rem 1rem;
+  }
+
+  .more {
+    padding: 1rem;
+    margin-bottom: 2.5rem;
+    button {
+      @include secondaryButton;
+      width: 100%;
+    }
+  }
+}

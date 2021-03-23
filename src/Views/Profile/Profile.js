@@ -44,7 +44,7 @@ const Profile = () => {
           </Link>
         </Route>
         <Route>
-          <Link to={`eventos/creados/${user._id}`}>
+          <Link to={`eventos/creados/`}>
             <ListButton
               icon={eventosCreados}
               text={"Actividades creadas"}
@@ -52,12 +52,12 @@ const Profile = () => {
           </Link>
         </Route>
         <Route>
-          <Link to={`eventos/apuntado/${user._id}`}>
+          <Link to={`eventos/apuntados/`}>
             <ListButton icon={eventos} text={"Asistire a ..."}></ListButton>
           </Link>
         </Route>
         <Route>
-          <Link to={`perfil/seguidos/${user._id}`}>
+          <Link to={`comercios/seguidos/`}>
             <ListButton
               icon={compartir}
               text={"Comercios seguidos"}

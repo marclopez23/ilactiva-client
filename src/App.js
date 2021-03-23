@@ -18,6 +18,8 @@ import { useAuth } from "./context/Auth/AuthContext.utils";
 import UserEvents from "./Views/UserEvents/UserEvents";
 import EditEvent from "./Views/EditEvent/EditEvent";
 import CommercePage from "./Views/CommercePage/CommercePage";
+import MoreEvents from "./Views/MoreEvents/MoreEvents";
+import FollowedCommerces from "./Views/FollowedCommerces/FollowedCommerces";
 
 function App() {
   const { user } = useAuth();
@@ -25,7 +27,10 @@ function App() {
     <>
       <Menu />
       <Switch>
-        <PrivateRoute exact path="/eventos/creados/:id">
+        <PrivateRoute exact path="/eventos/:query/:cuando">
+          <MoreEvents />
+        </PrivateRoute>
+        <PrivateRoute exact path="/eventos/:query/">
           <UserEvents />
         </PrivateRoute>
         <PrivateRoute exact path="/perfil/editar/:id">
@@ -52,6 +57,9 @@ function App() {
         </Route>
         <PrivateRoute exact path="/eventos/:id/editar">
           <EditEvent />
+        </PrivateRoute>
+        <PrivateRoute exact path="/comercios/seguidos">
+          <FollowedCommerces />
         </PrivateRoute>
         <Route exact path="/comercios/:id">
           <CommercePage />
