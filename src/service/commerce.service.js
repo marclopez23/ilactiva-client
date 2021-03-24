@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const commerceApi = axios.create({
-  baseURL: `http://localhost:4000/commerces`,
+  baseURL: `${process.env.REACT_APP_API}/commerces`,
   withCredentials: true,
 });
 

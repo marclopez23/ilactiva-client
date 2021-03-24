@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const userApi = axios.create({
-  baseURL: `http://localhost:4000/user`,
+  baseURL: `${process.env.REACT_APP_API}/user`,
   withCredentials: true,
 });
 
