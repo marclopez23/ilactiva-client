@@ -41,3 +41,22 @@
     opacity: 0.5;
   }
 }
+
+@mixin greenButton {
+  border-radius: 5px;
+  background-color: $verdePrimario;
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 19px;
+  border: 1px solid $verdePrimario;
+  color: $blanco;
+  border: none;
+  padding: 0.5rem;
+  height: 48px;
+  &:hover {
+    background-color: $salmon;
+  }
+  &:disabled {
+    opacity: 0.5;
+  }
+}

@@ -11,12 +11,19 @@ import marker from "../../assets/marker.svg";
 const Event = () => {
   const [event, setEvent] = useState({});
   const [showHub, setHub] = useState(false);
+  const [showHubJoin, setHubJoin] = useState(false);
   const [creator, setCreator] = useState({});
   const { bringEvent, registerEvent, quitEvent } = useEvents();
   const { id } = useParams();
   const history = useHistory();
   const { user, setUser } = useAuth();
   let newInfo = user;
+  const handleHub = (action) => {
+    if (action === "join") {
+      registerEvent(id);
+      setHubJoin(false);
+    }
+  };
   const handleFollow = async () => {
     try {
       await followCommerce(creator._id);
@@ -32,7 +39,6 @@ const Event = () => {
             ...newInfo,
             following: [...newInfo.following, creator._id],
           });
-      console.log({ ...user, following: newInfo.following });
       saveUser({ ...user, following: newInfo.following });
       setUser((state) => ({
         ...state,
@@ -109,7 +115,7 @@ const Event = () => {
         </div>
         {user.isLogged && creator._id === user.id && (
           <Route>
-            <Link to={`/eventos/${event._id}/editar`}>
+            <Link to={`/evento/editar/${event._id}/`}>
               <Button copy="Editar" primary={true} className="follow" />
             </Link>
           </Route>
@@ -170,7 +176,7 @@ const Event = () => {
           <Button
             copy="Desapuntarme"
             primary={true}
-            onClick={() => registerEvent(id)}
+            onClick={() => setHubJoin(true)}
           />
         )}
         {!user.isLogged && (
@@ -184,8 +190,8 @@ const Event = () => {
       <section
         className="overlay"
         style={{
-          top: showHub ? 0 : "-100vh",
-          backgroundColor: showHub ? "#000000c7" : "#00000000",
+          top: showHub || showHubJoin ? 0 : "-100vh",
+          backgroundColor: showHub || showHubJoin ? "#000000c7" : "#00000000",
         }}
         onClick={() => setHub(false)}
       ></section>
@@ -201,6 +207,22 @@ const Event = () => {
             No
           </button>
           <button className="delete" onClick={() => quitEvent(id)}>
+            Si
+          </button>
+        </div>
+      </section>
+      <section
+        className="hub"
+        style={{
+          bottom: showHubJoin ? 0 : "-300px",
+        }}
+      >
+        <h2 className="title">¿Seguro que quieres desapuntarte?</h2>
+        <div className="buttons">
+          <button className="noDelete" onClick={() => setHubJoin(false)}>
+            No
+          </button>
+          <button className="delete" onClick={() => handleHub("join")}>
             Si
           </button>
         </div>

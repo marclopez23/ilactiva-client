@@ -1,0 +1,19 @@
+.searchEvents {
+  margin: 1rem;
+  padding-bottom: 6rem;
+
+  .categoriesDiv {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding: 1rem 1rem;
+    margin-top: 2rem;
+    .article {
+      width: 50%;
+    }
+  }
+  .eventoLarge {
+    margin: 1rem 0;
+  }
+}

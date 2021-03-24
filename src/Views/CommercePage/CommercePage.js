@@ -7,6 +7,11 @@ import marker from "../../assets/marker.svg";
 import Tag from "../../components/Tag/Tag";
 import "./CommercePage.scss";
 import { useAuth, saveUser } from "../../context/Auth/AuthContext.utils";
+import EventCardLarge from "../../components/EventCardLarge/EventCardLarge";
+import facebook from "../../assets/facebook.svg";
+import twitter from "../../assets/twitter.svg";
+import web from "../../assets/web.svg";
+import insta from "../../assets/insta.svg";
 
 const CommercePage = () => {
   const { user, setUser } = useAuth();
@@ -29,7 +34,6 @@ const CommercePage = () => {
             ...newInfo,
             following: [...newInfo.following, id],
           });
-      console.log({ ...user, following: newInfo.following });
       saveUser({ ...user, following: newInfo.following });
       setUser((state) => ({
         ...state,
@@ -41,7 +45,7 @@ const CommercePage = () => {
   };
   useEffect(() => {
     getCommerce(id).then(({ data }) => setCommerce({ ...data }));
-  }, []);
+  }, [id]);
   useEffect(() => {
     const headerHeight = document.querySelector(".perfilHeader").offsetHeight;
     setTop(headerHeight + 32);
@@ -49,7 +53,11 @@ const CommercePage = () => {
 
   return (
     <main className="commercePage">
-      <ProfileHeader title={commerce.name} img={commerce.profileImg} />
+      <ProfileHeader
+        title={commerce.name}
+        img={commerce.profileImg}
+        back={true}
+      />
       <section className="userInfo" style={{ marginTop: topMargin }}>
         <article className="descripcion">
           <h2 className="cardTitle">Sobre nosotros</h2>
@@ -81,6 +89,60 @@ const CommercePage = () => {
             <p>{commerce.direction}</p>
           </div>
         </article>
+        <article className="actividades">
+          {commerce.eventsCreated && commerce.eventsCreated.length > 0 && (
+            <h2 className="title">Próximas actividades</h2>
+          )}
+          {commerce.eventsCreated &&
+            commerce.eventsCreated.length > 0 &&
+            commerce.eventsCreated
+              .sort(
+                (a, b) =>
+                  new Date(a.date).getTime() - new Date(b.date).getTime()
+              )
+              .slice(0, 3)
+              .map((evento) => (
+                <EventCardLarge event={evento} key={evento._id} />
+              ))}
+        </article>
+        {(commerce.facebook !== undefined ||
+          commerce.twitter !== undefined ||
+          commerce.web !== undefined ||
+          commerce.instagram !== undefined) && (
+          <>
+            <h2 className="cardTitle">Nuestras redes</h2>
+            <article className="socials">
+              {commerce.facebook && (
+                <a href={commerce.facebook} target="_blank" rel="noreferrer">
+                  <div className="social">
+                    <img src={facebook} alt="social icon" />
+                  </div>
+                </a>
+              )}
+              {commerce.twitter && (
+                <a href={commerce.twitter} target="_blank" rel="noreferrer">
+                  <div className="social">
+                    <img src={twitter} alt="social icon" />
+                  </div>
+                </a>
+              )}
+              {commerce.instagram && (
+                <a href={commerce.instagram} target="_blank" rel="noreferrer">
+                  <div className="social">
+                    <img src={insta} alt="social icon" />
+                  </div>
+                </a>
+              )}
+              {commerce.web && (
+                <a href={commerce.web} target="_blank" rel="noreferrer">
+                  <div className="social">
+                    <img src={web} alt="social icon" />
+                  </div>
+                </a>
+              )}
+            </article>
+          </>
+        )}
         <article className="fixedButton">
           {user.isLogged && user.id !== commerce._id ? (
             user.following.includes(commerce._id) ? (

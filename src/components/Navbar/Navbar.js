@@ -1,9 +1,11 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
 import NavbarItem from "./NavbarItem/NavbarItem";
 import { useAuth } from "../../context/Auth/AuthContext.utils";
 import "./Navbar.scss";
 import { crear, buscar, eventos, perfil, home } from "../../assets/menu/";
 const Navbar = () => {
+  const location = useLocation();
   const {
     user: { id },
   } = useAuth();
@@ -19,7 +21,12 @@ const Navbar = () => {
     <section className="navbarContainer">
       <article className="navbar">
         {sections.map(({ icon, link }) => (
-          <NavbarItem icon={icon} link={link} key={link} />
+          <NavbarItem
+            icon={icon}
+            link={link}
+            key={link}
+            active={location.pathname === link}
+          />
         ))}
       </article>
     </section>

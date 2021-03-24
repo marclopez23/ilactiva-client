@@ -2,6 +2,19 @@
 @import "../../styles/vars/shadows.scss";
 
 .perfilHeader {
+  .cross {
+    width: fit-content;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    padding: 1rem;
+    background-color: #fcf5f3;
+    -webkit-clip-path: circle(18px at 33px 34px);
+    clip-path: circle(18px at 33px 34px);
+    img.close {
+      float: right;
+    }
+  }
   padding: 2rem;
   text-align: center;
   background-color: $verdePrimario;

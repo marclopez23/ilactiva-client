@@ -55,4 +55,22 @@
   .enviar {
     @include primaryButton;
   }
+  .inputAdd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    input {
+      width: 75%;
+    }
+    button {
+      @include greenButton;
+      padding: 0.5rem 1rem;
+      height: 39px;
+    }
+  }
+  .tag {
+    text-transform: none;
+    margin-top: 0;
+    margin-bottom: 1rem;
+  }
 }

@@ -21,4 +21,8 @@
   @include desktop {
     display: none;
   }
+  .active {
+    border-bottom: 2.5px solid $verdePrimario;
+    padding-bottom: 0.5rem;
+  }
 }

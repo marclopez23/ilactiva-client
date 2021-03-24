@@ -20,6 +20,7 @@ import EditEvent from "./Views/EditEvent/EditEvent";
 import CommercePage from "./Views/CommercePage/CommercePage";
 import MoreEvents from "./Views/MoreEvents/MoreEvents";
 import FollowedCommerces from "./Views/FollowedCommerces/FollowedCommerces";
+import Search from "./Views/Search/Search";
 
 function App() {
   const { user } = useAuth();
@@ -27,6 +28,10 @@ function App() {
     <>
       <Menu />
       <Switch>
+        <PrivateRoute exact path="/buscar">
+          <Search />
+          <Navbar />
+        </PrivateRoute>
         <PrivateRoute exact path="/eventos/:query/:cuando">
           <MoreEvents />
         </PrivateRoute>
@@ -49,13 +54,13 @@ function App() {
         <AnonRoute exact path="/registrarme">
           <SignUp />
         </AnonRoute>
-        <PrivateRoute exact path="/eventos/creado/">
+        <PrivateRoute exact path="/evento/creado/">
           <EventConfirmation />
         </PrivateRoute>
         <Route exact path="/evento/:id">
           <Event />
         </Route>
-        <PrivateRoute exact path="/evento/:id/editar">
+        <PrivateRoute exact path="/evento/editar/:id">
           <EditEvent />
         </PrivateRoute>
         <PrivateRoute exact path="/comercios/seguidos">

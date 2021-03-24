@@ -11,8 +11,10 @@
   clip-path: url(#my-clip-path);
   position: fixed;
   width: 100%;
+  left: 0;
   top: 0;
   box-sizing: border-box;
+  z-index: 1000;
 }
 
 .svg {
