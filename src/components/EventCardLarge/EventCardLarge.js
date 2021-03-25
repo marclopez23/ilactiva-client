@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
 import "./EventCardLarge.scss";
+import PriceTag from "../PriceTag/PriceTag";
 
 const EventCardLarge = ({ event }) => {
   const handleDate = (dateEvent) => {
@@ -40,7 +41,9 @@ const EventCardLarge = ({ event }) => {
           <div
             className="imgEvent"
             style={{ backgroundImage: `url("${event.eventImg}")` }}
-          ></div>
+          >
+            {event.price > 0 && <PriceTag />}
+          </div>
           <div className="eventInfo">
             <h4 className="cardTitle">{event.title}</h4>
             <p className="body2 date">{handleDate(event.date)}</p>

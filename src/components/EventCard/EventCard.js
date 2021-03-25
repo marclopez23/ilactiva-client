@@ -1,8 +1,9 @@
 import React from "react";
 import { Route, Link } from "react-router-dom";
 import "./EventCard.scss";
+import PriceTag from "../PriceTag/PriceTag";
 const EventCard = ({ evento, cssClass }) => {
-  const { title, date, hour, place, _id, eventImg } = evento;
+  const { title, date, hour, place, _id, eventImg, price } = evento;
   const handleDate = (dateEvent) => {
     const dias = {
       0: "Domingo",
@@ -40,7 +41,9 @@ const EventCard = ({ evento, cssClass }) => {
           <div
             className="eventImg"
             style={{ backgroundImage: `url("${eventImg}")` }}
-          ></div>
+          >
+            {price > 0 && <PriceTag />}
+          </div>
           <div className="content">
             <h3 className="cardTitle ">{title}</h3>
             <p className="detail body2">{handleDate(date)}</p>
