@@ -165,7 +165,10 @@ const Event = () => {
         <h2 className="cardTitle">Descripción del evento</h2>
         <p className="body1">{event.description}</p>
       </section>
-      <section className="fixedButton">
+      <section
+        className="fixedButton"
+        style={{ display: `${new Date() > new Date(event.date) && "none"}` }}
+      >
         {user.isLogged &&
           !user.eventsJoined.includes(id) &&
           (creator._id === user.id ? (

@@ -13,7 +13,7 @@ const Navbar = () => {
     { icon: home, link: "/" },
     { icon: buscar, link: "/buscar" },
     { icon: crear, link: "/crear-evento" },
-    { icon: eventos, link: `/eventos/usuario/${id}` },
+    { icon: eventos, link: `/eventos/` },
     { icon: perfil, link: "/perfil" },
   ];
 

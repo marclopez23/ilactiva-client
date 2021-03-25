@@ -6,10 +6,12 @@ import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter as Router } from "react-router-dom";
 import AuthProvider from "./context/Auth/AuthContext";
 import EventProvider from "./context/Events/EventContext";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
+      <ScrollToTop />
       <AuthProvider>
         <EventProvider>
           <App />

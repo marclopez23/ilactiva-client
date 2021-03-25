@@ -1,5 +1,6 @@
 @import "../../styles/vars/color.scss";
 @import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/responsive.scss";
 
 .perfilHeader {
   .cross {
@@ -26,6 +27,16 @@
   top: 0;
   left: 0;
   box-sizing: border-box;
+
+  @include safari {
+    padding: 0;
+    .fotoPerfil {
+      margin: 2rem auto 1rem auto;
+    }
+    .title {
+      margin-bottom: 1rem;
+    }
+  }
 }
 
 .svg {

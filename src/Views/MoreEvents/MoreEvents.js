@@ -8,7 +8,6 @@ import EventCardLarge from "../../components/EventCardLarge/EventCardLarge";
 const MoreEvents = () => {
   const { query, cuando } = useParams();
   const [events, setEvents] = useState([]);
-  const [topMargin, setTop] = useState(0);
 
   useEffect(() => {
     if (query === "creados") {
@@ -53,12 +52,10 @@ const MoreEvents = () => {
       );
     }
   }, []);
-  useEffect(() => {
-    setTop(100);
-  }, [topMargin]);
+
   return (
     <main className="moreEvents">
-      <section className="eventsList" style={{ marginTop: topMargin }}>
+      <section className="eventsList" style={{ marginTop: 100 }}>
         <SimpleHeader
           title={
             query === "creados"

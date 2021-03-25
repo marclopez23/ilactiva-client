@@ -31,6 +31,15 @@
     &::-webkit-file-upload-button {
       visibility: hidden;
     }
+
+    @include safari {
+      &:before {
+        padding: 11px;
+      }
+    }
+
+    @media not all and (min-resolution: 0.001dpcm) {
+    }
   }
   form {
     margin-top: -4rem;

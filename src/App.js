@@ -21,6 +21,7 @@ import CommercePage from "./Views/CommercePage/CommercePage";
 import MoreEvents from "./Views/MoreEvents/MoreEvents";
 import FollowedCommerces from "./Views/FollowedCommerces/FollowedCommerces";
 import Search from "./Views/Search/Search";
+import EventsList from "./Views/EventsList/EventsList";
 
 function App() {
   const { user } = useAuth();
@@ -28,6 +29,9 @@ function App() {
     <>
       <Menu />
       <Switch>
+        <PrivateRoute exact path="/eventos-:filtro">
+          <EventsList />
+        </PrivateRoute>
         <PrivateRoute exact path="/buscar">
           <Search />
           <Navbar />
@@ -69,10 +73,10 @@ function App() {
         <Route exact path="/comercios/:id">
           <CommercePage />
         </Route>
-        <Route exact path="/eventos">
+        <PrivateRoute exact path="/eventos">
           <Events />
           <Navbar />
-        </Route>
+        </PrivateRoute>
         {user.isLogged ? (
           <>
             <PrivateRoute exact path="/">

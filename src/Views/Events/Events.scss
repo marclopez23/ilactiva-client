@@ -1,0 +1,31 @@
+@import "../../styles/vars/shadows.scss";
+@import "../../styles/vars/color.scss";
+
+.selectType {
+  margin: 7.5rem 1rem;
+  overflow: visible;
+
+  .userTypeCard {
+    cursor: pointer;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 12px;
+    @include fotoComodin;
+    .title {
+      text-transform: none;
+    }
+    p {
+      width: 80%;
+    }
+    img {
+      float: right;
+      width: 40%;
+    }
+  }
+  .creados {
+    background-color: $amarilloLight;
+  }
+  .apuntados {
+    background-color: $salmonLight;
+  }
+}

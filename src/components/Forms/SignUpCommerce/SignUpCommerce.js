@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import "../Form.scss";
 import { uploadFileService } from "../../../service/upload.service";
+import "../SignUpForm/SignUpForm.scss";
+import SimpleHeader from "../../SimpleHeader/SimpleHeader";
+import hide from "../../../assets/hide.svg";
+import unhide from "../../../assets/unhide.svg";
+import FormFooter from "../../FormFooter/FormFooter";
 
 const SignUpForm = ({ onSubmit }) => {
   const initialState = {
@@ -10,8 +15,7 @@ const SignUpForm = ({ onSubmit }) => {
     direction: "",
     neighbourhood: "",
     category: "",
-    profileImg:
-      "https://res.cloudinary.com/dziruresn/image/upload/v1615567759/illactiva/commerce-avatar.jpg",
+    profileImg: "",
     description: "",
     tags: [],
     schedule: [],
@@ -26,7 +30,20 @@ const SignUpForm = ({ onSubmit }) => {
   const [info, setInfo] = useState(initialState);
   const [step, setStep] = useState(1);
   const [text, setText] = useState("");
+  const [icon, setIcon] = useState(unhide);
+  const [inputType, setType] = useState("password");
   const [imageReady, setImageReady] = useState(false);
+  const maxStep = 3;
+
+  const handleIcon = () => {
+    if (icon === unhide) {
+      setIcon(hide);
+      setType("text");
+    } else {
+      setIcon(unhide);
+      setType("password");
+    }
+  };
 
   const handleUpload = async (e) => {
     setImageReady(false);
@@ -80,21 +97,53 @@ const SignUpForm = ({ onSubmit }) => {
       [name]: value,
     }));
   };
-  console.log(info);
+  const handleNext = () => {
+    if (step === 1) {
+      if (
+        info.profileImg !== "" &&
+        info.name !== "" &&
+        info.email !== "" &&
+        info.password !== ""
+      ) {
+        return false;
+      } else {
+        return true;
+      }
+    } else if (step === 2) {
+      return info.direction.length === 0;
+    } else if (step === 3) {
+      return info.category.length === 0;
+    }
+  };
+  const handleBack = (event) => {
+    event.preventDefault();
+    if (step > 0) {
+      setStep((state) => (state = state - 1));
+    }
+  };
   return (
-    <article>
+    <article className="signForm" style={{ marginTop: 100 }}>
       <form action="" onSubmit={handleSubmit}>
         {step === 1 && (
           <div className="personal-info">
-            <img src={info.profileImg} alt="logo" width="200" height="200" />
-            <label htmlFor="file">Sube tu logo</label>
-            <input
-              type="file"
-              name="file"
-              id="file"
-              value={info.file}
-              onChange={handleUpload}
-            />
+            <SimpleHeader title="Cuéntanos sobre tí" />
+            {info.profileImg === "" && !imageReady ? (
+              <input
+                type="file"
+                name="file"
+                id="file"
+                value={info.file}
+                onChange={handleUpload}
+              />
+            ) : (
+              <img
+                src={info.profileImg}
+                alt="logo"
+                width="200"
+                height="200"
+                id="file"
+              />
+            )}
             <label htmlFor="name">¿Comó se llama tu negocio?</label>
             <input
               type="text"
@@ -113,15 +162,39 @@ const SignUpForm = ({ onSubmit }) => {
               onChange={handleChange}
               required
             />
-            <label htmlFor="password">Contraseña</label>
-            <input
-              type="password"
-              name="password"
-              id="password"
-              value={info.password}
-              onChange={handleChange}
-              required
-            />
+            <div className="password">
+              <label htmlFor="password">Contraseña</label>
+              <input
+                type={inputType}
+                name="password"
+                id="password"
+                value={info.password}
+                onChange={handleChange}
+                required
+              />
+              <img
+                className="field-icon"
+                src={icon}
+                alt=""
+                onClick={() => handleIcon()}
+              />
+            </div>
+            <article className="requeriments">
+              <ul className="body1">
+                <li>Tiene que contener una mayúscula</li>
+                <li>Tiene que contener un número</li>
+                <li>Tiene que tener 8 carácteres como mínimo</li>
+              </ul>
+            </article>
+            <FormFooter
+              back={false}
+              handleBack={handleBack}
+              step={step}
+              next={"Siguiente"}
+              onClick={handleSubmit}
+              maxStep={maxStep}
+              disable={handleNext()}
+            ></FormFooter>
           </div>
         )}
         {step === 2 && (
@@ -264,11 +337,6 @@ const SignUpForm = ({ onSubmit }) => {
               onChange={handleChange}
             />
           </div>
-        )}
-        {step < 5 ? (
-          <button>Next</button>
-        ) : (
-          <input type="submit" value="Signup" disabled={!imageReady} />
         )}
       </form>
     </article>

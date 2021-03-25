@@ -70,7 +70,7 @@ const HomePrivate = () => {
           <div className="topSection">
             <h2 className="title">Próximas actividades</h2>
             <Route>
-              <Link className="link" to="/eventos/proximos">
+              <Link className="link" to="/eventos-proximos">
                 Ver todas
               </Link>
             </Route>
@@ -103,7 +103,7 @@ const HomePrivate = () => {
           <div className="topSection">
             <h2 className="title">Te recomendamos ...</h2>
             <Route>
-              <Link className="link" to="/eventos/proximos">
+              <Link className="link" to="/eventos-recomendados">
                 Ver todas
               </Link>
             </Route>
@@ -174,7 +174,7 @@ const HomePrivate = () => {
         {commerceEvents.length > 0 && (
           <article className="more">
             <Route>
-              <Link to="/">
+              <Link to="/eventos-comercios">
                 <button className="more">Descubre más</button>
               </Link>
             </Route>

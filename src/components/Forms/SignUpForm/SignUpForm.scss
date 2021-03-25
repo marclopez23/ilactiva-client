@@ -17,7 +17,7 @@
     width: 100px;
     height: 100px;
     display: block;
-    margin: 1rem auto;
+    margin: 1rem auto 2rem auto;
     &::before {
       content: " ";
       background-image: url("../../../assets/addPhoto.svg");

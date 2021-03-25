@@ -96,25 +96,13 @@ const Profile = () => {
             </ul>
           </>
         )}
-        
+
         <Route>
           <Link to={`perfil/editar/${user._id}`}>
             <ListButton icon={editar} text={"Editar perfil"}></ListButton>
           </Link>
         </Route>
-        <Route>
-          <Link to={`eventos/creados/`}>
-            <ListButton
-              icon={eventosCreados}
-              text={"Actividades creadas"}
-            ></ListButton>
-          </Link>
-        </Route>
-        <Route>
-          <Link to={`eventos/apuntados/`}>
-            <ListButton icon={eventos} text={"Asistire a ..."}></ListButton>
-          </Link>
-        </Route>
+
         <Route>
           <Link to={`comercios/seguidos/`}>
             <ListButton
