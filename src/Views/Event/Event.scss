@@ -33,7 +33,8 @@
       align-items: center;
       .creatorImg {
         width: 58px;
-        clip-path: circle(23px at 24px 24px);
+        height: 58px;
+        border-radius: 500px;
         margin-right: 0.5rem;
       }
       .caption {
@@ -47,6 +48,7 @@
     }
   }
   .content {
+    margin-bottom: 2rem;
     .categoria {
       text-transform: capitalize;
       color: $verdePrimario;
@@ -72,9 +74,19 @@
     -webkit-clip-path: url(#descriptionImg);
     clip-path: url(#descriptionImg);
     background-color: $blanco;
-    height: 50vh;
+    min-height: 50vh;
     h2 {
       margin-bottom: 1rem;
+    }
+  }
+  .apuntados {
+    display: flex;
+    align-items: center;
+    line-height: 1.5rem;
+    margin-top: 1rem;
+    img.icon {
+      width: 1.3rem;
+      margin-right: 0.5rem;
     }
   }
   .fixedButton {

@@ -7,12 +7,14 @@ import { followCommerce } from "../../service/user.service";
 import Button from "../../components/Button/Button";
 import "./Event.scss";
 import marker from "../../assets/marker.svg";
+import vecinos from "../../assets/vecinos.svg";
 
 const Event = () => {
   const [event, setEvent] = useState({});
   const [showHub, setHub] = useState(false);
   const [showHubJoin, setHubJoin] = useState(false);
   const [creator, setCreator] = useState({});
+  const [plazasLibres, setLibres] = useState(0);
   const { bringEvent, registerEvent, quitEvent } = useEvents();
   const { id } = useParams();
   const history = useHistory();
@@ -53,6 +55,7 @@ const Event = () => {
     bringEvent(id).then(({ data }) => {
       setEvent(data.event);
       setCreator(data.event.creator);
+      setLibres(data.event.maxUsers - data.event.resgisteredUsers.length);
     });
   }, []);
   const handleDate = (dateEvent) => {
@@ -146,6 +149,12 @@ const Event = () => {
           <img src={marker} alt="" className="marker" />
           <span className="body1">{event.place}</span>
         </p>
+        {event.resgisteredUsers && (
+          <div className="apuntados">
+            <img src={vecinos} alt="" className="icon" />
+            <p className="body2">{`Quedan ${plazasLibres} plazas libres`}</p>
+          </div>
+        )}
       </section>
       <section className="descripcion">
         <svg className="svgImg">
@@ -167,9 +176,14 @@ const Event = () => {
             />
           ) : (
             <Button
-              copy="¡Apuntarme!"
+              copy={
+                plazasLibres === 0
+                  ? "Todas las plazas reservadas"
+                  : "¡Apuntarme!"
+              }
               primary={true}
               onClick={() => registerEvent(id)}
+              disable={plazasLibres === 0}
             />
           ))}
         {user.isLogged && user.eventsJoined.includes(id) && (
