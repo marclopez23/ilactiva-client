@@ -1,5 +1,4 @@
 import React from "react";
-import { Route, Link } from "react-router-dom";
 import "./ListButton.scss";
 import chevronBig from "../../assets/chevronBig.svg";
 const ListButton = ({ icon, text }) => {

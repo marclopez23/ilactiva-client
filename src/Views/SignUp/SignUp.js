@@ -6,26 +6,24 @@ import SignUpCommerce from "../../components/Forms/SignUpCommerce/SignUpCommerce
 import "./SignUp.scss";
 import vecinoSign from "../../assets/vecinoSign.svg";
 import comercioSign from "../../assets/comercioSign.svg";
-
+import SimpleHeader from "../../components/SimpleHeader/SimpleHeader";
 const SignUp = () => {
   const { handleSignup } = useAuth();
   const [isCommerce, setCommerce] = useState();
   const [showForm, setForm] = useState(false);
   const handleUserType = (type) => {
-    const isNeighbour =
-      type === "vecino" ? setCommerce(true) : setCommerce(false);
+    type === "vecino" ? setCommerce(true) : setCommerce(false);
     setForm(true);
   };
 
   const signupHandler = async (user) => {
     try {
-      const newUser = await handleSignup(user);
-    } catch (e) {
-      console.error(e);
-    }
+      await handleSignup(user);
+    } catch (e) {}
   };
   return (
     <main>
+      <SimpleHeader title="" />
       {showForm ? (
         !isCommerce ? (
           <SignUpCommerce onSubmit={signupHandler} />

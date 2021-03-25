@@ -40,7 +40,7 @@ const CommercePage = () => {
         user: { ...state.user, following: newInfo.following },
       }));
     } catch (e) {
-      console.log(e);
+
     }
   };
   useEffect(() => {

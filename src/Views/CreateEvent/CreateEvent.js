@@ -7,7 +7,6 @@ const CreateEvent = () => {
   const [topMargin, setTop] = useState(0);
 
   useEffect(() => {
-    const headerHeight = document.querySelector(".simpleHeader").offsetHeight;
     setTop(100);
   }, [topMargin]);
   return (

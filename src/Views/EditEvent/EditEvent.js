@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useEvents } from "../../context/Events/EventsContext.utils";
-import cruz from "../../assets/cruz.svg";
 import { useParams, useHistory } from "react-router-dom";
 import { uploadFileService } from "../../service/upload.service";
 import "../Event/Event.scss";
@@ -8,7 +7,7 @@ import "./EditEvent.scss";
 import SimpleHeader from "../../components/SimpleHeader/SimpleHeader";
 
 const EditEvent = () => {
-  let setDate = false;
+  const [dateSetted, setDate] = useState(false);
   const history = useHistory();
   const { bringEvent, eventEdit } = useEvents();
   const { id } = useParams();
@@ -21,7 +20,7 @@ const EditEvent = () => {
   }, []);
   useEffect(() => {
     getDate();
-    setDate = true;
+    setDate(true);
   }, [event.date]);
 
   const getDate = () => {
@@ -81,11 +80,8 @@ const EditEvent = () => {
       await eventEdit(id, event);
       setEvent({});
       history.goBack();
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   };
-  console.log(event);
   return (
     <main className="editEvent">
       <svg className="svgImg">

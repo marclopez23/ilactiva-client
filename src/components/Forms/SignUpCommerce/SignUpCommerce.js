@@ -6,7 +6,7 @@ import SimpleHeader from "../../SimpleHeader/SimpleHeader";
 import hide from "../../../assets/hide.svg";
 import unhide from "../../../assets/unhide.svg";
 import FormFooter from "../../FormFooter/FormFooter";
-
+import Tag from "../../../components/Tag/Tag";
 const SignUpForm = ({ onSubmit }) => {
   const initialState = {
     email: "",
@@ -33,8 +33,7 @@ const SignUpForm = ({ onSubmit }) => {
   const [icon, setIcon] = useState(unhide);
   const [inputType, setType] = useState("password");
   const [imageReady, setImageReady] = useState(false);
-  const maxStep = 3;
-
+  const maxStep = 4;
   const handleIcon = () => {
     if (icon === unhide) {
       setIcon(hide);
@@ -47,12 +46,10 @@ const SignUpForm = ({ onSubmit }) => {
 
   const handleUpload = async (e) => {
     setImageReady(false);
-    console.log(e.target.files[0]);
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
 
     const { data } = await uploadFileService(uploadData);
-    console.log("File uploaded :>> ", data);
     setInfo({ ...info, profileImg: data });
     setImageReady(true);
   };
@@ -68,11 +65,9 @@ const SignUpForm = ({ onSubmit }) => {
   };
 
   const deleteSchedule = (scheduleClicked) => {
-    console.log(scheduleClicked);
     const newSchedule = info.schedule.filter(
       (schedule) => schedule !== scheduleClicked
     );
-    console.log(newSchedule);
     setInfo((state) => ({ ...state, schedule: newSchedule }));
   };
 
@@ -110,9 +105,23 @@ const SignUpForm = ({ onSubmit }) => {
         return true;
       }
     } else if (step === 2) {
-      return info.direction.length === 0;
+      if (
+        info.direction !== "" &&
+        info.schedule.length !== 0 &&
+        info.neighbourhood !== ""
+      ) {
+        return false;
+      } else {
+        return true;
+      }
     } else if (step === 3) {
-      return info.category.length === 0;
+      return info.category === "" && info.tags.length === 0;
+    } else if (step === 4) {
+      if (info.description === "") {
+        return true;
+      } else {
+        return false;
+      }
     }
   };
   const handleBack = (event) => {
@@ -122,11 +131,11 @@ const SignUpForm = ({ onSubmit }) => {
     }
   };
   return (
-    <article className="signForm" style={{ marginTop: 100 }}>
+    <article className="signForm" style={{ marginTop: 120 }}>
       <form action="" onSubmit={handleSubmit}>
         {step === 1 && (
           <div className="personal-info">
-            <SimpleHeader title="Cuéntanos sobre tí" />
+            <SimpleHeader title="Cuéntanos sobre tu negocio" />
             {info.profileImg === "" && !imageReady ? (
               <input
                 type="file"
@@ -136,13 +145,10 @@ const SignUpForm = ({ onSubmit }) => {
                 onChange={handleUpload}
               />
             ) : (
-              <img
-                src={info.profileImg}
-                alt="logo"
-                width="200"
-                height="200"
-                id="file"
-              />
+              <div
+                style={{ backgroundImage: `url(${info.profileImg})` }}
+                className="imgProfile"
+              ></div>
             )}
             <label htmlFor="name">¿Comó se llama tu negocio?</label>
             <input
@@ -199,24 +205,31 @@ const SignUpForm = ({ onSubmit }) => {
         )}
         {step === 2 && (
           <div className="location">
+            <SimpleHeader title="¿Dónde y cuando te econtrarán?" />
             <p>
               Puedes incluir los distintos horarios que tienes en tu negocio.
-              Pulsa intro para guardar el Horario
             </p>
             <label htmlFor="schedule">Horario</label>
-            <input
-              type="text"
-              name="schedule"
-              id="schedule"
-              value={text}
-              onChange={handleText}
-            />
-            <button onClick={(event) => saveIt("schedule", event)}>Save</button>
+            <div className="inputAdd">
+              <input
+                type="text"
+                name="schedule"
+                id="schedule"
+                value={text}
+                onChange={handleText}
+              />
+              <button onClick={(event) => saveIt("schedule", event)}>
+                Añadir
+              </button>
+            </div>
             <div className="horario">
               {info.schedule.map((schedule) => (
-                <p key={schedule} onClick={() => deleteSchedule(schedule)}>
-                  {schedule}
-                </p>
+                <Tag
+                  className="tag"
+                  txt={schedule}
+                  key={schedule}
+                  onClick={() => deleteSchedule(schedule)}
+                />
               ))}
             </div>
             <label htmlFor="neighbourhood">
@@ -250,10 +263,20 @@ const SignUpForm = ({ onSubmit }) => {
               onChange={handleChange}
               required
             />
+            <FormFooter
+              back={true}
+              handleBack={handleBack}
+              step={step}
+              next={"Siguiente"}
+              onClick={handleSubmit}
+              maxStep={maxStep}
+              disable={handleNext()}
+            ></FormFooter>
           </div>
         )}
         {step === 3 && (
           <div className="category">
+            <SimpleHeader title="¿Qué puedes ofrecer a tus vecinos?" />
             <label htmlFor="category">¿Qué tipo de negoció tienes?</label>
             <select
               name="category"
@@ -273,31 +296,42 @@ const SignUpForm = ({ onSubmit }) => {
               <option value="otros">Otros</option>
             </select>
             <label htmlFor="tags">Tags</label>
-            <input
-              type="text"
-              name="tags"
-              id="tags"
-              value={info.text}
-              onChange={handleText}
-              required
-            />
-            <button onClick={(event) => saveIt("tags", event)}>Save</button>
+            <div className="inputAdd">
+              <input
+                type="text"
+                name="tags"
+                id="tags"
+                value={info.text}
+                onChange={handleText}
+                required
+              />
+              <button onClick={(event) => saveIt("tags", event)}>Añadir</button>
+            </div>
             <div className="tags">
               {info.tags.map((tag) => (
-                <p key={tag} onClick={() => deleteTags(tag)}>
-                  {tag}
-                </p>
+                <Tag key={tag} onClick={() => deleteTags(tag)} txt={tag} />
               ))}
             </div>
+            <FormFooter
+              back={true}
+              handleBack={handleBack}
+              step={step}
+              next={"Siguiente"}
+              onClick={handleSubmit}
+              maxStep={maxStep}
+              disable={handleNext()}
+            ></FormFooter>
           </div>
         )}
         {step === 4 && (
           <div className="socials">
+            <SimpleHeader title="Más información" />
             <label htmlFor="description">
               ¿Como le explicarias tu negocio a los usuarios?
             </label>
-            <input
-              type="textarea"
+            <textarea
+              rows="5"
+              cols="50"
               name="description"
               id="description"
               value={info.description}
@@ -336,7 +370,68 @@ const SignUpForm = ({ onSubmit }) => {
               value={info.instagram}
               onChange={handleChange}
             />
+            <FormFooter
+              back={true}
+              handleBack={handleBack}
+              step={step}
+              next={"Siguiente"}
+              onClick={handleSubmit}
+              maxStep={maxStep}
+              disable={handleNext()}
+            ></FormFooter>
           </div>
+        )}
+        {step === 5 && (
+          <article className="confirmation">
+            <SimpleHeader title="Resumen de tus datos" />
+            <img
+              src={info.profileImg}
+              alt="logo"
+              width="200"
+              height="200"
+              id="file"
+            />
+            <h4 className="cardTitle">Nombre:</h4>
+            <p>{info.name}</p>
+            <h4 className="cardTitle">Correo electrónico:</h4>
+            <p>{info.email}</p>
+
+            <h4 className="cardTitle">Dirección</h4>
+            <p>{info.direction}</p>
+            <h4 className="cardTitle">Barrio:</h4>
+            <p>{info.neighbourhood}</p>
+            <article className="descripcion">
+              <h4 className="cardTitle">Descripción:</h4>
+              <p className="body2">{info.description}</p>
+            </article>
+
+            <article className="tags">
+              <h4 className="cardTitle">Ofreces actividades de:</h4>
+              {info.tags &&
+                info.tags.map((tag) => (
+                  <Tag className="tag" txt={tag} key={tag} />
+                ))}
+            </article>
+            <article className="horario">
+              <h4 className="cardTitle">Horarios de apertura</h4>
+              <ul>
+                {info.schedule &&
+                  info.schedule.map((horario) => (
+                    <li className="body2" key={horario}>
+                      {horario}
+                    </li>
+                  ))}
+              </ul>
+            </article>
+            <div className="button">
+              <input
+                className="send"
+                type="submit"
+                value="Resgistrarme"
+                disabled={!imageReady}
+              />
+            </div>
+          </article>
         )}
       </form>
     </article>

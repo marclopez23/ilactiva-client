@@ -4,8 +4,6 @@ import { getUser } from "../../service/user.service";
 import ListButton from "../../components/ListButton/ListButton";
 import { Route, Link } from "react-router-dom";
 import { useAuth } from "../../context/Auth/AuthContext.utils";
-import eventosCreados from "../../assets/eventosCreados.svg";
-import eventos from "../../assets/eventos.svg";
 import editar from "../../assets/editar.svg";
 import compartir from "../../assets/compartir.svg";
 import ProfileHeader from "../../components/ProfileHeader/ProfileHeader";

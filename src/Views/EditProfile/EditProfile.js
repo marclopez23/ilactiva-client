@@ -87,7 +87,6 @@ const EditProfile = () => {
       }));
       history.goBack();
     } catch (e) {
-      console.log(e);
     }
   };
   const handleText = (event) => {

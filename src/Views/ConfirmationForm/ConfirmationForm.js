@@ -9,7 +9,6 @@ const ConfirmationForm = ({ info }) => {
     free,
     price,
     date,
-    file,
     hour,
     end,
     place,

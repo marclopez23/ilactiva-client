@@ -1,10 +1,9 @@
 import React from "react";
 import cruz from "../../assets/cruz.svg";
-import { Route, Link, useParams } from "react-router-dom";
+import { Route, Link} from "react-router-dom";
 import confirmation from "../../assets/confirmation.svg";
 import "./EventConfirmation.scss";
 const EventConfirmation = () => {
-  const { id } = useParams();
   return (
     <main className="confirmationPage">
       <article className="headerConfirm">

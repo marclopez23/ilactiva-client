@@ -50,7 +50,6 @@ const Search = () => {
     { category: "Visitas y tours", img: visitas },
     { category: "espectaculos", img: espectaculos },
   ];
-  console.log(result.length);
   const handleSelected = (cat) => {
     setCategoria(cat);
     setResult([...eventos.filter((evento) => evento.category.includes(cat))]);

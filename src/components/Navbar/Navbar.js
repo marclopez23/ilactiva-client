@@ -1,14 +1,10 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import NavbarItem from "./NavbarItem/NavbarItem";
-import { useAuth } from "../../context/Auth/AuthContext.utils";
 import "./Navbar.scss";
 import { crear, buscar, eventos, perfil, home } from "../../assets/menu/";
 const Navbar = () => {
   const location = useLocation();
-  const {
-    user: { id },
-  } = useAuth();
   const sections = [
     { icon: home, link: "/" },
     { icon: buscar, link: "/buscar" },

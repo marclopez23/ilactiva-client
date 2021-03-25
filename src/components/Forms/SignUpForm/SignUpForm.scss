@@ -6,6 +6,15 @@
 .signForm {
   margin: 1rem;
   padding-bottom: 4rem;
+  .imgProfile {
+    border: 1px solid $salmon;
+    width: 100px;
+    height: 100px;
+    margin: 1rem auto 2rem auto;
+    background-position: center;
+    background-size: cover;
+    border-radius: 500px;
+  }
   #file {
     cursor: pointer;
     border: none;
@@ -55,6 +64,20 @@
     }
   }
 
+  .inputAdd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    input {
+      width: 75%;
+    }
+    button {
+      @include greenButton;
+      padding: 0.5rem 1rem;
+      height: 39px;
+    }
+  }
+
   .categoriesDiv {
     display: flex;
     justify-content: space-between;
@@ -65,9 +88,15 @@
     .article {
       width: 50%;
     }
+    h4.cardTitle {
+      margin-top: 0.5rem;
+    }
     .confirmation {
       .cardTitle {
         margin-top: 1rem;
+      }
+      h4.cardTitle {
+        margin-top: 0.5rem;
       }
 
       .categoria {
