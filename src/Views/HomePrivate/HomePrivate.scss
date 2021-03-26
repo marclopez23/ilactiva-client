@@ -1,10 +1,9 @@
-@import "../../styles/vars/font.scss";
 @import "../../styles/vars/color.scss";
 @import "../../styles/vars/shadows.scss";
 @import "../../styles/mixins/buttons.scss";
+@import "../../styles/mixins/responsive.scss";
 
 .contenidoHome {
-  padding-bottom: 6rem;
   .barrio {
     margin: 0 1rem;
     .marker {
@@ -14,45 +13,99 @@
       color: $verdePrimario;
     }
   }
-  .proximas,
-  .gustar,
-  .comercios {
-    margin-top: 1rem;
-    .topSection {
-      margin: 0 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .eventsList {
-      display: flex;
-      overflow: scroll;
-      -ms-overflow-style: none;
-      scrollbar-width: none;
-    }
-    ::-webkit-scrollbar {
-      display: none;
-    }
-  }
-  .comercios {
-    padding: 1.5rem 0 2rem 0;
-    margin: 1rem 0;
-    background-color: $salmonLight;
-    .title {
-      margin: 0 1rem 1rem 1rem;
-    }
-  }
+
   .eventosComercio {
     h2 {
       margin: 0 1rem;
     }
+    @include tablet {
+      a {
+        width: 50%;
+      }
+      .eventsCommerce {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        display: flex;
+        .eventoLarge {
+          min-height: 170px;
+        }
+      }
+    }
   }
   .more {
     padding: 1rem;
-    margin-bottom: 3.5rem;
     button {
       @include secondaryButton;
       width: 100%;
+      @include tablet {
+        width: 50%;
+        display: block;
+        margin: 0 auto;
+      }
+      @include desktop {
+        width: 30%;
+      }
+    }
+  }
+
+  @include desktop {
+    margin-top: 2rem !important;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
+.proximas,
+.gustar,
+.comercios {
+  margin-top: 1rem;
+  .topSection {
+    margin: 0 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .eventsList {
+    display: flex;
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    @include desktop {
+      justify-content: flex-start;
+      margin-right: 1rem;
+    }
+
+    @include large {
+      overflow: hidden;
+    }
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.end {
+  padding-bottom: 7rem;
+  @include tablet {
+    margin-top: 1rem !important;
+    padding-bottom: 2rem;
+  }
+}
+
+.zone {
+  padding: 1.5rem 0;
+  margin: 1rem 0;
+  background-color: $salmonLight;
+  .title {
+    margin: 0 1rem 1rem 1rem;
+  }
+  .eventsList {
+    justify-content: flex-start;
+  }
+  .comercios {
+    @include desktop {
+      max-width: 1200px;
+      margin: 0 auto;
     }
   }
 }

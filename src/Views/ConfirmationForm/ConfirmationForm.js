@@ -14,6 +14,7 @@ const ConfirmationForm = ({ info }) => {
     place,
     maxUsers,
   } = info;
+  console.log(info);
   return (
     <>
       <section

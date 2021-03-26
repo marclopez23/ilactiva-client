@@ -56,7 +56,7 @@ const UserEvents = () => {
     setTop(100);
   }, [topMargin]);
   return (
-    <section className="eventsList" style={{ marginTop: topMargin }}>
+    <section className="eventsList vertical" style={{ marginTop: topMargin }}>
       <SimpleHeader
         title={
           query === "creados"
@@ -64,13 +64,18 @@ const UserEvents = () => {
             : "Te has apuntado a..."
         }
       />
+      <h1 className="headline">
+        {query === "creados"
+          ? "Gestiona tus actividades"
+          : "Te has apuntado a..."}
+      </h1>
+      <h2 className="cardTitle">Próximas actividades</h2>
       <article>
-        <h2 className="cardTitle">Próximas actividades</h2>
         {nextEvents
           .sort(
             (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
           )
-          .slice(0, 3)
+          .slice(0, 4)
           .map((evento) => (
             <EventCardLarge event={evento} key={evento._id} />
           ))}
@@ -89,39 +94,40 @@ const UserEvents = () => {
             </Route>
           </article>
         )}
-        {nextEvents.length === 0 && (
-          <Empty txt="No hay ningún evento a la vista" />
-        )}
       </article>
+      {nextEvents.length === 0 && (
+        <Empty txt="No hay ningún evento a la vista" />
+      )}
+
+      <h2 className="cardTitle">Actividades pasadas</h2>
       <article>
-        <h2 className="cardTitle">Actividades pasadas</h2>
         {pastEvents
           .sort(
             (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
           )
-          .slice(0, 3)
+          .slice(0, 4)
           .map((evento) => (
             <EventCardLarge event={evento} key={evento._id} />
           ))}
-        <article className="more">
-          {pastEvents.length > 3 && (
-            <Route>
-              <Link
-                to={
-                  query === "creados"
-                    ? "/eventos/creados/pasados"
-                    : "/eventos/apuntados/pasados"
-                }
-              >
-                <button className="more">Descubre más</button>
-              </Link>
-            </Route>
-          )}
-          {pastEvents.length === 0 && (
-            <Empty txt="No tienes ningún evento pasado" />
-          )}
-        </article>
       </article>
+      <article className="more">
+        {pastEvents.length > 3 && (
+          <Route>
+            <Link
+              to={
+                query === "creados"
+                  ? "/eventos/creados/pasados"
+                  : "/eventos/apuntados/pasados"
+              }
+            >
+              <button className="more">Descubre más</button>
+            </Link>
+          </Route>
+        )}
+      </article>
+      {pastEvents.length === 0 && (
+        <Empty txt="No tienes ningún evento pasado" />
+      )}
     </section>
   );
 };

@@ -55,7 +55,7 @@ const MoreEvents = () => {
 
   return (
     <main className="moreEvents">
-      <section className="eventsList" style={{ marginTop: 100 }}>
+      <section className="eventsList vertical" style={{ marginTop: 100 }}>
         <SimpleHeader
           title={
             query === "creados"

@@ -27,74 +27,89 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    const headerHeight = document.querySelector(".perfilHeader").offsetHeight;
-    setTop(headerHeight + 46);
-  }, []);
+    const num =
+      window.outerWidth > 992
+        ? setTop(0)
+        : setTop(document.querySelector(".perfilHeader").offsetHeight + 40);
+  }, [window]);
   useEffect(() => {
     getUser().then(({ data: { user } }) => {
       setUser({ ...user });
     });
   }, []);
   return (
-    <main className="perfil">
+    <main className="perfil" style={{ marginTop: topMargin }}>
       <ProfileHeader title={user.name} img={user.profileImg} />
-      <section className="userInfo" style={{ marginTop: topMargin }}>
+      <section className="userInfo">
         <h2 className="title">
           {user.schedule ? commerce.info : usuario.info}
         </h2>
-        <h4 className="cardTitle">
-          {user.schedule ? commerce.nombre : usuario.nombre}
-        </h4>
-        <p>{user.name}</p>
-        <h4 className="cardTitle">Correo electrónico:</h4>
-        <p>{user.email}</p>
-        <h4 className="cardTitle">
-          {user.schedule ? commerce.distrito : usuario.distrito}
-        </h4>
-        <p>{user.neighbourhood}</p>
-        {user.schedule ? (
-          <>
-            <article className="descripcion">
-              <h2 className="cardTitle">Descripción:</h2>
-              <p className="body2">{user.description}</p>
-            </article>
-
-            <article className="tags">
-              <h2 className="cardTitle">Ofreces actividades de:</h2>
-              {user.tags &&
-                user.tags.map((tag) => (
-                  <Tag className="tag" txt={tag} key={tag} />
-                ))}
-            </article>
-            <article className="horario">
-              <h2 className="cardTitle">Horarios de apertura</h2>
-              <ul>
-                {user.schedule &&
-                  user.schedule.map((horario) => (
-                    <li className="body2" key={horario}>
-                      {horario}
-                    </li>
-                  ))}
-              </ul>
-            </article>
-            <article className="direccion">
-              <h2 className="cardTitle">Dirección</h2>
-              <div>
-                <img src={marker} alt="" className="marker" />
-                <p>{user.direction}</p>
+        <article>
+          <div>
+            <h4 className="cardTitle">
+              {user.schedule ? commerce.nombre : usuario.nombre}
+            </h4>
+            <p>{user.name}</p>
+          </div>
+          <div>
+            <h4 className="cardTitle">Correo electrónico:</h4>
+            <p>{user.email}</p>
+          </div>
+          <div>
+            <h4 className="cardTitle">
+              {user.schedule ? commerce.distrito : usuario.distrito}
+            </h4>
+            <p>{user.neighbourhood}</p>
+          </div>
+          {user.schedule ? (
+            <>
+              <div className="descripcion">
+                <h2 className="cardTitle">Descripción:</h2>
+                <p className="body2">{user.description}</p>
               </div>
-            </article>
-          </>
-        ) : (
-          <>
-            <h4 className="cardTitle">Te interesan actividades sobre:</h4>
-            <ul>
-              {user.category &&
-                user.category.map((value) => <Tag txt={value} key={value} />)}
-            </ul>
-          </>
-        )}
 
+              <div className="tags">
+                <h2 className="cardTitle">Ofreces actividades de:</h2>
+                {user.tags &&
+                  user.tags.map((tag) => (
+                    <Tag className="tag" txt={tag} key={tag} />
+                  ))}
+              </div>
+              <div className="horario">
+                <h2 className="cardTitle">Horarios de apertura</h2>
+                <ul>
+                  {user.schedule &&
+                    user.schedule.map((horario) => (
+                      <li className="body2" key={horario}>
+                        {horario}
+                      </li>
+                    ))}
+                </ul>
+              </div>
+              <div className="direccion">
+                <h2 className="cardTitle">Dirección</h2>
+                <div>
+                  <img src={marker} alt="" className="marker" />
+                  <p>{user.direction}</p>
+                </div>
+              </div>
+            </>
+          ) : (
+            <>
+              <div>
+                <h4 className="cardTitle">Te interesan actividades sobre:</h4>
+                <ul>
+                  {user.category &&
+                    user.category.map((value) => (
+                      <Tag txt={value} key={value} />
+                    ))}
+                </ul>
+              </div>
+            </>
+          )}
+        </article>
+      </section>
+      <section className="options">
         <Route>
           <Link to={`perfil/editar/${user._id}`}>
             <ListButton icon={editar} text={"Editar perfil"}></ListButton>

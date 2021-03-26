@@ -22,7 +22,7 @@ import MoreEvents from "./Views/MoreEvents/MoreEvents";
 import FollowedCommerces from "./Views/FollowedCommerces/FollowedCommerces";
 import Search from "./Views/Search/Search";
 import EventsList from "./Views/EventsList/EventsList";
-
+import Footer from "./components/Footer/Footer";
 function App() {
   const { user } = useAuth();
   return (
@@ -92,6 +92,7 @@ function App() {
           </>
         )}
       </Switch>
+      <Footer />
     </>
   );
 }

@@ -1,9 +1,17 @@
 @import "../../styles/vars/shadows.scss";
 @import "../../styles/vars/color.scss";
+@import "../../styles/mixins/responsive.scss";
 
 .selectType {
-  margin: 7.5rem 1rem;
   overflow: visible;
+  .selector {
+    margin: 0 1rem 4rem 1rem;
+    overflow: visible;
+    @include desktop {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  }
 
   .userTypeCard {
     cursor: pointer;
@@ -21,11 +29,30 @@
       float: right;
       width: 40%;
     }
+    @include desktop {
+      width: 45vw;
+    }
+    @include desktop {
+      width: 40vw;
+    }
   }
   .creados {
     background-color: $amarilloLight;
   }
   .apuntados {
     background-color: $salmonLight;
+  }
+  @include desktop {
+    margin-top: 0px !important;
+    padding-bottom: 2rem;
+
+    .header {
+      margin-top: 0;
+    }
+    .selector {
+      margin: 2rem auto;
+      display: flex;
+      justify-content: space-around;
+    }
   }
 }

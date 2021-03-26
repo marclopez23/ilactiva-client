@@ -1,4 +1,5 @@
 @import "../../styles/vars/color.scss";
+@import "../../styles/mixins/responsive.scss";
 
 .simpleHeader {
   padding: 1rem;
@@ -14,5 +15,8 @@
   }
   h1 {
     clear: both;
+  }
+  @include desktop {
+    display: none;
   }
 }

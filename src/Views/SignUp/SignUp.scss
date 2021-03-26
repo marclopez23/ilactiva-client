@@ -1,10 +1,12 @@
 @import "../../styles/vars/font.scss";
 @import "../../styles/vars/color.scss";
 @import "../../styles/vars/shadows.scss";
-
+@import "../../styles/mixins/responsive.scss";
 .selectType {
-  margin: 5rem 1rem;
-  overflow: visible;
+  .selector {
+    margin: 7.5rem 1rem;
+    overflow: visible;
+  }
 
   .userTypeCard {
     cursor: pointer;
@@ -27,5 +29,9 @@
   }
   .comercio {
     background-color: $salmonLight;
+  }
+  @include desktop {
+    margin-top: 0px !important;
+    padding-bottom: 2rem;
   }
 }

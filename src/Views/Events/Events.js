@@ -17,26 +17,28 @@ const Events = () => {
           headline={"Tus actividades"}
           subheader={`¡Conecta con tu barrio`}
         />
-        <Route>
-          <Link to={`/eventos/creados/`}>
-            <article className="userTypeCard creados">
-              <h3 className="title">Eventos Creados</h3>
-              <p className="body2">¡Gestiona tus eventos!</p>
-              <img src={creados} alt="creados" />
-            </article>
-          </Link>
-        </Route>
-        <Route>
-          <Link to={`/eventos/apuntados/`}>
-            <article className="userTypeCard apuntados">
-              <h3 className="title">Asistiré</h3>
-              <p className="body2">
-                ¡Repasa las actividades a las que te has apuntado!
-              </p>
-              <img src={apuntados} alt="apuntados" />
-            </article>
-          </Link>
-        </Route>
+        <section className="selector">
+          <Route>
+            <Link to={`/eventos/creados/`}>
+              <article className="userTypeCard creados">
+                <h3 className="title">Eventos Creados</h3>
+                <p className="body2">¡Gestiona tus eventos!</p>
+                <img src={creados} alt="creados" />
+              </article>
+            </Link>
+          </Route>
+          <Route>
+            <Link to={`/eventos/apuntados/`}>
+              <article className="userTypeCard apuntados">
+                <h3 className="title">Asistiré</h3>
+                <p className="body2">
+                  ¡Repasa las actividades a las que te has apuntado!
+                </p>
+                <img src={apuntados} alt="apuntados" />
+              </article>
+            </Link>
+          </Route>
+        </section>
       </section>
     </main>
   );

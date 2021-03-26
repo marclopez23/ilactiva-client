@@ -1,5 +1,6 @@
 @import "../../styles/vars/color.scss";
 @import "../../styles/mixins/buttons.scss";
+@import "../../styles/mixins/responsive.scss";
 
 .eventPage,
 .editEvent {
@@ -19,7 +20,18 @@
       clip-path: circle(18px at 33px 34px);
       img.close {
         float: right;
+        @include tablet {
+          width: 29px;
+        }
       }
+    }
+    @include desktop {
+      .cross {
+        display: none;
+      }
+    }
+    @include large {
+      height: 50vh;
     }
   }
   .creator {
@@ -45,6 +57,10 @@
       @include primaryButton;
       height: fit-content;
       padding: 0.5rem 1rem;
+      @include tablet {
+        width: 20vw;
+        height: 50px;
+      }
     }
   }
   .content {
@@ -78,6 +94,9 @@
     h2 {
       margin-bottom: 1rem;
     }
+    @include desktop {
+      min-height: 20vh;
+    }
   }
   .apuntados {
     display: flex;
@@ -104,12 +123,22 @@
     button {
       height: 48px;
       width: 100%;
+      margin: 0 auto;
+      display: block;
+      @include tablet {
+        width: 40%;
+      }
     }
     a {
       color: $blanco;
       display: block;
       text-align: center;
       padding: 1rem;
+      margin: 0 auto;
+      display: block;
+      @include tablet {
+        width: 40%;
+      }
     }
   }
   .overlay {
@@ -141,12 +170,25 @@
       button {
         width: 48%;
       }
+      @include desktop {
+        width: 50%;
+        margin: 2rem auto;
+      }
     }
     .noDelete {
       @include secondaryButton;
     }
     .delete {
       @include primaryButton;
+    }
+  }
+  @include desktop {
+    .creator,
+    .content,
+    .descripcionText {
+      max-width: 1200px;
+      padding: 1rem;
+      margin: 1rem auto;
     }
   }
 }

@@ -59,7 +59,7 @@ const LoginForm = ({ onSubmit }) => {
           onClick={() => handleIcon()}
         />
       </div>
-      <input type="submit" value="Login" />
+      <input type="submit" value="Iniciar sesión" />
     </form>
   );
 };

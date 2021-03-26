@@ -9,6 +9,8 @@
   bottom: 0;
   width: 100%;
   .navbar {
+    max-width: 500px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;

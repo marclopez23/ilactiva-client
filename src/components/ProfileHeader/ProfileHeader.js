@@ -5,7 +5,8 @@ import "./ProfileHeader.scss";
 const ProfileHeader = ({ img, title, back }) => {
   const history = useHistory();
   const [show, setShow] = useState("block");
-  if (document.querySelector(".perfilHeader")) {
+
+  if (document.querySelector(".perfilHeader") && window.outerWidth < 992) {
     window.onscroll = function (e) {
       if (50 < this.scrollY) {
         return setShow("none");

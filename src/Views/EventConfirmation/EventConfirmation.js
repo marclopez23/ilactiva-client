@@ -1,6 +1,6 @@
 import React from "react";
 import cruz from "../../assets/cruz.svg";
-import { Route, Link} from "react-router-dom";
+import { Route, Link } from "react-router-dom";
 import confirmation from "../../assets/confirmation.svg";
 import "./EventConfirmation.scss";
 const EventConfirmation = () => {
@@ -17,7 +17,7 @@ const EventConfirmation = () => {
         </h1>
       </article>
 
-      <img src={confirmation} alt="illustration" />
+      <img src={confirmation} alt="illustration" className="illustration" />
       <article className="fixedButton">
         <Route>
           <Link to={`/`}>Volver al inicio</Link>

@@ -32,24 +32,28 @@ const SignUp = () => {
         )
       ) : (
         <section className="selectType">
-          <h1 className="headline">Eres un ...</h1>
-          <article
-            className="userTypeCard vecino"
-            onClick={() => handleUserType("vecino")}
-          >
-            <h3 className="title">Vecino/a</h3>
-            <p className="body2">Quiero apuntarme y crear nuevas atividades.</p>
-            <img src={vecinoSign} alt="vecinos" />
-          </article>
-          <article
-            className="userTypeCard comercio"
-            onClick={() => handleUserType("comercio")}
-          >
-            <h3 className="title">Comercio</h3>
-            <p className="body2">
-              Quiero ganar visiblidad y crear eventos para mis vecinos.
-            </p>
-            <img src={comercioSign} alt="comercios" />
+          <article className="selector">
+            <h1 className="headline">Eres un ...</h1>
+            <article
+              className="userTypeCard vecino"
+              onClick={() => handleUserType("vecino")}
+            >
+              <h3 className="title">Vecino/a</h3>
+              <p className="body2">
+                Quiero apuntarme y crear nuevas atividades.
+              </p>
+              <img src={vecinoSign} alt="vecinos" />
+            </article>
+            <article
+              className="userTypeCard comercio"
+              onClick={() => handleUserType("comercio")}
+            >
+              <h3 className="title">Comercio</h3>
+              <p className="body2">
+                Quiero ganar visiblidad y crear eventos para mis vecinos.
+              </p>
+              <img src={comercioSign} alt="comercios" />
+            </article>
           </article>
         </section>
       )}

@@ -1,19 +1,50 @@
+@import "../../styles/mixins/responsive.scss";
 .searchEvents {
-  margin: 1rem;
   padding-bottom: 6rem;
-
+  .tag {
+    margin-left: 1rem;
+  }
   .categoriesDiv {
+    margin: 1rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-wrap: wrap;
     margin: 0 auto;
     padding: 1rem 1rem;
     margin-top: 2rem;
+    @include desktop {
+      justify-content: flex-start;
+      width: fit-content;
+    }
     .article {
       width: 50%;
+    }
+    @include large {
+      max-width: 1200px;
+      justify-content: space-between;
     }
   }
   .eventoLarge {
     margin: 1rem 0;
+  }
+  @include desktop {
+    margin-top: 100px !important;
+    padding-bottom: 2rem;
+  }
+  .resultados {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    display: flex;
+    margin: 0 1rem;
+    @include tablet {
+      a {
+        width: 50%;
+      }
+
+      .eventoLarge {
+        min-height: 170px;
+        margin: 1rem;
+      }
+    }
   }
 }

@@ -1,3 +1,4 @@
+@import "../../styles/mixins/responsive.scss";
 .noEvents {
   text-align: center;
   padding: 2rem;
@@ -9,5 +10,8 @@
   img {
     margin-bottom: 2rem;
     width: 30%;
+    @include tablet {
+      width: 10%;
+    }
   }
 }

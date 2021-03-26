@@ -12,37 +12,38 @@
   }
 }
 
- .date, .info{
+.date,
+.info {
   margin: 1rem;
   padding-bottom: 25%;
 }
 
-#price, #maxUser{
+#price,
+#maxUser {
   width: 33%;
 }
 
-.check{
+.check {
   margin-bottom: 1rem;
   height: 20px;
   display: flex;
   align-items: center;
-  input{
+  input {
     margin: 0 0.5rem;
     width: 20px;
     height: 20px;
   }
-
-  
-
 }
 
-.confirmation{
- 
-    .send{
-      @include primaryButton;
-    }
+.confirmation {
+  .send {
+    @include primaryButton;
+    display: block;
+    margin: 0 auto;
+    width: 40%;
+  }
 
-    .button{
+  .button {
     padding: 1rem;
     position: fixed;
     background-color: #fcf5f3;
@@ -51,7 +52,17 @@
     left: 0;
     box-sizing: border-box;
     z-index: 1000;
+    @include desktop {
+      position: unset;
+      display: block;
+      margin: 1rem auto;
     }
   }
-
-
+  @include desktop {
+    .contenido {
+      margin: 0 auto;
+      padding: 1rem;
+      max-width: 1200px;
+    }
+  }
+}

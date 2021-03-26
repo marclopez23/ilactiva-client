@@ -86,8 +86,7 @@ const EditProfile = () => {
         user: { ...state.user, ...data.user },
       }));
       history.goBack();
-    } catch (e) {
-    }
+    } catch (e) {}
   };
   const handleText = (event) => {
     const { value } = event.target;
@@ -115,6 +114,7 @@ const EditProfile = () => {
   return (
     <main className="editProfile" style={{ marginTop: topMargin }}>
       <SimpleHeader title="Editar información" />
+      <h1 className="headline">Edita tu información</h1>
       <img
         src={info.profileImg || ""}
         alt="logo"

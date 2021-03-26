@@ -60,17 +60,19 @@ const Search = () => {
       {categoria ? (
         <>
           <Tag txt={categoria} onClick={() => setCategoria(undefined)} />
-          {result.length > 0 ? (
-            result.map((evento) => (
-              <EventCardLarge
-                key={evento._id}
-                event={evento}
-                cssClass="eventCard"
-              />
-            ))
-          ) : (
-            <Empty txt="Oooh, lo sentimos pero actualmente no hay ningún envento de esta categoria en tu zona" />
-          )}
+          <article className="resultados">
+            {result.length > 0 ? (
+              result.map((evento) => (
+                <EventCardLarge
+                  key={evento._id}
+                  event={evento}
+                  cssClass="eventCard"
+                />
+              ))
+            ) : (
+              <Empty txt="Oooh, lo sentimos pero actualmente no hay ningún envento de esta categoria en tu zona" />
+            )}
+          </article>
         </>
       ) : (
         <>

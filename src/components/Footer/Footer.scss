@@ -1,0 +1,10 @@
+@import "../../styles/vars/color.scss";
+@import "../../styles/mixins/responsive.scss";
+footer {
+  height: 30vh;
+  background-color: $verdePrimario;
+  display: none;
+  @include desktop {
+    display: block;
+  }
+}

@@ -29,4 +29,7 @@
       color: $verdePrimario;
     }
   }
+  @include tablet {
+    min-height: 170px;
+  }
 }

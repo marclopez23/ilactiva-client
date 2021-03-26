@@ -1,6 +1,25 @@
 @import "./vars/color.scss";
 @import "./vars/font.scss";
 @import "./vars/shadows.scss";
+@import "./mixins/responsive.scss";
+
+:root {
+  @include tablet {
+    font-size: 18px;
+  }
+  @include desktop {
+    font-size: 20px;
+  }
+}
+
+@include desktop {
+  main {
+    margin-top: 100px;
+  }
+  button {
+    width: 30%;
+  }
+}
 
 * {
   box-sizing: border-box;
@@ -22,4 +41,20 @@ body {
   margin: 0 auto;
 }
 
+form {
+  @include tablet {
+    width: 60%;
+    margin: 0 auto;
+  }
+  @include desktop {
+    width: 50%;
+  }
+}
 
+h1.headline {
+  display: none;
+  @include desktop {
+    display: block;
+    margin-top: 2rem;
+  }
+}

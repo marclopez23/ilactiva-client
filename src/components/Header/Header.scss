@@ -25,6 +25,23 @@
       margin: 1rem 2rem 2.5rem 2rem;
     }
   }
+  @include large {
+    height: 30vh;
+  }
+  @include desktop {
+    margin-top: 100px;
+    position: unset;
+    display: flex;
+    align-items: center;
+    z-index: 0;
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 1200px;
+      margin: 0 auto;
+    }
+  }
 }
 
 .svg {

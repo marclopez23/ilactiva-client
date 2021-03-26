@@ -161,8 +161,10 @@ const Event = () => {
             <path d="M0.998,0.109 V1 H0.885 H0.529 H-0.002 V0.294 V0 H0.923 C0.941,0,0.957,0.011,0.966,0.028 L0.992,0.082 C0.996,0.09,0.998,0.1,0.998,0.109"></path>
           </clipPath>
         </svg>
-        <h2 className="cardTitle">Descripción del evento</h2>
-        <p className="body1">{event.description}</p>
+        <article className="descripcionText">
+          <h2 className="cardTitle">Descripción del evento</h2>
+          <p className="body1">{event.description}</p>
+        </article>
       </section>
       <section
         className="fixedButton"

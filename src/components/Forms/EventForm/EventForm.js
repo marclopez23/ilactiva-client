@@ -79,8 +79,7 @@ const EventForm = ({ onSubmit }) => {
     setInfo({ ...info, eventImg: data });
     setImageReady(true);
   };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
     if (step === 4) {
       await onSubmit({ ...info });
       setInfo(initialState);
@@ -289,21 +288,22 @@ const EventForm = ({ onSubmit }) => {
             ></FormFooter>
           </article>
         )}
-        {step === 4 && (
-          <article className="confirmation">
-            <SimpleHeader title="Revisa la información" />
-            <Confirmationform info={info} />
-            <div className="button">
-              <input
-                className="send"
-                type="submit"
-                value="Crear Evento"
-                disabled={!imageReady}
-              />
-            </div>
-          </article>
-        )}
       </form>
+      {step === 4 && (
+        <article className="confirmation">
+          <SimpleHeader title="Revisa la información" />
+          <Confirmationform info={info} />
+          <div className="button">
+            <button
+              className="send"
+              disabled={!imageReady}
+              onClick={() => handleSubmit()}
+            >
+              Crear Evento
+            </button>
+          </div>
+        </article>
+      )}
     </>
   );
 };

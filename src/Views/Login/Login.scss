@@ -1,17 +1,29 @@
-@import "../../styles/vars/font.scss";
-@import "../../styles/vars/color.scss";
-@import "../../styles/vars/shadows.scss";
 @import "../../styles/mixins/buttons.scss";
+@import "../../styles/mixins/responsive.scss";
 
 .login {
   .logo {
     width: 40%;
     display: block;
     margin: 2rem auto;
+    @include tablet {
+      width: 30%;
+    }
+    @include desktop {
+      display: none;
+    }
   }
   .illustration {
     width: 100%;
     margin: 2rem 0 2rem 0;
+    @include tablet {
+      margin: 3rem auto 2rem auto;
+      width: 50%;
+      display: block;
+    }
+    @include desktop {
+      width: 20%;
+    }
   }
   article {
     padding: 1rem;
@@ -26,6 +38,9 @@
       width: 32px;
       position: relative;
       z-index: 2;
+      @include tablet {
+        margin-top: -50px;
+      }
     }
   }
   a.enlace {
@@ -33,5 +48,8 @@
     margin: 0 auto;
     display: block;
     text-align: center;
+  }
+  @include desktop {
+    padding-bottom: 2rem;
   }
 }
