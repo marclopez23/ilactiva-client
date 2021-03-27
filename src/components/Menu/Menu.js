@@ -18,31 +18,36 @@ const Menu = () => {
         </div>
 
         <ul className="menu-items">
-          <li>
-            <Route>
-              <Link to="/eventos">Eventos</Link>
-            </Route>
-          </li>
-          <li>
-            <Route>
-              <Link to="/comercios">Comercios</Link>
-            </Route>
-          </li>
           {user.isLogged ? (
             <>
               <li>
                 <Route>
+                  <Link to="/buscar">Buscar</Link>
+                </Route>
+              </li>
+              <li>
+                <Route>
+                  <Link to="/eventos">Actividades</Link>
+                </Route>
+              </li>
+              <li>
+                <Route>
+                  <Link to="/crear-evento">Crear Actividad</Link>
+                </Route>
+              </li>
+              <li>
+                <Route>
                   <Link to="/perfil">
-                    <img src={user.avatar} alt="" width="30" />{" "}
+                    <img
+                      className="menuImg"
+                      src={user.avatar}
+                      alt=""
+                      width="30"
+                    />{" "}
                     {user.name.substring(0, user.name.indexOf(" "))}
                   </Link>
                 </Route>
               </li>{" "}
-              <li>
-                <Route>
-                  <Link to="/cerrar-sesion">Cerrar sesión</Link>
-                </Route>
-              </li>
             </>
           ) : (
             <>

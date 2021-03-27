@@ -23,6 +23,7 @@ import FollowedCommerces from "./Views/FollowedCommerces/FollowedCommerces";
 import Search from "./Views/Search/Search";
 import EventsList from "./Views/EventsList/EventsList";
 import Footer from "./components/Footer/Footer";
+import ErrorPage from "./Views/ErrorPage/ErrorPage";
 function App() {
   const { user } = useAuth();
   return (
@@ -77,20 +78,18 @@ function App() {
           <Events />
           <Navbar />
         </PrivateRoute>
-        {user.isLogged ? (
-          <>
-            <PrivateRoute exact path="/">
-              <HomePrivate />
-              <Navbar />
-            </PrivateRoute>
-          </>
-        ) : (
-          <>
-            <AnonRoute exact path="/">
-              <Home />
-            </AnonRoute>
-          </>
-        )}
+        <PrivateRoute exact path="/">
+          <HomePrivate />
+          <Navbar />
+        </PrivateRoute>
+
+        <Route path="*">
+          <ErrorPage
+            title="Nos encanta crear cosas pero parece ser que la página que estas buscando
+        no existe."
+          />
+          <Navbar />
+        </Route>
       </Switch>
       <Footer />
     </>

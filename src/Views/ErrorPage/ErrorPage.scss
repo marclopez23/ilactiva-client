@@ -1,0 +1,65 @@
+@import "../../styles/vars/color.scss";
+@import "../../styles/mixins/buttons.scss";
+@import "../../styles/mixins/responsive.scss";
+
+.page404 {
+  @include desktop {
+    padding: 2rem;
+    img {
+      width: 20%;
+    }
+    h2 {
+      width: 40%;
+      display: block;
+      margin: 1rem auto;
+    }
+    a {
+      @include primaryButton;
+      display: block;
+      width: 30%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  img {
+    width: 50%;
+    display: block;
+    margin: 2rem auto;
+  }
+  h2 {
+    padding: 1rem;
+    text-align: center;
+  }
+  a {
+    @include primaryButton;
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  @include desktop {
+    padding: 2rem;
+    img {
+      width: 20%;
+    }
+    h2 {
+      width: 40%;
+      display: block;
+      margin: 1rem auto;
+    }
+    a {
+      @include primaryButton;
+      display: block;
+      width: 30%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}

@@ -3,7 +3,7 @@ import "./Footer.scss";
 const Footer = () => {
   return (
     <footer>
-      <p>footer</p>
+      <p className="title">Illactiva © 2021</p>
     </footer>
   );
 };

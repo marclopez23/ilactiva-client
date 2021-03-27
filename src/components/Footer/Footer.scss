@@ -1,9 +1,11 @@
 @import "../../styles/vars/color.scss";
 @import "../../styles/mixins/responsive.scss";
 footer {
-  height: 30vh;
+  padding: 2rem;
+  color: $blanco;
   background-color: $verdePrimario;
   display: none;
+  text-align: center;
   @include desktop {
     display: block;
   }
