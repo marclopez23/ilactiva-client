@@ -1,5 +1,6 @@
 @import "../../styles/vars/color.scss";
 @import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/responsive.scss";
 
 .categorySelector {
   text-align: center;
@@ -25,8 +26,25 @@
       width: 100%;
     }
   }
+  @include tablet {
+    width: 26%;
+    .titleMedium {
+      font-size: 1rem;
+      line-height: 1.25rem;
+    }
+  }
+  @include desktop {
+    width: 17%;
+    margin: 1rem;
+    .titleMedium {
+      font-size: 0.75rem;
+    }
+  }
+  @include large {
+    width: 16%;
+  }
 }
 
 .selected {
-   background-color: $verdeLight!important;
+  background-color: $verdeLight !important;
 }

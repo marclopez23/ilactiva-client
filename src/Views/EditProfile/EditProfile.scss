@@ -4,6 +4,9 @@
 
 .editProfile {
   padding-top: 1rem;
+  .headline {
+    text-align: center;
+  }
   #file {
     cursor: pointer;
     transform: translate(4rem, -4rem);
@@ -27,9 +30,18 @@
       padding: 3px;
       display: block;
       margin: 0.75rem auto;
+      @include desktop {
+        margin: 0.45rem auto;
+      }
     }
     &::-webkit-file-upload-button {
       visibility: hidden;
+    }
+
+    @include safari {
+      &:before {
+        padding: 11px;
+      }
     }
   }
   form {
@@ -42,6 +54,7 @@
   }
   margin: 1rem;
   .categoriesDiv {
+    margin-top: 1rem;
     display: flex;
     flex-wrap: wrap;
     .categorySelector {
@@ -51,8 +64,31 @@
         font-size: 1rem;
       }
     }
+    @include desktop {
+      .categorySelector {
+        width: 17%;
+      }
+    }
   }
   .enviar {
     @include primaryButton;
+  }
+  .inputAdd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    input {
+      width: 75%;
+    }
+    button {
+      @include greenButton;
+      padding: 0.5rem 1rem;
+      height: 39px;
+    }
+  }
+  .tag {
+    text-transform: none;
+    margin-top: 0;
+    margin-bottom: 1rem;
   }
 }

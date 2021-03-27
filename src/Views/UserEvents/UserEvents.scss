@@ -1,8 +1,27 @@
 @import "../../styles/mixins/buttons.scss";
 
-.eventsList {
+.vertical {
   h2 {
-    margin: 2rem 1rem 1.5rem 1rem;
+    margin: 3rem 1rem 1.5rem 1rem;
+  }
+  .cardTitle {
+    font-size: 1.2rem;
+  }
+  @include tablet {
+    a {
+      width: 50%;
+    }
+    h2.cardTitle {
+      margin-left: 0;
+    }
+    article {
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      display: flex;
+      .eventoLarge {
+        min-height: 170px;
+      }
+    }
   }
 
   .more {
@@ -12,5 +31,22 @@
       @include secondaryButton;
       width: 100%;
     }
+    @include tablet {
+      width: 50%;
+      display: block;
+      margin: 0 auto;
+    }
+    @include desktop {
+      width: 30%;
+      margin-bottom: 2rem;
+    }
+  }
+  @include desktop {
+    h1.headline {
+      max-width: 1200px;
+      margin: 2rem auto;
+    }
+    max-width: 1200px;
+    margin: 2rem auto !important;
   }
 }

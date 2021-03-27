@@ -1,6 +1,7 @@
 @import "../../styles/vars/color.scss";
 @import "../../styles/vars/font.scss";
 @import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/responsive.scss";
 
 form {
   label {
@@ -10,6 +11,9 @@ form {
       color: $gris;
       font-size: 0.875rem;
       font-weight: 400;
+    }
+    @include desktop {
+      line-height: 1.25rem;
     }
   }
   input,

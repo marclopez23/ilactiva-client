@@ -1,0 +1,12 @@
+@import "../../styles/vars/color.scss";
+@import "../../styles/mixins/responsive.scss";
+footer {
+  padding: 2rem;
+  color: $blanco;
+  background-color: $verdePrimario;
+  display: none;
+  text-align: center;
+  @include desktop {
+    display: block;
+  }
+}

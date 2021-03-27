@@ -1,7 +1,15 @@
+@import "../../styles/mixins/responsive.scss";
 .commercesList {
   margin: 1rem;
   .commerceCard {
     width: 100%;
     margin: 1rem auto;
+  }
+  @include desktop {
+    display: flex;
+    justify-content: space-around;
+    .a {
+      width: 40%;
+    }
   }
 }

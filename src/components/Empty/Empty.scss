@@ -1,9 +1,18 @@
+@import "../../styles/mixins/responsive.scss";
 .noEvents {
   text-align: center;
   padding: 2rem;
+  margin: 0 auto;
+
+  .subheader {
+    line-height: 1.5rem;
+  }
 
   img {
     margin-bottom: 2rem;
     width: 30%;
+    @include tablet {
+      width: 10%;
+    }
   }
 }

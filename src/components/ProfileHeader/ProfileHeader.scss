@@ -1,7 +1,21 @@
 @import "../../styles/vars/color.scss";
 @import "../../styles/vars/shadows.scss";
+@import "../../styles/mixins/responsive.scss";
 
 .perfilHeader {
+  .cross {
+    width: fit-content;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    padding: 1rem;
+    background-color: #fcf5f3;
+    -webkit-clip-path: circle(18px at 33px 34px);
+    clip-path: circle(18px at 33px 34px);
+    img.close {
+      float: right;
+    }
+  }
   padding: 2rem;
   text-align: center;
   background-color: $verdePrimario;
@@ -13,6 +27,21 @@
   top: 0;
   left: 0;
   box-sizing: border-box;
+
+  @include safari {
+    padding: 0;
+    .fotoPerfil {
+      margin: 2rem auto 1rem auto;
+    }
+    .title {
+      margin-bottom: 1rem;
+    }
+  }
+  @include desktop {
+    position: unset;
+
+    z-index: 0;
+  }
 }
 
 .svg {

@@ -62,7 +62,6 @@ const EventForm = ({ onSubmit }) => {
   const [makeRedirect, setRedirect] = useState(false);
   const [imageReady, setImageReady] = useState(true);
   const maxStep = 3;
-  console.log(info);
   const handleCategory = (title) => {
     const cat = title.title;
     if (info.category === cat) {
@@ -74,19 +73,15 @@ const EventForm = ({ onSubmit }) => {
 
   const handleUpload = async (e) => {
     setImageReady(false);
-    console.log(e.target.files[0]);
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
     const { data } = await uploadFileService(uploadData);
-    console.log("File uploaded :>> ", data);
     setInfo({ ...info, eventImg: data });
     setImageReady(true);
   };
-  const handleSubmit = async (event) => {
-    event.preventDefault();
+  const handleSubmit = async () => {
     if (step === 4) {
-      const newEvent = await onSubmit({ ...info });
-      console.log(newEvent);
+      await onSubmit({ ...info });
       setInfo(initialState);
       setStep(1);
       setImageReady(false);
@@ -131,13 +126,6 @@ const EventForm = ({ onSubmit }) => {
     } else if (step === 2) {
       return !(info.date !== "" && info.hour !== "" && info.end !== "");
     } else if (step === 3) {
-      console.log(
-        info.eventImg !== "" &&
-          info.title !== "" &&
-          info.description !== "" &&
-          info.maxUser !== "" &&
-          info.direction !== ""
-      );
       return info.eventImg !== "" &&
         info.name !== "" &&
         info.description !== "" &&
@@ -149,32 +137,37 @@ const EventForm = ({ onSubmit }) => {
   };
   return (
     <>
-      {makeRedirect && <Redirect to={`/eventos/creado/`} />}
+      {makeRedirect && <Redirect to={`/evento/creado/`} />}
       <form action="" onSubmit={handleSubmit}>
         {step === 1 && (
-          <article className="categories">
-            <SimpleHeader title="Escoge la categoría" />
-            {categories.map(({ category, img }) => (
-              <CategorySelector
-                title={category}
-                img={img}
-                onClick={handleCategory}
-                key={category}
-              />
-            ))}
-            <FormFooter
-              back={false}
-              step={step}
-              next={"Siguiente"}
-              onClick={handleSubmit}
-              maxStep={maxStep}
-              disable={handleNext()}
-            ></FormFooter>
-          </article>
+          <>
+            <h1 className="headline">Escoge la categoría</h1>
+            <article className="categories">
+              <SimpleHeader title="Escoge la categoría" />
+
+              {categories.map(({ category, img }) => (
+                <CategorySelector
+                  title={category}
+                  img={img}
+                  onClick={handleCategory}
+                  key={category}
+                />
+              ))}
+              <FormFooter
+                back={false}
+                step={step}
+                next={"Siguiente"}
+                onClick={handleSubmit}
+                maxStep={maxStep}
+                disable={handleNext()}
+              ></FormFooter>
+            </article>
+          </>
         )}
         {step === 2 && (
           <article className="date">
             <SimpleHeader title="¿Cuando quieres hacerla?" />
+            <h1 className="headline">¿Cuando quieres hacerla?</h1>
             <label htmlFor="date">¿Qué día será?</label>
             <input
               type="date"
@@ -217,6 +210,7 @@ const EventForm = ({ onSubmit }) => {
         {step === 3 && (
           <article className="info">
             <SimpleHeader title="Cuéntanos más sobre la actividad" />
+            <h1 className="headline">Cuéntanos más sobre la actividad</h1>
             <label htmlFor="title">Nombre de la Actividad</label>
             <input
               type="text"
@@ -233,7 +227,6 @@ const EventForm = ({ onSubmit }) => {
               maxLength="200"
               rows="5"
               cols="50"
-              type="textarea"
               name="description"
               id="description"
               value={info.description}
@@ -301,21 +294,23 @@ const EventForm = ({ onSubmit }) => {
             ></FormFooter>
           </article>
         )}
-        {step === 4 && (
-          <article className="confirmation">
-            <SimpleHeader title="Revisa la información" />
-            <Confirmationform info={info} />
-            <div className="button">
-              <input
-                className="send"
-                type="submit"
-                value="Crear Evento"
-                disabled={!imageReady}
-              />
-            </div>
-          </article>
-        )}
       </form>
+      {step === 4 && (
+        <article className="confirmation">
+          <SimpleHeader title="Revisa la información" />
+          <h1 className="headline">Revisa la información</h1>
+          <Confirmationform info={info} />
+          <div className="button">
+            <button
+              className="send"
+              disabled={!imageReady}
+              onClick={() => handleSubmit()}
+            >
+              Crear Evento
+            </button>
+          </div>
+        </article>
+      )}
     </>
   );
 };

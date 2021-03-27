@@ -9,12 +9,12 @@ const ConfirmationForm = ({ info }) => {
     free,
     price,
     date,
-    file,
     hour,
     end,
     place,
     maxUsers,
   } = info;
+  console.log(info);
   return (
     <>
       <section

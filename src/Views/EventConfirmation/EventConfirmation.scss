@@ -8,9 +8,21 @@
     padding: 1rem;
     .close {
       float: right;
+      @include desktop {
+        display: none;
+      }
     }
     h1 {
       margin: 3rem 0;
+    }
+    .headline {
+      display: block;
+    }
+  }
+  .illustration {
+    width: 100%;
+    @include desktop {
+      width: 50%;
     }
   }
   .fixedButton {
@@ -28,6 +40,21 @@
       display: block;
       text-align: center;
       padding: 1rem;
+      @include desktop {
+        position: unset;
+        width: 40%;
+        height: 58px;
+        margin: 0 auto;
+      }
     }
+    @include desktop {
+      position: unset;
+    }
+  }
+  @include desktop {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    margin-top: 100px;
   }
 }

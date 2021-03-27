@@ -11,7 +11,6 @@ const FormFooter = ({
   handleBack,
   disable,
 }) => {
-  console.log(disable);
   return (
     <article className="formFooter">
       {back && (

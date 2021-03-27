@@ -1,0 +1,58 @@
+@import "../../styles/vars/shadows.scss";
+@import "../../styles/vars/color.scss";
+@import "../../styles/mixins/responsive.scss";
+
+.selectType {
+  overflow: visible;
+  .selector {
+    margin: 0 1rem 4rem 1rem;
+    overflow: visible;
+    @include desktop {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+  }
+
+  .userTypeCard {
+    cursor: pointer;
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 12px;
+    @include fotoComodin;
+    .title {
+      text-transform: none;
+    }
+    p {
+      width: 80%;
+    }
+    img {
+      float: right;
+      width: 40%;
+    }
+    @include desktop {
+      width: 45vw;
+    }
+    @include desktop {
+      width: 40vw;
+    }
+  }
+  .creados {
+    background-color: $amarilloLight;
+  }
+  .apuntados {
+    background-color: $salmonLight;
+  }
+  @include desktop {
+    margin-top: 0px !important;
+    padding-bottom: 2rem;
+
+    .header {
+      margin-top: 0;
+    }
+    .selector {
+      margin: 2rem auto;
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+}

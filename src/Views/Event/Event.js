@@ -7,16 +7,25 @@ import { followCommerce } from "../../service/user.service";
 import Button from "../../components/Button/Button";
 import "./Event.scss";
 import marker from "../../assets/marker.svg";
+import vecinos from "../../assets/vecinos.svg";
 
 const Event = () => {
   const [event, setEvent] = useState({});
   const [showHub, setHub] = useState(false);
+  const [showHubJoin, setHubJoin] = useState(false);
   const [creator, setCreator] = useState({});
+  const [plazasLibres, setLibres] = useState(0);
   const { bringEvent, registerEvent, quitEvent } = useEvents();
   const { id } = useParams();
   const history = useHistory();
   const { user, setUser } = useAuth();
   let newInfo = user;
+  const handleHub = (action) => {
+    if (action === "join") {
+      registerEvent(id);
+      setHubJoin(false);
+    }
+  };
   const handleFollow = async () => {
     try {
       await followCommerce(creator._id);
@@ -32,14 +41,12 @@ const Event = () => {
             ...newInfo,
             following: [...newInfo.following, creator._id],
           });
-      console.log({ ...user, following: newInfo.following });
       saveUser({ ...user, following: newInfo.following });
       setUser((state) => ({
         ...state,
         user: { ...state.user, following: newInfo.following },
       }));
     } catch (e) {
-      console.log(e);
     }
   };
 
@@ -47,6 +54,7 @@ const Event = () => {
     bringEvent(id).then(({ data }) => {
       setEvent(data.event);
       setCreator(data.event.creator);
+      setLibres(data.event.maxUsers - data.event.resgisteredUsers.length);
     });
   }, []);
   const handleDate = (dateEvent) => {
@@ -109,7 +117,7 @@ const Event = () => {
         </div>
         {user.isLogged && creator._id === user.id && (
           <Route>
-            <Link to={`/eventos/${event._id}/editar`}>
+            <Link to={`/evento/editar/${event._id}/`}>
               <Button copy="Editar" primary={true} className="follow" />
             </Link>
           </Route>
@@ -140,6 +148,12 @@ const Event = () => {
           <img src={marker} alt="" className="marker" />
           <span className="body1">{event.place}</span>
         </p>
+        {event.resgisteredUsers && (
+          <div className="apuntados">
+            <img src={vecinos} alt="" className="icon" />
+            <p className="body2">{`Quedan ${plazasLibres} plazas libres`}</p>
+          </div>
+        )}
       </section>
       <section className="descripcion">
         <svg className="svgImg">
@@ -147,10 +161,15 @@ const Event = () => {
             <path d="M0.998,0.109 V1 H0.885 H0.529 H-0.002 V0.294 V0 H0.923 C0.941,0,0.957,0.011,0.966,0.028 L0.992,0.082 C0.996,0.09,0.998,0.1,0.998,0.109"></path>
           </clipPath>
         </svg>
-        <h2 className="cardTitle">Descripción del evento</h2>
-        <p className="body1">{event.description}</p>
+        <article className="descripcionText">
+          <h2 className="cardTitle">Descripción del evento</h2>
+          <p className="body1">{event.description}</p>
+        </article>
       </section>
-      <section className="fixedButton">
+      <section
+        className="fixedButton"
+        style={{ display: `${new Date() > new Date(event.date) && "none"}` }}
+      >
         {user.isLogged &&
           !user.eventsJoined.includes(id) &&
           (creator._id === user.id ? (
@@ -161,16 +180,21 @@ const Event = () => {
             />
           ) : (
             <Button
-              copy="¡Apuntarme!"
+              copy={
+                plazasLibres === 0
+                  ? "Todas las plazas reservadas"
+                  : "¡Apuntarme!"
+              }
               primary={true}
               onClick={() => registerEvent(id)}
+              disable={plazasLibres === 0}
             />
           ))}
         {user.isLogged && user.eventsJoined.includes(id) && (
           <Button
             copy="Desapuntarme"
             primary={true}
-            onClick={() => registerEvent(id)}
+            onClick={() => setHubJoin(true)}
           />
         )}
         {!user.isLogged && (
@@ -184,8 +208,8 @@ const Event = () => {
       <section
         className="overlay"
         style={{
-          top: showHub ? 0 : "-100vh",
-          backgroundColor: showHub ? "#000000c7" : "#00000000",
+          top: showHub || showHubJoin ? 0 : "-100vh",
+          backgroundColor: showHub || showHubJoin ? "#000000c7" : "#00000000",
         }}
         onClick={() => setHub(false)}
       ></section>
@@ -201,6 +225,22 @@ const Event = () => {
             No
           </button>
           <button className="delete" onClick={() => quitEvent(id)}>
+            Si
+          </button>
+        </div>
+      </section>
+      <section
+        className="hub"
+        style={{
+          bottom: showHubJoin ? 0 : "-300px",
+        }}
+      >
+        <h2 className="title">¿Seguro que quieres desapuntarte?</h2>
+        <div className="buttons">
+          <button className="noDelete" onClick={() => setHubJoin(false)}>
+            No
+          </button>
+          <button className="delete" onClick={() => handleHub("join")}>
             Si
           </button>
         </div>

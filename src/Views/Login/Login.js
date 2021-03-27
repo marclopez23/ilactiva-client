@@ -1,5 +1,6 @@
 import React from "react";
 import "./Login.scss";
+import { Route, Link } from "react-router-dom";
 import { useAuth } from "../../context/Auth/AuthContext.utils";
 import LoginForm from "../../components/Forms/LoginForm/LoginForm";
 import loginImg from "../../assets/imagen-login.svg";
@@ -9,7 +10,7 @@ const Login = () => {
   const { handleLogin } = useAuth();
   const loginHandler = async (user) => {
     try {
-      const logUser = await handleLogin(user);
+      await handleLogin(user);
     } catch (e) {
       console.error(e);
     }
@@ -21,6 +22,11 @@ const Login = () => {
       <article>
         <LoginForm onSubmit={loginHandler} />
       </article>
+      <Route>
+        <Link to="/registrarme" className="enlace link">
+          No tienes cuenta? Registrate
+        </Link>
+      </Route>
     </main>
   );
 };

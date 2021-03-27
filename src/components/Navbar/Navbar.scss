@@ -9,6 +9,8 @@
   bottom: 0;
   width: 100%;
   .navbar {
+    max-width: 500px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
@@ -20,5 +22,9 @@
   }
   @include desktop {
     display: none;
+  }
+  .active {
+    border-bottom: 2.5px solid $verdePrimario;
+    padding-bottom: 0.5rem;
   }
 }

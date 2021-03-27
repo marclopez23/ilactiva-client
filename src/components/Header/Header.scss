@@ -11,8 +11,37 @@
   clip-path: url(#my-clip-path);
   position: fixed;
   width: 100%;
+  left: 0;
   top: 0;
   box-sizing: border-box;
+  z-index: 1000;
+
+  @include safari {
+    padding: 0;
+    .subheader {
+      margin: 2.5rem 2rem 0 2rem;
+    }
+    .headline {
+      margin: 1rem 2rem 2.5rem 2rem;
+    }
+  }
+  @include large {
+    height: 30vh;
+  }
+  @include desktop {
+    margin-top: 100px;
+    position: unset;
+    display: flex;
+    align-items: center;
+    z-index: 0;
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 1200px;
+      margin: 0 auto;
+    }
+  }
 }
 
 .svg {

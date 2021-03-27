@@ -64,7 +64,6 @@ const SignUpForm = ({ onSubmit }) => {
   const [icon, setIcon] = useState(unhide);
   const [inputType, setType] = useState("password");
   const maxStep = 3;
-  console.log(info);
   const handleIcon = () => {
     if (icon === unhide) {
       setIcon(hide);
@@ -81,21 +80,17 @@ const SignUpForm = ({ onSubmit }) => {
 
   const handleUpload = async (e) => {
     setImageReady(false);
-    console.log(e.target.files[0]);
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
 
     const { data } = await uploadFileService(uploadData);
-    console.log("File uploaded :>> ", data);
     setInfo({ ...info, profileImg: data });
     setImageReady(true);
   };
 
   const handleCategory = (cat) => {
-    console.log(cat);
     if (info.category.includes(cat)) {
       const newArr = info.category.filter((item) => item !== cat);
-      console.log(newArr);
       setInfo((state) => ({ ...state, category: [...newArr] }));
     } else {
       setInfo((state) => ({ ...state, category: [...state.category, cat] }));
@@ -152,6 +147,7 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 1 && (
           <div className="personal-info">
             <SimpleHeader title="Cuéntanos sobre tí" />
+            <h1 className="headline">Cuéntanos sobre tí</h1>
             {info.profileImg === "" && !imageReady ? (
               <input
                 type="file"
@@ -161,13 +157,10 @@ const SignUpForm = ({ onSubmit }) => {
                 onChange={handleUpload}
               />
             ) : (
-              <img
-                src={info.profileImg}
-                alt="logo"
-                width="200"
-                height="200"
-                id="file"
-              />
+              <div
+                style={{ backgroundImage: `url(${info.profileImg})` }}
+                className="imgProfile"
+              ></div>
             )}
             <label htmlFor="name">¿Comó te llamas?</label>
             <input
@@ -225,6 +218,7 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 2 && (
           <div className="location">
             <SimpleHeader title="¿En que distrito vives?" />
+            <h1 className="headline">¿En que distrito vives?</h1>
             {distritos.map((distrito) => (
               <article
                 className={`distrito${
@@ -252,6 +246,9 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 3 && (
           <div className="category">
             <SimpleHeader title="¿En que actividades te gustaria participar?" />
+            <h1 className="headline">
+              ¿En que actividades te gustaria participar?
+            </h1>
             <article className="categoriesDiv">
               {categories.map(({ category, img }) => (
                 <CategorySelector
@@ -276,6 +273,7 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 4 && (
           <article className="confirmation">
             <SimpleHeader title="Resumen de tus datos" />
+            <h1 className="headline">Resumen de tus datos</h1>
             <img
               src={info.profileImg}
               alt="logo"
@@ -293,7 +291,9 @@ const SignUpForm = ({ onSubmit }) => {
 
             <ul>
               {info.category.map((value) => (
-                <li className="categoria" key={value}>{value}</li>
+                <li className="categoria" key={value}>
+                  {value}
+                </li>
               ))}
             </ul>
             <div className="button">

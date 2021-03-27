@@ -1,0 +1,8 @@
+@import "../../styles/mixins/responsive.scss";
+.moreEvents .vertical {
+  .eventsList {
+    @include desktop {
+      margin-top: 1rem !important;
+    }
+  }
+}

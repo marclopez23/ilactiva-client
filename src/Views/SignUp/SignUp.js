@@ -6,26 +6,24 @@ import SignUpCommerce from "../../components/Forms/SignUpCommerce/SignUpCommerce
 import "./SignUp.scss";
 import vecinoSign from "../../assets/vecinoSign.svg";
 import comercioSign from "../../assets/comercioSign.svg";
-
+import SimpleHeader from "../../components/SimpleHeader/SimpleHeader";
 const SignUp = () => {
   const { handleSignup } = useAuth();
   const [isCommerce, setCommerce] = useState();
   const [showForm, setForm] = useState(false);
   const handleUserType = (type) => {
-    const isNeighbour =
-      type === "vecino" ? setCommerce(true) : setCommerce(false);
+    type === "vecino" ? setCommerce(true) : setCommerce(false);
     setForm(true);
   };
 
   const signupHandler = async (user) => {
     try {
-      const newUser = await handleSignup(user);
-    } catch (e) {
-      console.error(e);
-    }
+      await handleSignup(user);
+    } catch (e) {}
   };
   return (
     <main>
+      <SimpleHeader title="" />
       {showForm ? (
         !isCommerce ? (
           <SignUpCommerce onSubmit={signupHandler} />
@@ -35,23 +33,27 @@ const SignUp = () => {
       ) : (
         <section className="selectType">
           <h1 className="headline">Eres un ...</h1>
-          <article
-            className="userTypeCard vecino"
-            onClick={() => handleUserType("vecino")}
-          >
-            <h3 className="title">Vecino/a</h3>
-            <p className="body2">Quiero apuntarme y crear nuevas atividades.</p>
-            <img src={vecinoSign} alt="vecinos" />
-          </article>
-          <article
-            className="userTypeCard comercio"
-            onClick={() => handleUserType("comercio")}
-          >
-            <h3 className="title">Comercio</h3>
-            <p className="body2">
-              Quiero ganar visiblidad y crear eventos para mis vecinos.
-            </p>
-            <img src={comercioSign} alt="comercios" />
+          <article className="selector">
+            <article
+              className="userTypeCard vecino"
+              onClick={() => handleUserType("vecino")}
+            >
+              <h3 className="title">Vecino/a</h3>
+              <p className="body2">
+                Quiero apuntarme y crear nuevas atividades.
+              </p>
+              <img src={vecinoSign} alt="vecinos" />
+            </article>
+            <article
+              className="userTypeCard comercio"
+              onClick={() => handleUserType("comercio")}
+            >
+              <h3 className="title">Comercio</h3>
+              <p className="body2">
+                Quiero ganar visiblidad y crear eventos para mis vecinos.
+              </p>
+              <img src={comercioSign} alt="comercios" />
+            </article>
           </article>
         </section>
       )}

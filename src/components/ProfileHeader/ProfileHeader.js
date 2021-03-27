@@ -1,8 +1,12 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import cruz from "../../assets/cruz.svg";
 import "./ProfileHeader.scss";
-const ProfileHeader = ({ img, title }) => {
+const ProfileHeader = ({ img, title, back }) => {
+  const history = useHistory();
   const [show, setShow] = useState("block");
-  if (document.querySelector(".perfilHeader")) {
+
+  if (document.querySelector(".perfilHeader") && window.outerWidth < 992) {
     window.onscroll = function (e) {
       if (50 < this.scrollY) {
         return setShow("none");
@@ -18,6 +22,16 @@ const ProfileHeader = ({ img, title }) => {
           <path d="M0,0.803 V0 H0.112 H0.469 H1 V0.519 V1 H0.07 C0.055,1,0.041,0.982,0.031,0.951 L0.01,0.879 C0.004,0.857,0,0.83,0,0.803"></path>
         </clipPath>
       </svg>
+      {back && (
+        <div className="cross">
+          <img
+            src={cruz}
+            className="close"
+            alt="close"
+            onClick={() => history.goBack()}
+          />
+        </div>
+      )}
       <img
         style={{ display: show }}
         src={img}

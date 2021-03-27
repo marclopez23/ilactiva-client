@@ -17,18 +17,18 @@ function EventProvider({ children }) {
   const [events, setEvents] = useState([]);
   const { user, setUser } = useAuth();
   useEffect(() => {
-    const fetchEvents = getEvents().then(({ data }) => {
+    getEvents().then(({ data }) => {
       setEvents([...data]);
     });
   }, []);
 
   const bringEvent = async (id) => {
     try {
-      console.log("hola");
+      
       const fetchEvent = await getEvent(id);
       return fetchEvent;
     } catch (e) {
-      console.log(e);
+      
     }
   };
 
@@ -36,11 +36,10 @@ function EventProvider({ children }) {
     try {
       const postEvent = await createEvent(info);
       const { event: newEvent } = postEvent.data;
-      console.log(newEvent);
+      
       setEvents((state) => [...state, newEvent]);
       return newEvent;
     } catch (e) {
-      console.log(e);
       return "Algo ha salido mal, porfavor vuelve a intentarlo";
     }
   }, []);
@@ -51,7 +50,7 @@ function EventProvider({ children }) {
         data: { event: evento },
       } = await joinEvent(eventId);
       const currentEventIndex = user.eventsJoined.includes(eventId);
-      console.log("id", evento._id);
+      
 
       if (currentEventIndex) {
         setUser((state) => ({
@@ -81,14 +80,14 @@ function EventProvider({ children }) {
         });
       }
     } catch (e) {
-      console.log(e);
+      
       return "Algo ha salido mal, porfavor vuelve a intentarlo";
     }
   };
 
   const quitEvent = async (id) => {
     try {
-      const deleted = await deleteEvent(id);
+      await deleteEvent(id);
       setUser((state) => ({
         ...state,
         user: {
@@ -101,7 +100,7 @@ function EventProvider({ children }) {
       setEvents((state) => state.filter((evento) => evento._id !== id));
       history.goBack();
     } catch (e) {
-      console.log(e);
+      
     }
   };
 
@@ -110,11 +109,11 @@ function EventProvider({ children }) {
       const {
         data: { updatedEvent },
       } = await editEvent(id, info);
-      console.log(updatedEvent);
+      
       const newList = events.filter((event) => event._id !== id);
       setEvents([...newList, updatedEvent]);
     } catch (e) {
-      console.log(e);
+     
     }
   };
 

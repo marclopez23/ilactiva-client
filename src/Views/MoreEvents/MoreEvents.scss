@@ -1,0 +1,22 @@
+@import "../../styles/mixins/responsive.scss";
+.moreEvents .home {
+  margin-bottom: 2rem;
+  .eventList {
+    @include tablet {
+      a {
+        width: 50%;
+      }
+      .eventsCommerce {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        display: flex;
+        .eventoLarge {
+          min-height: 170px;
+        }
+      }
+    }
+  }
+  @include desktop {
+    margin-top: 1rem !important;
+  }
+}

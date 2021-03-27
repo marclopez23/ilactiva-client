@@ -19,7 +19,6 @@
   }
   .userInfo {
     margin: 1rem;
-    padding-bottom: 6rem;
     h4 {
       margin-top: 1rem;
     }
@@ -31,11 +30,41 @@
     .listButton {
       margin-top: 1rem;
     }
+    article {
+      @include desktop {
+        display: flex;
+        flex-wrap: wrap;
+        div {
+          width: 50%;
+        }
+      }
+    }
   }
-  .logout {
-    @include primaryButton;
-    width: 100%;
-    margin: 2rem 0 1rem 0;
+
+  .options {
+    margin: 1rem;
+    padding-bottom: 6rem;
+    .listButton {
+      margin-top: 1rem;
+    }
+    .logout {
+      @include primaryButton;
+      width: 100%;
+      margin: 2rem 0 1rem 0;
+      @include desktop {
+        width: 50%;
+        height: 58px;
+      }
+    }
+    @include tablet {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      article.listButton {
+        width: 45vw;
+      }
+      padding-bottom: 2rem;
+    }
   }
 
   .tags,
@@ -58,6 +87,16 @@
       img {
         margin-right: 0.5rem;
       }
+    }
+  }
+  @include desktop {
+    .userInfo,
+    .options {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .userInfo {
+      margin-top: 2rem;
     }
   }
 }

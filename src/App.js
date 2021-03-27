@@ -20,13 +20,23 @@ import EditEvent from "./Views/EditEvent/EditEvent";
 import CommercePage from "./Views/CommercePage/CommercePage";
 import MoreEvents from "./Views/MoreEvents/MoreEvents";
 import FollowedCommerces from "./Views/FollowedCommerces/FollowedCommerces";
-
+import Search from "./Views/Search/Search";
+import EventsList from "./Views/EventsList/EventsList";
+import Footer from "./components/Footer/Footer";
+import ErrorPage from "./Views/ErrorPage/ErrorPage";
 function App() {
   const { user } = useAuth();
   return (
     <>
       <Menu />
       <Switch>
+        <PrivateRoute exact path="/eventos-:filtro">
+          <EventsList />
+        </PrivateRoute>
+        <PrivateRoute exact path="/buscar">
+          <Search />
+          <Navbar />
+        </PrivateRoute>
         <PrivateRoute exact path="/eventos/:query/:cuando">
           <MoreEvents />
         </PrivateRoute>
@@ -49,13 +59,13 @@ function App() {
         <AnonRoute exact path="/registrarme">
           <SignUp />
         </AnonRoute>
-        <PrivateRoute exact path="/eventos/creado/">
+        <PrivateRoute exact path="/evento/creado/">
           <EventConfirmation />
         </PrivateRoute>
         <Route exact path="/evento/:id">
           <Event />
         </Route>
-        <PrivateRoute exact path="/evento/:id/editar">
+        <PrivateRoute exact path="/evento/editar/:id">
           <EditEvent />
         </PrivateRoute>
         <PrivateRoute exact path="/comercios/seguidos">
@@ -64,25 +74,24 @@ function App() {
         <Route exact path="/comercios/:id">
           <CommercePage />
         </Route>
-        <Route exact path="/eventos">
+        <PrivateRoute exact path="/eventos">
           <Events />
           <Navbar />
+        </PrivateRoute>
+        <PrivateRoute exact path="/">
+          <HomePrivate />
+          <Navbar />
+        </PrivateRoute>
+
+        <Route path="*">
+          <ErrorPage
+            title="Nos encanta crear cosas pero parece ser que la página que estas buscando
+        no existe."
+          />
+          <Navbar />
         </Route>
-        {user.isLogged ? (
-          <>
-            <PrivateRoute exact path="/">
-              <HomePrivate />
-              <Navbar />
-            </PrivateRoute>
-          </>
-        ) : (
-          <>
-            <AnonRoute exact path="/">
-              <Home />
-            </AnonRoute>
-          </>
-        )}
       </Switch>
+      <Footer />
     </>
   );
 }

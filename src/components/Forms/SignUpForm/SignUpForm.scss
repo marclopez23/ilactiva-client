@@ -6,6 +6,15 @@
 .signForm {
   margin: 1rem;
   padding-bottom: 4rem;
+  .imgProfile {
+    border: 1px solid $salmon;
+    width: 100px;
+    height: 100px;
+    margin: 1rem auto 2rem auto;
+    background-position: center;
+    background-size: cover;
+    border-radius: 500px;
+  }
   #file {
     cursor: pointer;
     border: none;
@@ -17,7 +26,7 @@
     width: 100px;
     height: 100px;
     display: block;
-    margin: 1rem auto;
+    margin: 1rem auto 2rem auto;
     &::before {
       content: " ";
       background-image: url("../../../assets/addPhoto.svg");
@@ -38,6 +47,9 @@
     width: 32px;
     position: relative;
     z-index: 2;
+    @include desktop {
+      margin-top: -56px;
+    }
   }
   .location {
     .distrito {
@@ -55,6 +67,23 @@
     }
   }
 
+  .inputAdd {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    input {
+      width: 75%;
+    }
+    button {
+      @include greenButton;
+      padding: 0.5rem 1rem;
+      height: 39px;
+      @include desktop {
+        width: 20%;
+      }
+    }
+  }
+
   .categoriesDiv {
     display: flex;
     justify-content: space-between;
@@ -62,12 +91,21 @@
     margin: 0 auto;
     padding: 1rem 2rem;
     margin-top: 2rem;
+    @include desktop {
+      justify-content: flex-start;
+    }
     .article {
       width: 50%;
+    }
+    h4.cardTitle {
+      margin-top: 0.5rem;
     }
     .confirmation {
       .cardTitle {
         margin-top: 1rem;
+      }
+      h4.cardTitle {
+        margin-top: 0.5rem;
       }
 
       .categoria {
