@@ -5,11 +5,11 @@
 .selectType {
   overflow: visible;
   .selector {
-    margin: 0 1rem 4rem 1rem;
+    margin: 7.5rem 1rem 4rem 1rem;
     overflow: visible;
     @include desktop {
       max-width: 1200px;
-      margin: 0 auto;
+      margin: 3rem auto;
     }
   }
 

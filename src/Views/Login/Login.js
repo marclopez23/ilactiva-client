@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.scss";
 import { Route, Link } from "react-router-dom";
 import { useAuth } from "../../context/Auth/AuthContext.utils";
@@ -8,12 +8,14 @@ import logo from "../../assets/logo.svg";
 
 const Login = () => {
   const { handleLogin } = useAuth();
+  const [error, setError] = useState();
   const loginHandler = async (user) => {
     try {
       await handleLogin(user);
     } catch (e) {
-      console.error(e);
+      setError(e.response.data.message);
     }
+    console.error("hola");
   };
   return (
     <main className="login">
@@ -21,6 +23,7 @@ const Login = () => {
       <img src={loginImg} alt="login illustration" className="illustration" />
       <article>
         <LoginForm onSubmit={loginHandler} />
+        {error && <p className="error">{error}</p>}
       </article>
       <Route>
         <Link to="/registrarme" className="enlace link">

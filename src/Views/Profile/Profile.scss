@@ -12,6 +12,9 @@
 }
 
 .perfil {
+  @include desktop {
+    margin-top: 100px !important;
+  }
   .svgImg {
     position: absolute;
     width: 0;
@@ -61,7 +64,7 @@
       justify-content: space-around;
       flex-wrap: wrap;
       article.listButton {
-        width: 45vw;
+        width: 500px;
       }
       padding-bottom: 2rem;
     }
