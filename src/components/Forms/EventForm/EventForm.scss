@@ -10,12 +10,19 @@
   .article {
     width: 50%;
   }
+  @include desktop {
+    justify-content: flex-start;
+    padding-bottom: 1rem;
+  }
 }
 
 .date,
 .info {
   margin: 1rem;
   padding-bottom: 25%;
+  @include desktop {
+    padding-bottom: 1rem;
+  }
 }
 
 #price,
@@ -36,11 +43,32 @@
 }
 
 .confirmation {
+  .headline {
+    display: block;
+    margin: 2rem auto;
+    max-width: 1200px;
+  }
   .send {
     @include primaryButton;
     display: block;
     margin: 0 auto;
     width: 40%;
+  }
+
+  .eventImg {
+    @include desktop {
+      height: 40vh;
+    }
+  }
+
+  .content {
+    @include desktop {
+      .contenido {
+        margin: 1rem auto;
+        padding: 1rem;
+        max-width: 1200px;
+      }
+    }
   }
 
   .button {

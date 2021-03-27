@@ -140,6 +140,12 @@
         width: 40%;
       }
     }
+    @include desktop {
+      position: unset;
+      box-shadow: none;
+      background: none;
+      background-color: $blanco;
+    }
   }
   .overlay {
     height: 100vh;

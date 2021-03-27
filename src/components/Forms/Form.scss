@@ -12,6 +12,9 @@ form {
       font-size: 0.875rem;
       font-weight: 400;
     }
+    @include desktop {
+      line-height: 1.25rem;
+    }
   }
   input,
   textarea,
@@ -40,5 +43,4 @@ form {
       margin: 37%;
     }
   }
-  
 }

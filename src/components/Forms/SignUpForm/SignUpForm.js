@@ -147,6 +147,7 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 1 && (
           <div className="personal-info">
             <SimpleHeader title="Cuéntanos sobre tí" />
+            <h1 className="headline">Cuéntanos sobre tí</h1>
             {info.profileImg === "" && !imageReady ? (
               <input
                 type="file"
@@ -217,6 +218,7 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 2 && (
           <div className="location">
             <SimpleHeader title="¿En que distrito vives?" />
+            <h1 className="headline">¿En que distrito vives?</h1>
             {distritos.map((distrito) => (
               <article
                 className={`distrito${
@@ -244,6 +246,9 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 3 && (
           <div className="category">
             <SimpleHeader title="¿En que actividades te gustaria participar?" />
+            <h1 className="headline">
+              ¿En que actividades te gustaria participar?
+            </h1>
             <article className="categoriesDiv">
               {categories.map(({ category, img }) => (
                 <CategorySelector
@@ -268,6 +273,7 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 4 && (
           <article className="confirmation">
             <SimpleHeader title="Resumen de tus datos" />
+            <h1 className="headline">Resumen de tus datos</h1>
             <img
               src={info.profileImg}
               alt="logo"

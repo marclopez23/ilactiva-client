@@ -47,6 +47,9 @@
     width: 32px;
     position: relative;
     z-index: 2;
+    @include desktop {
+      margin-top: -56px;
+    }
   }
   .location {
     .distrito {
@@ -75,6 +78,9 @@
       @include greenButton;
       padding: 0.5rem 1rem;
       height: 39px;
+      @include desktop {
+        width: 20%;
+      }
     }
   }
 
@@ -85,6 +91,9 @@
     margin: 0 auto;
     padding: 1rem 2rem;
     margin-top: 2rem;
+    @include desktop {
+      justify-content: flex-start;
+    }
     .article {
       width: 50%;
     }

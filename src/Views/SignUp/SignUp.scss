@@ -6,6 +6,9 @@
   .selector {
     margin: 7.5rem 1rem;
     overflow: visible;
+    @include desktop {
+      margin-top: 2rem;
+    }
   }
 
   .userTypeCard {

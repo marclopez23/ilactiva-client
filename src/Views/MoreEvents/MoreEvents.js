@@ -55,6 +55,15 @@ const MoreEvents = () => {
 
   return (
     <main className="moreEvents">
+      <h1 className="headline">
+        {query === "creados"
+          ? cuando === "proximos"
+            ? "Tus proximas actividades"
+            : "Actividades realizadas"
+          : cuando === "proximos"
+          ? "Asistirás a ..."
+          : "Has asistido a ..."}
+      </h1>
       <section className="eventsList vertical" style={{ marginTop: 100 }}>
         <SimpleHeader
           title={

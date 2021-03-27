@@ -32,8 +32,8 @@ const SignUp = () => {
         )
       ) : (
         <section className="selectType">
+          <h1 className="headline">Eres un ...</h1>
           <article className="selector">
-            <h1 className="headline">Eres un ...</h1>
             <article
               className="userTypeCard vecino"
               onClick={() => handleUserType("vecino")}

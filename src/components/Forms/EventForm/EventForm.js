@@ -140,29 +140,34 @@ const EventForm = ({ onSubmit }) => {
       {makeRedirect && <Redirect to={`/evento/creado/`} />}
       <form action="" onSubmit={handleSubmit}>
         {step === 1 && (
-          <article className="categories">
-            <SimpleHeader title="Escoge la categoría" />
-            {categories.map(({ category, img }) => (
-              <CategorySelector
-                title={category}
-                img={img}
-                onClick={handleCategory}
-                key={category}
-              />
-            ))}
-            <FormFooter
-              back={false}
-              step={step}
-              next={"Siguiente"}
-              onClick={handleSubmit}
-              maxStep={maxStep}
-              disable={handleNext()}
-            ></FormFooter>
-          </article>
+          <>
+            <h1 className="headline">Escoge la categoría</h1>
+            <article className="categories">
+              <SimpleHeader title="Escoge la categoría" />
+
+              {categories.map(({ category, img }) => (
+                <CategorySelector
+                  title={category}
+                  img={img}
+                  onClick={handleCategory}
+                  key={category}
+                />
+              ))}
+              <FormFooter
+                back={false}
+                step={step}
+                next={"Siguiente"}
+                onClick={handleSubmit}
+                maxStep={maxStep}
+                disable={handleNext()}
+              ></FormFooter>
+            </article>
+          </>
         )}
         {step === 2 && (
           <article className="date">
             <SimpleHeader title="¿Cuando quieres hacerla?" />
+            <h1 className="headline">¿Cuando quieres hacerla?</h1>
             <label htmlFor="date">¿Qué día será?</label>
             <input
               type="date"
@@ -205,6 +210,7 @@ const EventForm = ({ onSubmit }) => {
         {step === 3 && (
           <article className="info">
             <SimpleHeader title="Cuéntanos más sobre la actividad" />
+            <h1 className="headline">Cuéntanos más sobre la actividad</h1>
             <label htmlFor="title">Nombre de la Actividad</label>
             <input
               type="text"
@@ -292,6 +298,7 @@ const EventForm = ({ onSubmit }) => {
       {step === 4 && (
         <article className="confirmation">
           <SimpleHeader title="Revisa la información" />
+          <h1 className="headline">Revisa la información</h1>
           <Confirmationform info={info} />
           <div className="button">
             <button

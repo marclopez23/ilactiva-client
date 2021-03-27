@@ -39,6 +39,13 @@ const EventsList = () => {
   }, []);
   return (
     <main className="moreEvents home">
+      <h1 className="headline">
+        {filtro === "proximos"
+          ? "Próximos eventos"
+          : filtro === "comercios"
+          ? "Eventos de los comercios"
+          : "Te recomendamos"}
+      </h1>
       <section className="eventsList" style={{ marginTop: 100 }}>
         <SimpleHeader
           title={

@@ -136,6 +136,7 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 1 && (
           <div className="personal-info">
             <SimpleHeader title="Cuéntanos sobre tu negocio" />
+            <h1 className="headline">Cuéntanos sobre tu negocio</h1>
             {info.profileImg === "" && !imageReady ? (
               <input
                 type="file"
@@ -206,6 +207,7 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 2 && (
           <div className="location">
             <SimpleHeader title="¿Dónde y cuando te econtrarán?" />
+            <h1 className="headline">¿Dónde y cuando te econtrarán?</h1>
             <p>
               Puedes incluir los distintos horarios que tienes en tu negocio.
             </p>
@@ -277,6 +279,7 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 3 && (
           <div className="category">
             <SimpleHeader title="¿Qué puedes ofrecer a tus vecinos?" />
+            <h1 className="headline">¿Qué puedes ofrecer a tus vecinos?</h1>
             <label htmlFor="category">¿Qué tipo de negoció tienes?</label>
             <select
               name="category"
@@ -326,6 +329,7 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 4 && (
           <div className="socials">
             <SimpleHeader title="Más información" />
+            <h1 className="headline">Más información</h1>
             <label htmlFor="description">
               ¿Como le explicarias tu negocio a los usuarios?
             </label>
@@ -337,7 +341,7 @@ const SignUpForm = ({ onSubmit }) => {
               value={info.description}
               onChange={handleChange}
             />
-            <p>Si quieres dinos cuales són las redes de tu negocio</p>
+
             <label htmlFor="web">Web</label>
             <input
               type="url"
@@ -384,6 +388,7 @@ const SignUpForm = ({ onSubmit }) => {
         {step === 5 && (
           <article className="confirmation">
             <SimpleHeader title="Resumen de tus datos" />
+            <h1 className="headline">Resumen de tus datos</h1>
             <img
               src={info.profileImg}
               alt="logo"
