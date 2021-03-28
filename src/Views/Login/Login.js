@@ -15,7 +15,6 @@ const Login = () => {
     } catch (e) {
       setError(e.response.data.message);
     }
-    console.error("hola");
   };
   return (
     <main className="login">

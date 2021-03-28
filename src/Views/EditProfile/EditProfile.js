@@ -47,6 +47,7 @@ const EditProfile = () => {
   const [info, setInfo] = useState({});
   const [topMargin, setTop] = useState(0);
   const [imageReady, setImageReady] = useState(true);
+  const [error, setError] = useState();
   const [text, setText] = useState("");
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -86,7 +87,9 @@ const EditProfile = () => {
         user: { ...state.user, ...data.user },
       }));
       history.goBack();
-    } catch (e) {}
+    } catch (e) {
+      setError(e.response.data.message);
+    }
   };
   const handleText = (event) => {
     const { value } = event.target;
@@ -345,6 +348,7 @@ const EditProfile = () => {
           onClick={handleSubmit}
         />
       </form>
+      {error && <p className="error">{error}</p>}
     </main>
   );
 };

@@ -19,16 +19,13 @@ function AuthProvider({ children }) {
   const handleLogin = React.useCallback(async (user) => {
     const { data: loggedUser } = await login(user);
     saveUser(loggedUser);
-
     setUser({ user: { ...loggedUser, isLogged: true } });
   }, []);
 
   const handleSignup = React.useCallback(async (user) => {
-    try {
-      const { data: loggedUser } = await signup(user);
-      saveUser(loggedUser);
-      setUser({ user: { ...loggedUser, isLogged: true } });
-    } catch (e) {}
+    const { data: loggedUser } = await signup(user);
+    saveUser(loggedUser);
+    setUser({ user: { ...loggedUser, isLogged: true } });
   }, []);
 
   const handleLogout = React.useCallback(async () => {
