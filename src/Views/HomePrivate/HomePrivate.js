@@ -43,12 +43,14 @@ const HomePrivate = () => {
         .filter((event) => user.neighbourhood === event.creator.neighbourhood)
     );
     setCommerceEvents(
-      events.filter(
-        (event) =>
-          new Date() < new Date(event.date) &&
-          event.creator !== user.id &&
-          event.onModel === "Commerce"
-      )
+      events
+        .filter(
+          (event) =>
+            new Date() < new Date(event.date) &&
+            event.creator !== user.id &&
+            event.onModel === "Commerce"
+        )
+        .filter((event) => user.neighbourhood === event.creator.neighbourhood)
     );
     getCommerces().then(({ data: { commerces } }) => {
       setCommerces(
