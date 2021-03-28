@@ -17,7 +17,7 @@
     margin-top: 100px;
   }
   button {
-    width: 30%;
+    width: fit-content;
   }
 }
 
@@ -70,4 +70,9 @@ h1.headline {
   text-align: center;
   background-color: $salmonSelected;
   color: $blanco;
+}
+
+button {
+  box-sizing: border-box;
+  cursor: pointer;
 }

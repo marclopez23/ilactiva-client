@@ -78,17 +78,21 @@ function App() {
           <Events />
           <Navbar />
         </PrivateRoute>
-        <PrivateRoute exact path="/">
-          <HomePrivate />
-          <Navbar />
-        </PrivateRoute>
+        <Route exact path="/">
+          {user.isLogged && (
+            <>
+              <HomePrivate />
+              <Navbar />
+            </>
+          )}
+          {!user.isLogged && <Home />}
+        </Route>
 
         <Route path="*">
           <ErrorPage
             title="Nos encanta crear cosas pero parece ser que la página que estas buscando
         no existe."
           />
-          <Navbar />
         </Route>
       </Switch>
       <Footer />

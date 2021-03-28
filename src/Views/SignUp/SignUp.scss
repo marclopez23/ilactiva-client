@@ -3,7 +3,7 @@
 @import "../../styles/vars/shadows.scss";
 @import "../../styles/mixins/responsive.scss";
 .selectType {
-  .selector {
+  .selectores {
     margin: 7.5rem 1rem;
     overflow: visible;
     @include desktop {
@@ -36,5 +36,13 @@
   @include desktop {
     margin-top: 0px !important;
     padding-bottom: 2rem;
+  }
+}
+
+.sign {
+  .userTypeCard {
+    @include desktop {
+      width: 45%;
+    }
   }
 }

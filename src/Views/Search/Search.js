@@ -19,6 +19,7 @@ import {
   visitas,
   espectaculos,
 } from "../../assets/category/index";
+import Loader from "../../components/Loader/Loader";
 
 const Search = () => {
   const { user } = useAuth();
@@ -26,6 +27,7 @@ const Search = () => {
   const [eventos, setEventos] = useState([]);
   const [categoria, setCategoria] = useState(undefined);
   const [result, setResult] = useState([]);
+  const [number, setNumber] = useState(0);
   useEffect(() => {
     setEventos([
       ...events
@@ -54,6 +56,14 @@ const Search = () => {
     setCategoria(cat);
     setResult([...eventos.filter((evento) => evento.category.includes(cat))]);
   };
+  const checkLoader = () => {
+    console.log("hola");
+    const imageLoaded = number + 1;
+
+    if (imageLoaded <= categories.length) {
+      setNumber(imageLoaded);
+    }
+  };
   return (
     <main className="searchEvents" style={{ marginTop: "150px" }}>
       <Header subheader={"Buscador"} headline={"Encuentra tu actividad"} />
@@ -76,13 +86,23 @@ const Search = () => {
         </>
       ) : (
         <>
-          <article className="categoriesDiv">
+          <article
+            style={{ display: number !== categories.length ? "block" : "none" }}
+          >
+            <Loader />
+          </article>
+
+          <article
+            className="categoriesDiv"
+            style={{ display: number === categories.length ? "flex" : "none" }}
+          >
             {categories.map(({ category, img }) => (
               <CategorySelector
                 title={category}
                 img={img}
                 onClick={() => handleSelected(category)}
                 key={category}
+                load={checkLoader}
               />
             ))}
           </article>

@@ -36,6 +36,7 @@
     margin-top: 0.5rem;
     display: flex;
     justify-content: space-between;
+
     .social {
       background-color: $verdePrimario;
       text-align: center;
@@ -44,6 +45,8 @@
     }
     @include tablet {
       justify-content: flex-start;
+      width: fit-content;
+      margin: 0 auto;
       a {
         margin: 2rem;
       }
@@ -89,5 +92,9 @@
       padding: 1rem;
       margin: 1rem auto !important;
     }
+  }
+  .cardTitle.redes {
+    text-align: center;
+    margin-bottom: 1rem;
   }
 }

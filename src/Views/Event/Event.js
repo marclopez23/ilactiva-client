@@ -57,8 +57,8 @@ const Event = () => {
       setEvent(data.event);
       setCreator(data.event.creator);
       setLibres(data.event.maxUsers - data.event.resgisteredUsers.length);
+      setLoading(false);
     });
-    setLoading(false);
   }, []);
   const handleDate = (dateEvent) => {
     const dias = {
@@ -97,7 +97,7 @@ const Event = () => {
           <path d="M0,0.879 V0 H0.112 H0.469 H1 V0.706 V1 H0.07 C0.055,1,0.041,0.989,0.031,0.97 L0.01,0.926 C0.003,0.912,0,0.896,0,0.879"></path>
         </clipPath>
       </svg>
-      {isLoading && <h2>Loading...</h2>}
+      {isLoading && <Loader />}
       {!isLoading && (
         <>
           <section

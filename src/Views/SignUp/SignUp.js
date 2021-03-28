@@ -25,7 +25,7 @@ const SignUp = () => {
     }
   };
   return (
-    <main>
+    <main className="sign">
       <SimpleHeader title="" />
       {showForm ? (
         !isCommerce ? (
