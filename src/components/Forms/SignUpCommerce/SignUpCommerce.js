@@ -146,10 +146,23 @@ const SignUpForm = ({ onSubmit }) => {
                 onChange={handleUpload}
               />
             ) : (
-              <div
-                style={{ backgroundImage: `url(${info.profileImg})` }}
-                className="imgProfile"
-              ></div>
+              <>
+                {" "}
+                <img
+                  src={info.profileImg || ""}
+                  alt="logo"
+                  width="200"
+                  height="200"
+                  className="fotoPerfil"
+                />
+                <input
+                  type="file"
+                  name="file"
+                  id="fileLittle"
+                  value={info.file}
+                  onChange={handleUpload}
+                />
+              </>
             )}
             <label htmlFor="name">¿Comó se llama tu negocio?</label>
             <input
@@ -342,7 +355,7 @@ const SignUpForm = ({ onSubmit }) => {
               onChange={handleChange}
             />
 
-            <label htmlFor="web">Web</label>
+            <label htmlFor="web">Web (opcional)</label>
             <input
               type="url"
               name="web"
@@ -350,7 +363,7 @@ const SignUpForm = ({ onSubmit }) => {
               value={info.web}
               onChange={handleChange}
             />
-            <label htmlFor="facebook">Facebook</label>
+            <label htmlFor="facebook">Facebook (opcional)</label>
             <input
               type="url"
               name="facebook"
@@ -358,7 +371,7 @@ const SignUpForm = ({ onSubmit }) => {
               value={info.facebook}
               onChange={handleChange}
             />
-            <label htmlFor="twitter">Twitter</label>
+            <label htmlFor="twitter">Twitter (opcional)</label>
             <input
               type="url"
               name="twitter"
@@ -366,7 +379,7 @@ const SignUpForm = ({ onSubmit }) => {
               value={info.twitter}
               onChange={handleChange}
             />
-            <label htmlFor="instagram">Instagram</label>
+            <label htmlFor="instagram">Instagram (opcional)</label>
             <input
               type="url"
               name="instagram"

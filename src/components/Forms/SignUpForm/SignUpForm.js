@@ -157,10 +157,23 @@ const SignUpForm = ({ onSubmit }) => {
                 onChange={handleUpload}
               />
             ) : (
-              <div
-                style={{ backgroundImage: `url(${info.profileImg})` }}
-                className="imgProfile"
-              ></div>
+              <>
+                {" "}
+                <img
+                  src={info.profileImg || ""}
+                  alt="logo"
+                  width="200"
+                  height="200"
+                  className="fotoPerfil"
+                />
+                <input
+                  type="file"
+                  name="file"
+                  id="fileLittle"
+                  value={info.file}
+                  onChange={handleUpload}
+                />
+              </>
             )}
             <label htmlFor="name">¿Comó te llamas?</label>
             <input

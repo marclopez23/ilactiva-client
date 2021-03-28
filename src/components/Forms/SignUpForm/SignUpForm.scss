@@ -23,8 +23,8 @@
     background-color: $salmonLight;
     border: 1px solid $salmon;
     border-radius: 500px;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     display: block;
     margin: 1rem auto 2rem auto;
     &::before {
@@ -34,11 +34,56 @@
       background-position: center;
       background-size: contain;
       background-repeat: no-repeat;
-      width: 20px;
-      padding: 15px;
+      width: 32px;
+      padding: 24px;
       display: block;
-      margin: 0.75rem auto;
+      margin: 1.85rem auto;
+      @include desktop {
+        margin: 1.5rem auto;
+      }
     }
+  }
+  #fileLittle {
+    cursor: pointer;
+    transform: translate(4rem, -4rem);
+    border: none;
+    height: unset;
+    color: #ffffff;
+    background-color: $salmonLight;
+    border: 1px solid $salmon;
+    border-radius: 500px;
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 1rem auto;
+    &::before {
+      content: " ";
+      background-image: url("../../../assets/addPhoto.svg");
+      background-position: center;
+      background-size: contain;
+      background-repeat: no-repeat;
+      width: 25px;
+      padding: 3px;
+      display: block;
+      margin: 0.15rem auto;
+      @include desktop {
+        margin: 0 auto;
+      }
+    }
+    &::-webkit-file-upload-button {
+      visibility: hidden;
+    }
+
+    @include safari {
+      &:before {
+        padding: 11px;
+      }
+    }
+  }
+  .fotoPerfil {
+    border: 1px solid $salmon;
+    width: 150px;
+    height: 150px;
   }
   .field-icon {
     float: right;
@@ -46,7 +91,7 @@
     margin-top: -47px;
     width: 32px;
     position: relative;
-    z-index: 2;
+    z-index: 0;
     @include desktop {
       margin-top: -56px;
     }

@@ -59,3 +59,15 @@ h1.headline {
     max-width: 1200px;
   }
 }
+
+.error {
+  padding: 1rem;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  display: block;
+  width: fit-content;
+  border-radius: 4px;
+  text-align: center;
+  background-color: $salmonSelected;
+  color: $blanco;
+}

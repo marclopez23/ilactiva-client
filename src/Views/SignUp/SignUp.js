@@ -11,6 +11,7 @@ const SignUp = () => {
   const { handleSignup } = useAuth();
   const [isCommerce, setCommerce] = useState();
   const [showForm, setForm] = useState(false);
+  const [error, setError] = useState(undefined);
   const handleUserType = (type) => {
     type === "vecino" ? setCommerce(true) : setCommerce(false);
     setForm(true);
@@ -19,16 +20,24 @@ const SignUp = () => {
   const signupHandler = async (user) => {
     try {
       await handleSignup(user);
-    } catch (e) {}
+    } catch (e) {
+      setError(e.response.data.message);
+    }
   };
   return (
     <main>
       <SimpleHeader title="" />
       {showForm ? (
         !isCommerce ? (
-          <SignUpCommerce onSubmit={signupHandler} />
+          <>
+            <SignUpCommerce onSubmit={signupHandler} />
+            {error && <p className="error">{error}</p>}
+          </>
         ) : (
-          <SignUpForm onSubmit={signupHandler} />
+          <>
+            <SignUpForm onSubmit={signupHandler} error={error} />
+            {error && <p className="error">{error}</p>}
+          </>
         )
       ) : (
         <section className="selectType">
