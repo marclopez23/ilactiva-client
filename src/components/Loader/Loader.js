@@ -1,8 +1,8 @@
 import React from "react";
-import LoaderGif from "../../assets/loader.gif";
+
 import "./Loader.scss";
 const Loader = () => {
-  return <img src={LoaderGif} alt="loading..." className="loader" />;
+  return <div className="spinner"></div>;
 };
 
 export default Loader;

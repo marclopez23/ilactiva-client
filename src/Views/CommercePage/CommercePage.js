@@ -12,12 +12,14 @@ import facebook from "../../assets/facebook.svg";
 import twitter from "../../assets/twitter.svg";
 import web from "../../assets/web.svg";
 import insta from "../../assets/insta.svg";
+import Loader from "../../components/Loader/Loader";
 
 const CommercePage = () => {
   const { user, setUser } = useAuth();
   const { id } = useParams();
   const [commerce, setCommerce] = useState({});
   const [topMargin, setTop] = useState(0);
+  const [isLoading, setLoading] = useState(true);
   let newInfo = user;
   const handleFollow = async () => {
     try {
@@ -39,131 +41,144 @@ const CommercePage = () => {
         ...state,
         user: { ...state.user, following: newInfo.following },
       }));
-    } catch (e) {
-
-    }
+    } catch (e) {}
   };
   useEffect(() => {
-    getCommerce(id).then(({ data }) => setCommerce({ ...data }));
+    setLoading(true);
+    getCommerce(id).then(({ data }) => {
+      setCommerce({ ...data });
+      setLoading(false);
+      const headerHeight = document.querySelector(".perfilHeader").offsetHeight;
+      setTop(headerHeight + 32);
+    });
   }, [id]);
-  useEffect(() => {
-    const headerHeight = document.querySelector(".perfilHeader").offsetHeight;
-    setTop(headerHeight + 32);
-  }, []);
 
   return (
     <main className="commercePage">
-      <ProfileHeader
-        title={commerce.name}
-        img={commerce.profileImg}
-        back={true}
-      />
-      <section className="userInfo" style={{ marginTop: topMargin }}>
-        <article className="descripcion">
-          <h2 className="cardTitle">Sobre nosotros</h2>
-          <p className="body2">{commerce.description}</p>
-        </article>
+      {isLoading && <Loader />}
+      {!isLoading && (
+        <>
+          <ProfileHeader
+            title={commerce.name}
+            img={commerce.profileImg}
+            back={true}
+          />
+          <section className="userInfo" style={{ marginTop: topMargin }}>
+            <article className="descripcion">
+              <h2 className="cardTitle">Sobre nosotros</h2>
+              <p className="body2">{commerce.description}</p>
+            </article>
 
-        <article className="tags">
-          <h2 className="cardTitle">Ofrecemos actividades de:</h2>
-          {commerce.tags &&
-            commerce.tags.map((tag) => (
-              <Tag className="tag" txt={tag} key={tag} />
-            ))}
-        </article>
-        <article className="horario">
-          <h2 className="cardTitle">Horarios de apertura</h2>
-          <ul>
-            {commerce.schedule &&
-              commerce.schedule.map((horario) => (
-                <li className="body2" key={horario}>
-                  {horario}
-                </li>
-              ))}
-          </ul>
-        </article>
-        <article className="direccion">
-          <h2 className="cardTitle">Dirección</h2>
-          <div>
-            <img src={marker} alt="" className="marker" />
-            <p>{commerce.direction}</p>
-          </div>
-        </article>
-        <article className="actividades">
-          {commerce.eventsCreated && commerce.eventsCreated.length > 0 && (
-            <h2 className="title">Próximas actividades</h2>
-          )}
-          {commerce.eventsCreated &&
-            commerce.eventsCreated.length > 0 &&
-            commerce.eventsCreated
-              .sort(
-                (a, b) =>
-                  new Date(a.date).getTime() - new Date(b.date).getTime()
-              )
-              .slice(0, 3)
-              .map((evento) => (
-                <EventCardLarge event={evento} key={evento._id} />
-              ))}
-        </article>
-        {(commerce.facebook !== undefined ||
-          commerce.twitter !== undefined ||
-          commerce.web !== undefined ||
-          commerce.instagram !== undefined) && (
-          <>
-            <h2 className="cardTitle">Nuestras redes</h2>
-            <article className="socials">
-              {commerce.facebook && (
-                <a href={commerce.facebook} target="_blank" rel="noreferrer">
-                  <div className="social">
-                    <img src={facebook} alt="social icon" />
-                  </div>
-                </a>
+            <article className="tags">
+              <h2 className="cardTitle">Ofrecemos actividades de:</h2>
+              {commerce.tags &&
+                commerce.tags.map((tag) => (
+                  <Tag className="tag" txt={tag} key={tag} />
+                ))}
+            </article>
+            <article className="horario">
+              <h2 className="cardTitle">Horarios de apertura</h2>
+              <ul>
+                {commerce.schedule &&
+                  commerce.schedule.map((horario) => (
+                    <li className="body2" key={horario}>
+                      {horario}
+                    </li>
+                  ))}
+              </ul>
+            </article>
+            <article className="direccion">
+              <h2 className="cardTitle">Dirección</h2>
+              <div>
+                <img src={marker} alt="" className="marker" />
+                <p>{commerce.direction}</p>
+              </div>
+            </article>
+            <article className="actividades">
+              {commerce.eventsCreated && commerce.eventsCreated.length > 0 && (
+                <h2 className="title">Próximas actividades</h2>
               )}
-              {commerce.twitter && (
-                <a href={commerce.twitter} target="_blank" rel="noreferrer">
-                  <div className="social">
-                    <img src={twitter} alt="social icon" />
-                  </div>
-                </a>
-              )}
-              {commerce.instagram && (
-                <a href={commerce.instagram} target="_blank" rel="noreferrer">
-                  <div className="social">
-                    <img src={insta} alt="social icon" />
-                  </div>
-                </a>
-              )}
-              {commerce.web && (
-                <a href={commerce.web} target="_blank" rel="noreferrer">
-                  <div className="social">
-                    <img src={web} alt="social icon" />
-                  </div>
-                </a>
+              {commerce.eventsCreated &&
+                commerce.eventsCreated.length > 0 &&
+                commerce.eventsCreated
+                  .sort(
+                    (a, b) =>
+                      new Date(a.date).getTime() - new Date(b.date).getTime()
+                  )
+                  .slice(0, 3)
+                  .map((evento) => (
+                    <EventCardLarge event={evento} key={evento._id} />
+                  ))}
+            </article>
+            {(commerce.facebook !== undefined ||
+              commerce.twitter !== undefined ||
+              commerce.web !== undefined ||
+              commerce.instagram !== undefined) && (
+              <>
+                <h2 className="cardTitle redes">Nuestras redes</h2>
+                <article className="socials">
+                  {commerce.facebook && (
+                    <a
+                      href={commerce.facebook}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <div className="social">
+                        <img src={facebook} alt="social icon" />
+                      </div>
+                    </a>
+                  )}
+                  {commerce.twitter && (
+                    <a href={commerce.twitter} target="_blank" rel="noreferrer">
+                      <div className="social">
+                        <img src={twitter} alt="social icon" />
+                      </div>
+                    </a>
+                  )}
+                  {commerce.instagram && (
+                    <a
+                      href={commerce.instagram}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <div className="social">
+                        <img src={insta} alt="social icon" />
+                      </div>
+                    </a>
+                  )}
+                  {commerce.web && (
+                    <a href={commerce.web} target="_blank" rel="noreferrer">
+                      <div className="social">
+                        <img src={web} alt="social icon" />
+                      </div>
+                    </a>
+                  )}
+                </article>
+              </>
+            )}
+            <article className="fixedButton">
+              {user.isLogged && user.id !== commerce._id ? (
+                user.following.includes(commerce._id) ? (
+                  <button className="follow" onClick={() => handleFollow()}>
+                    Dejar de seguir
+                  </button>
+                ) : (
+                  <button className="follow" onClick={() => handleFollow()}>
+                    Seguir
+                  </button>
+                )
+              ) : null}
+              {!user.isLogged && (
+                <Route>
+                  <Link to="/iniciar-sesion" className="follow">
+                    Inicia sesión para seguir a este negocio
+                  </Link>
+                </Route>
               )}
             </article>
-          </>
-        )}
-        <article className="fixedButton">
-          {user.isLogged && user.id !== commerce._id ? (
-            user.following.includes(commerce._id) ? (
-              <button className="follow" onClick={() => handleFollow()}>
-                Dejar de seguir
-              </button>
-            ) : (
-              <button className="follow" onClick={() => handleFollow()}>
-                Seguir
-              </button>
-            )
-          ) : null}
-          {!user.isLogged && (
-            <Route>
-              <Link to="/iniciar-sesion" className="follow">
-                Inicia sesión para seguir a este negocio
-              </Link>
-            </Route>
-          )}
-        </article>
-      </section>
+          </section>
+        </>
+      )}
     </main>
   );
 };

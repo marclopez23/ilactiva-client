@@ -4,12 +4,15 @@ import "./MoreEvents.scss";
 import { getUser } from "../../service/user.service";
 import SimpleHeader from "../../components/SimpleHeader/SimpleHeader";
 import EventCardLarge from "../../components/EventCardLarge/EventCardLarge";
+import Loader from "../../components/Loader/Loader";
 
 const MoreEvents = () => {
   const { query, cuando } = useParams();
   const [events, setEvents] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     if (query === "creados") {
       getUser().then(
         ({
@@ -28,6 +31,7 @@ const MoreEvents = () => {
                   (event) => new Date() > new Date(event.date)
                 ),
               ]);
+          setLoading(false);
         }
       );
     } else if (query === "apuntados") {
@@ -48,6 +52,7 @@ const MoreEvents = () => {
                   (event) => new Date() > new Date(event.date)
                 ),
               ]);
+          setLoading(false);
         }
       );
     }
@@ -55,38 +60,44 @@ const MoreEvents = () => {
 
   return (
     <main className="moreEvents">
-      <h1 className="headline">
-        {query === "creados"
-          ? cuando === "proximos"
-            ? "Tus proximas actividades"
-            : "Actividades realizadas"
-          : cuando === "proximos"
-          ? "Asistirás a ..."
-          : "Has asistido a ..."}
-      </h1>
-      <section className="eventsList vertical" style={{ marginTop: 100 }}>
-        <SimpleHeader
-          title={
-            query === "creados"
+      {isLoading && <Loader />}
+      {!isLoading && (
+        <>
+          <h1 className="headline">
+            {query === "creados"
               ? cuando === "proximos"
                 ? "Tus proximas actividades"
                 : "Actividades realizadas"
               : cuando === "proximos"
               ? "Asistirás a ..."
-              : "Has asistido a ..."
-          }
-        />
-        <article>
-          {events
-            .sort(
-              (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-            )
-            .slice(0, 3)
-            .map((evento) => (
-              <EventCardLarge event={evento} key={evento._id} />
-            ))}
-        </article>
-      </section>
+              : "Has asistido a ..."}
+          </h1>
+          <section className="eventsList vertical" style={{ marginTop: 100 }}>
+            <SimpleHeader
+              title={
+                query === "creados"
+                  ? cuando === "proximos"
+                    ? "Tus proximas actividades"
+                    : "Actividades realizadas"
+                  : cuando === "proximos"
+                  ? "Asistirás a ..."
+                  : "Has asistido a ..."
+              }
+            />
+            <article>
+              {events
+                .sort(
+                  (a, b) =>
+                    new Date(a.date).getTime() - new Date(b.date).getTime()
+                )
+                .slice(0, 3)
+                .map((evento) => (
+                  <EventCardLarge event={evento} key={evento._id} />
+                ))}
+            </article>
+          </section>
+        </>
+      )}
     </main>
   );
 };

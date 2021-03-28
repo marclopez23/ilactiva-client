@@ -1,11 +1,11 @@
 @import "../../styles/vars/color.scss";
 @import "../../styles/mixins/buttons.scss";
+@import "../../styles/mixins/responsive.scss";
 
 .editEvent {
   margin-top: 100px;
   #file {
     cursor: pointer;
-    transform: translate(9rem, 10rem);
     border: none;
     height: unset;
     color: #ffffff;
@@ -15,7 +15,10 @@
     width: 55px;
     height: 55px;
     display: block;
-    margin: 1rem auto;
+    margin: 1rem;
+    @include desktop {
+      margin: 2rem;
+    }
     &::before {
       content: " ";
       background-image: url("./../../assets/addPhoto.svg");
@@ -26,6 +29,11 @@
       padding: 4px;
       display: block;
       margin: 0.82rem auto;
+      @include desktop {
+        padding: 2px;
+
+        margin: 0.6rem auto;
+      }
     }
     &::-webkit-file-upload-button {
       visibility: hidden;
@@ -36,6 +44,14 @@
 
     .send {
       @include primaryButton;
+      @include desktop {
+        width: auto;
+        margin: 0 auto;
+        display: block;
+      }
+    }
+    @include desktop {
+      margin: 2rem auto;
     }
   }
 }

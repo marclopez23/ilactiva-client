@@ -1,3 +1,77 @@
 @import "../../styles/vars/font.scss";
 @import "../../styles/vars/color.scss";
 @import "../../styles/vars/shadows.scss";
+@import "../../styles//mixins/buttons.scss";
+@import "../../styles//mixins/responsive.scss";
+
+.iniciar {
+  @include primaryButton;
+  padding: 0.5rem 1rem;
+}
+.registrarse {
+  @include greenButton;
+  padding: 0.5rem 1rem;
+}
+
+.home {
+  background-image: url("../../assets/home.svg");
+  background-position: right bottom;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-size: 34vh;
+}
+.mainSection {
+  height: 100vh;
+  padding: 1rem;
+  padding: 4rem 2rem;
+
+  h1 {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 3rem;
+    color: $verdePrimario;
+  }
+  p {
+    font-family: "Sarabun", sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.05rem;
+    line-height: 1.5rem;
+    margin: 2rem 0;
+  }
+}
+
+@include desktop {
+  .home {
+    background-position: right;
+    background-size: contain;
+    background-position-y: 4rem;
+  }
+  .mainSection {
+    height: 80vh;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem;
+
+    h1 {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 600;
+      font-size: 4rem;
+      line-height: 5rem;
+      color: $verdePrimario;
+    }
+    p {
+      font-family: "Sarabun", sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 20px;
+      line-height: 31px;
+      width: 50%;
+    }
+    .mobile {
+      display: none;
+    }
+  }
+}

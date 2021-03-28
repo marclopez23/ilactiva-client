@@ -18,6 +18,7 @@ const HomePrivate = () => {
   const [likedEvents, setLiked] = useState([]);
   const [commerceEvents, setCommerceEvents] = useState([]);
   const [isLoading, setLoading] = useState(true);
+  const [topMargin, setTop] = useState(0);
   const [max, setMax] = useState(9);
   const { events } = useEvents();
   const { user } = useAuth();
@@ -45,16 +46,19 @@ const HomePrivate = () => {
           event.onModel === "Commerce"
       )
     );
-    getCommerces().then(({ data: { commerces } }) =>
-      setCommerces(commerces.filter((commerce) => commerce._id !== user.id))
-    );
-    setLoading(false);
+    getCommerces().then(({ data: { commerces } }) => {
+      setCommerces(commerces.filter((commerce) => commerce._id !== user.id));
+      setLoading(false);
+      const num =
+        window.outerWidth > 992
+          ? setTop(0)
+          : setTop(document.querySelector(".header").offsetHeight + 40);
+    });
   }, [events]);
 
   useEffect(() => {
     const num = window.outerWidth > 1200 ? 4 : 9;
     setMax(num);
-    setLoading(false);
   }, [window]);
 
   return (
@@ -66,7 +70,7 @@ const HomePrivate = () => {
             headline={"¿Qué te apetece hacer?"}
             subheader={`¡Hola, ${user.name}!`}
           />
-          <section className="contenidoHome" style={{ marginTop: 100 }}>
+          <section className="contenidoHome" style={{ marginTop: topMargin }}>
             <h4 className="barrio">
               <img src={marker} alt="" className="marker" />
               Lo que esta pasando en <span>{user.neighbourhood}</span>
@@ -191,7 +195,6 @@ const HomePrivate = () => {
                 </Route>
               </article>
             )}
-            )
           </section>
         </>
       )}

@@ -31,6 +31,7 @@ const SignUpForm = ({ onSubmit }) => {
   const [step, setStep] = useState(1);
   const [text, setText] = useState("");
   const [icon, setIcon] = useState(unhide);
+  const [mensaje, setMensaje] = useState(false);
   const [inputType, setType] = useState("password");
   const [imageReady, setImageReady] = useState(false);
   const maxStep = 4;
@@ -45,6 +46,7 @@ const SignUpForm = ({ onSubmit }) => {
   };
 
   const handleUpload = async (e) => {
+    setMensaje(true);
     setImageReady(false);
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
@@ -52,6 +54,7 @@ const SignUpForm = ({ onSubmit }) => {
     const { data } = await uploadFileService(uploadData);
     setInfo({ ...info, profileImg: data });
     setImageReady(true);
+    setMensaje(false);
   };
   const saveIt = (key, e) => {
     e.preventDefault();
@@ -164,6 +167,7 @@ const SignUpForm = ({ onSubmit }) => {
                 />
               </>
             )}
+            {mensaje && <p className="subida">Estamos subiendo tu imagen</p>}
             <label htmlFor="name">¿Comó se llama tu negocio?</label>
             <input
               type="text"

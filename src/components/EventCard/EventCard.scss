@@ -22,10 +22,10 @@
   }
   @include tablet {
     width: 300px;
-    height: 300px;
+    height: 325px;
   }
   @include desktop {
-    width: 21vw;
+    width: auto;
   }
 }
 

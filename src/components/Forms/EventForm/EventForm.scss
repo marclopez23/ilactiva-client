@@ -94,3 +94,9 @@
     }
   }
 }
+
+@include desktop {
+  .fileLabel {
+    text-align: center;
+  }
+}

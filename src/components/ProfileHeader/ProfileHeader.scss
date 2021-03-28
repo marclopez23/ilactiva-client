@@ -14,6 +14,9 @@
     clip-path: circle(18px at 33px 34px);
     img.close {
       float: right;
+      @include tablet {
+        width: 30px;
+      }
     }
   }
   padding: 2rem;

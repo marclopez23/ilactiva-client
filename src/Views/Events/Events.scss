@@ -29,12 +29,6 @@
       float: right;
       width: 40%;
     }
-    @include desktop {
-      width: 45vw;
-    }
-    @include desktop {
-      width: 40vw;
-    }
   }
   .creados {
     background-color: $amarilloLight;
@@ -53,6 +47,9 @@
       margin: 2rem auto;
       display: flex;
       justify-content: space-around;
+      a {
+        width: 45%;
+      }
     }
   }
 }

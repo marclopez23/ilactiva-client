@@ -6,10 +6,11 @@
     margin: 1rem auto;
   }
   @include desktop {
+    height: 80vh;
     display: flex;
     justify-content: space-around;
-    .a {
-      width: 40%;
+    .commercesCard {
+      width: 500px;
     }
   }
 }

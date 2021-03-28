@@ -1,8 +1,15 @@
 @import "../../styles/mixins/responsive.scss";
-.moreEvents .vertical {
-  .eventsList {
-    @include desktop {
-      margin-top: 1rem !important;
+
+@include desktop {
+  .moreList {
+    max-width: 1200px;
+    margin: 0 auto;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    display: flex;
+    margin-bottom: 2rem;
+    a {
+      width: 50%;
     }
   }
 }

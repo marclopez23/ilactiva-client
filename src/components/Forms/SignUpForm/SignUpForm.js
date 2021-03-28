@@ -19,6 +19,7 @@ import {
   visitas,
   espectaculos,
 } from "../../../assets/category/index";
+import Loader from "../../../components/Loader/Loader";
 
 const SignUpForm = ({ onSubmit }) => {
   const initialState = {
@@ -60,9 +61,11 @@ const SignUpForm = ({ onSubmit }) => {
   const [info, setInfo] = useState(initialState);
   const [step, setStep] = useState(1);
   const [imageReady, setImageReady] = useState(false);
+  const [mensaje, setMensaje] = useState(false);
   const [topMargin, setTop] = useState(0);
   const [icon, setIcon] = useState(unhide);
   const [inputType, setType] = useState("password");
+  const [number, setNumber] = useState(0);
   const maxStep = 3;
   const handleIcon = () => {
     if (icon === unhide) {
@@ -79,6 +82,7 @@ const SignUpForm = ({ onSubmit }) => {
   }, [topMargin]);
 
   const handleUpload = async (e) => {
+    setMensaje(true);
     setImageReady(false);
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
@@ -86,6 +90,7 @@ const SignUpForm = ({ onSubmit }) => {
     const { data } = await uploadFileService(uploadData);
     setInfo({ ...info, profileImg: data });
     setImageReady(true);
+    setMensaje(false);
   };
 
   const handleCategory = (cat) => {
@@ -141,6 +146,15 @@ const SignUpForm = ({ onSubmit }) => {
     }
   };
 
+  const checkLoader = () => {
+    console.log("hola");
+    const imageLoaded = number + 1;
+
+    if (imageLoaded <= categories.length) {
+      setNumber(imageLoaded);
+    }
+  };
+
   return (
     <article className="signForm" style={{ marginTop: topMargin }}>
       <form action="" onSubmit={handleSubmit}>
@@ -175,6 +189,7 @@ const SignUpForm = ({ onSubmit }) => {
                 />
               </>
             )}
+            {mensaje && <p className="subida">Estamos subiendo tu imagen</p>}
             <label htmlFor="name">¿Comó te llamas?</label>
             <input
               type="text"
@@ -262,13 +277,26 @@ const SignUpForm = ({ onSubmit }) => {
             <h1 className="headline">
               ¿En que actividades te gustaria participar?
             </h1>
-            <article className="categoriesDiv">
+            <article
+              style={{
+                display: number !== categories.length ? "block" : "none",
+              }}
+            >
+              <Loader />
+            </article>
+            <article
+              className="categoriesDiv"
+              style={{
+                display: number === categories.length ? "flex" : "none",
+              }}
+            >
               {categories.map(({ category, img }) => (
                 <CategorySelector
                   title={category}
                   img={img}
                   onClick={() => handleCategory(category)}
                   key={category}
+                  load={checkLoader}
                 />
               ))}
             </article>

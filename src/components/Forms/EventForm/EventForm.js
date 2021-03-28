@@ -19,6 +19,7 @@ import CategorySelector from "../../CategorySelector/CategorySelector";
 import FormFooter from "../../FormFooter/FormFooter";
 import SimpleHeader from "../../SimpleHeader/SimpleHeader";
 import Confirmationform from "../../../Views/ConfirmationForm/ConfirmationForm";
+import Loader from "../../Loader/Loader";
 
 const EventForm = ({ onSubmit }) => {
   const currentDay = () => {
@@ -57,13 +58,15 @@ const EventForm = ({ onSubmit }) => {
   ];
 
   const [info, setInfo] = useState(initialState);
-  //const [itsFree, setFree] = useState(false);
+  const [number, setNumber] = useState(0);
   const [step, setStep] = useState(1);
   const [makeRedirect, setRedirect] = useState(false);
   const [imageReady, setImageReady] = useState(true);
+  const [subida, setSubida] = useState(false);
   const maxStep = 3;
+
   const handleCategory = (title) => {
-    const cat = title.title;
+    const cat = title;
     if (info.category === cat) {
       setInfo((state) => ({ ...state, category: "" }));
     } else {
@@ -72,12 +75,14 @@ const EventForm = ({ onSubmit }) => {
   };
 
   const handleUpload = async (e) => {
+    setSubida(false);
     setImageReady(false);
     const uploadData = new FormData();
     uploadData.append("image", e.target.files[0]);
     const { data } = await uploadFileService(uploadData);
     setInfo({ ...info, eventImg: data });
     setImageReady(true);
+    setSubida(true);
   };
   const handleSubmit = async () => {
     if (step === 4) {
@@ -106,7 +111,7 @@ const EventForm = ({ onSubmit }) => {
         price: 0,
       }));
     }
-    //setFree(checked);
+
     setInfo((state) => ({
       ...state,
       [name]: checked,
@@ -135,6 +140,15 @@ const EventForm = ({ onSubmit }) => {
         : true;
     }
   };
+
+  const checkLoader = () => {
+    const imageLoaded = number + 1;
+
+    if (imageLoaded <= categories.length) {
+      setNumber(imageLoaded);
+    }
+  };
+
   return (
     <>
       {makeRedirect && <Redirect to={`/evento/creado/`} />}
@@ -142,26 +156,47 @@ const EventForm = ({ onSubmit }) => {
         {step === 1 && (
           <>
             <h1 className="headline">Escoge la categoría</h1>
-            <article className="categories">
-              <SimpleHeader title="Escoge la categoría" />
-
-              {categories.map(({ category, img }) => (
-                <CategorySelector
-                  title={category}
-                  img={img}
-                  onClick={handleCategory}
-                  key={category}
-                />
-              ))}
-              <FormFooter
-                back={false}
-                step={step}
-                next={"Siguiente"}
-                onClick={handleSubmit}
-                maxStep={maxStep}
-                disable={handleNext()}
-              ></FormFooter>
+            <article
+              style={{
+                display: number !== categories.length ? "block" : "none",
+              }}
+            >
+              <Loader />
             </article>
+            <>
+              <article
+                className="categories"
+                style={{
+                  display: number !== categories.length ? "none" : "flex",
+                }}
+              >
+                <SimpleHeader title="Escoge la categoría" />
+
+                {categories.map(({ category, img }) => (
+                  <CategorySelector
+                    title={category}
+                    img={img}
+                    onClick={() => handleCategory(category)}
+                    key={category}
+                    load={checkLoader}
+                    isActive={
+                      info.category !== undefined &&
+                      info.category.includes(category)
+                        ? true
+                        : false
+                    }
+                  />
+                ))}
+              </article>
+            </>
+            <FormFooter
+              back={false}
+              step={step}
+              next={"Siguiente"}
+              onClick={handleSubmit}
+              maxStep={maxStep}
+              disable={handleNext()}
+            ></FormFooter>
           </>
         )}
         {step === 2 && (
@@ -275,7 +310,9 @@ const EventForm = ({ onSubmit }) => {
                 />
               </>
             )}
-            <label htmlFor="file">Foto de Evento</label>
+            <label htmlFor="file" className="fileLabel">
+              Foto de Evento
+            </label>
             <input
               type="file"
               name="file"
@@ -283,6 +320,10 @@ const EventForm = ({ onSubmit }) => {
               value={info.file}
               onChange={handleUpload}
             />
+            {!imageReady && (
+              <p className="subida">Estamos subiendo tu imagen</p>
+            )}
+            {subida && <p className="subida">Imagen subida perfectamente</p>}
             <FormFooter
               back={true}
               handleBack={handleBack}

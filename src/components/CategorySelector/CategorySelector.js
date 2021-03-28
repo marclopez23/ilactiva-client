@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./CategorySelector.scss";
 
-const CategorySelector = ({ img, title, onClick, isActive }) => {
+const CategorySelector = ({ img, title, onClick, isActive, load }) => {
   const [active, setActive] = useState(isActive);
   const handleClick = () => {
     setActive((state) => !state);
@@ -11,7 +11,7 @@ const CategorySelector = ({ img, title, onClick, isActive }) => {
   return (
     <article className={`categorySelector`} onClick={handleClick}>
       <div className={`img ${active ? "selected" : " "}`}>
-        <img src={img} alt="" />
+        <img src={img} alt="" onLoad={() => load()} />
       </div>
       <h3 className="titleMedium">{title}</h3>
     </article>

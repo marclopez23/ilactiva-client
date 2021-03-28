@@ -5,13 +5,16 @@ import SimpleHeader from "../../components/SimpleHeader/SimpleHeader";
 import "./EventsList.scss";
 import EventCardLarge from "../../components/EventCardLarge/EventCardLarge";
 import { useEvents } from "../../context/Events/EventsContext.utils";
+import Loader from "../../components/Loader/Loader";
 
 const EventsList = () => {
   const { user } = useAuth();
   const { filtro } = useParams();
   const [eventsList, setEvents] = useState([]);
+  const [isLoading, setLoading] = useState(true);
   const { events } = useEvents();
   useEffect(() => {
+    setLoading(true);
     if (filtro === "proximos") {
       setEvents([
         ...events.filter(
@@ -36,32 +39,38 @@ const EventsList = () => {
         )
       );
     }
+    setLoading(false);
   }, []);
   return (
     <main className="moreEvents home">
-      <h1 className="headline">
-        {filtro === "proximos"
-          ? "Próximos eventos"
-          : filtro === "comercios"
-          ? "Eventos de los comercios"
-          : "Te recomendamos"}
-      </h1>
-      <section className="eventsList" style={{ marginTop: 100 }}>
-        <SimpleHeader
-          title={
-            filtro === "proximos"
-              ? "Próximos eventos"
-              : filtro === "comercios"
-              ? "Eventos de los comercios"
-              : "Te recomendamos"
-          }
-        />
-        <article>
-          {eventsList.map((evento) => (
-            <EventCardLarge event={evento} key={evento._id} />
-          ))}
-        </article>
-      </section>
+      {isLoading && <Loader />}
+      {!isLoading && (
+        <>
+          <section className="eventsList" style={{ marginTop: 100 }}>
+            <SimpleHeader
+              title={
+                filtro === "proximos"
+                  ? "Próximos eventos"
+                  : filtro === "comercios"
+                  ? "Eventos de los comercios"
+                  : "Te recomendamos"
+              }
+            />
+            <h1 className="headline">
+              {filtro === "proximos"
+                ? "Próximos eventos"
+                : filtro === "comercios"
+                ? "Eventos de los comercios"
+                : "Te recomendamos"}
+            </h1>
+            <article className="moreList">
+              {eventsList.map((evento) => (
+                <EventCardLarge event={evento} key={evento._id} />
+              ))}
+            </article>
+          </section>
+        </>
+      )}
     </main>
   );
 };
