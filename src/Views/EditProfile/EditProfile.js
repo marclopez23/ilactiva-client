@@ -138,13 +138,11 @@ const EditProfile = () => {
           <SimpleHeader title="Editar información" />
           <h1 className="headline">Edita tu información</h1>
           {mensaje && <p className="subida">Estamos subiendo tu imagen</p>}
-          <img
-            src={info.profileImg || ""}
-            alt="logo"
-            width="200"
-            height="200"
+          <div
+            style={{ backgroundImage: `url("${info.profileImg}")` }}
             className="fotoPerfil"
-          />
+          ></div>
+
           <input
             type="file"
             name="file"
@@ -152,7 +150,6 @@ const EditProfile = () => {
             value={info.file}
             onChange={handleUpload}
           />
-
           <form action="">
             <label htmlFor="name">Nombre:</label>
             <input

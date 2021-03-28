@@ -23,8 +23,15 @@ nav {
       li {
         display: inline-block;
         padding: 0.75rem;
-        img.menuImg {
-          border-radius: 500px;
+        .menuImg {
+          width: 35px;
+          height: 35px;
+          display: inline-block;
+          background: center no-repeat;
+          background-size: cover;
+          border-radius: 20px;
+          margin-bottom: -9px;
+          margin-right: 5px;
         }
       }
     }

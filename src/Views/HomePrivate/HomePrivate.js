@@ -25,18 +25,22 @@ const HomePrivate = () => {
   useEffect(() => {
     setLoading(true);
     setEvents(
-      events.filter(
-        (event) =>
-          new Date() < new Date(event.date) && event.creator !== user.id
-      )
+      events
+        .filter(
+          (event) =>
+            new Date() < new Date(event.date) && event.creator !== user.id
+        )
+        .filter((event) => user.neighbourhood === event.creator.neighbourhood)
     );
     setLiked(
-      events.filter(
-        (event) =>
-          new Date() < new Date(event.date) &&
-          event.creator !== user.id &&
-          user.category.includes(event.category)
-      )
+      events
+        .filter(
+          (event) =>
+            new Date() < new Date(event.date) &&
+            event.creator !== user.id &&
+            user.category.includes(event.category)
+        )
+        .filter((event) => user.neighbourhood === event.creator.neighbourhood)
     );
     setCommerceEvents(
       events.filter(
@@ -47,7 +51,13 @@ const HomePrivate = () => {
       )
     );
     getCommerces().then(({ data: { commerces } }) => {
-      setCommerces(commerces.filter((commerce) => commerce._id !== user.id));
+      setCommerces(
+        commerces.filter(
+          (commerce) =>
+            commerce._id !== user.id &&
+            user.neighbourhood === commerce.neighbourhood
+        )
+      );
       setLoading(false);
       const num =
         window.outerWidth > 992
@@ -85,27 +95,31 @@ const HomePrivate = () => {
                 </Route>
               </div>
               <div className="eventsList">
-                {eventsList
-                  .sort(
-                    (a, b) =>
-                      new Date(a.date).getTime() - new Date(b.date).getTime()
-                  )
-                  .slice(0, max)
-                  .map((evento, index) =>
-                    index === 8 || index === eventsList.length - 1 ? (
-                      <EventCard
-                        key={evento._id}
-                        evento={evento}
-                        cssClass="eventCard last"
-                      />
-                    ) : (
-                      <EventCard
-                        key={evento._id}
-                        evento={evento}
-                        cssClass="eventCard"
-                      />
+                {eventsList.length > 0 ? (
+                  eventsList
+                    .sort(
+                      (a, b) =>
+                        new Date(a.date).getTime() - new Date(b.date).getTime()
                     )
-                  )}
+                    .slice(0, max)
+                    .map((evento, index) =>
+                      index === 8 || index === eventsList.length - 1 ? (
+                        <EventCard
+                          key={evento._id}
+                          evento={evento}
+                          cssClass="eventCard last"
+                        />
+                      ) : (
+                        <EventCard
+                          key={evento._id}
+                          evento={evento}
+                          cssClass="eventCard"
+                        />
+                      )
+                    )
+                ) : (
+                  <Empty txt="No hay ningún evento que se ajuste a tus gustos" />
+                )}
               </div>
             </article>
             <article className="gustar">
@@ -146,24 +160,30 @@ const HomePrivate = () => {
             <article className="comercios">
               <h2 className="title">Descubre los comercios cerca de ti</h2>
               <div className="eventsList">
-                {commerces
-                  .slice(0, 9)
-                  .filter((commerce) => !user.following.includes(commerce._id))
-                  .map((commerce, index) =>
-                    index === 8 || index === commerces.length - 1 ? (
-                      <CommerceCard
-                        commerce={commerce}
-                        key={commerce._id}
-                        cssClass="commerceCard last"
-                      />
-                    ) : (
-                      <CommerceCard
-                        commerce={commerce}
-                        key={commerce._id}
-                        cssClass="commerceCard"
-                      />
+                {commerces.length > 0 ? (
+                  commerces
+                    .slice(0, 9)
+                    .filter(
+                      (commerce) => !user.following.includes(commerce._id)
                     )
-                  )}
+                    .map((commerce, index) =>
+                      index === 8 || index === commerces.length - 1 ? (
+                        <CommerceCard
+                          commerce={commerce}
+                          key={commerce._id}
+                          cssClass="commerceCard last"
+                        />
+                      ) : (
+                        <CommerceCard
+                          commerce={commerce}
+                          key={commerce._id}
+                          cssClass="commerceCard"
+                        />
+                      )
+                    )
+                ) : (
+                  <Empty txt="No hay ningún evento que se ajuste a tus gustos" />
+                )}
               </div>
             </article>
           </section>

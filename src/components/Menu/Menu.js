@@ -38,16 +38,14 @@ const Menu = () => {
               <li>
                 <Route>
                   <Link to="/perfil">
-                    <img
+                    <span
                       className="menuImg"
-                      src={user.avatar}
-                      alt=""
-                      width="30"
-                    />{" "}
-                    {user.name.substring(0, user.name.indexOf(" "))}
+                      style={{ backgroundImage: `url("${user.avatar}")` }}
+                    ></span>
+                    {user.name}
                   </Link>
                 </Route>
-              </li>{" "}
+              </li>
             </>
           ) : (
             <>
