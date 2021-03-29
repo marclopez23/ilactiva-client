@@ -23,41 +23,46 @@ const HomePrivate = () => {
   const [max, setMax] = useState(9);
   const { events } = useEvents();
   const { user } = useAuth();
-  console.log(eventsList);
   useEffect(() => {
-    console.log("events", events);
     setLoading(true);
-     getEvents().then(({ data }) => {
-       setEvents([...data]);
-     });
-    /* setEvents(
-      events
-        .filter(
-          (event) =>
-            new Date() < new Date(event.date) && event.creator !== user.id
-        )
-        .filter((event) => user.neighbourhood === event.creator.neighbourhood)
-    );
-    setLiked(
-      events
-        .filter(
-          (event) =>
-            new Date() < new Date(event.date) &&
-            event.creator !== user.id &&
-            user.category.includes(event.category)
-        )
-        .filter((event) => user.neighbourhood === event.creator.neighbourhood)
-    );
-    setCommerceEvents(
-      events
-        .filter(
-          (event) =>
-            new Date() < new Date(event.date) &&
-            event.creator !== user.id &&
-            event.onModel === "Commerce"
-        )
-        .filter((event) => user.neighbourhood === event.creator.neighbourhood)
-    );*/
+    getEvents().then(({ data }) => {
+      setEvents([
+        ...data
+          .filter(
+            (event) =>
+              new Date() < new Date(event.date) && event.creator !== user.id
+          )
+          .filter(
+            (event) => user.neighbourhood === event.creator.neighbourhood
+          ),
+      ]);
+      setLiked([
+        ...data
+          .filter(
+            (event) =>
+              new Date() < new Date(event.date) &&
+              event.creator !== user.id &&
+              user.category.includes(event.category)
+          )
+          .filter(
+            (event) => user.neighbourhood === event.creator.neighbourhood
+          ),
+      ]);
+      setCommerceEvents([
+        ...data
+          .filter(
+            (event) =>
+              new Date() < new Date(event.date) &&
+              event.creator !== user.id &&
+              event.onModel === "Commerce"
+          )
+          .filter(
+            (event) => user.neighbourhood === event.creator.neighbourhood
+          ),
+      ]);
+      setLoading(false);
+    });
+
     getCommerces().then(({ data: { commerces } }) => {
       setCommerces(
         commerces.filter(
@@ -66,7 +71,7 @@ const HomePrivate = () => {
             user.neighbourhood === commerce.neighbourhood
         )
       );
-      setLoading(false);
+
       const num =
         window.outerWidth > 992
           ? setTop(0)
