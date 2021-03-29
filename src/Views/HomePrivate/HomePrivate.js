@@ -64,9 +64,10 @@ const HomePrivate = () => {
         )
       );
 
-      window.outerWidth > 992
-        ? setTop(0)
-        : setTop(document.querySelector(".header").offsetHeight + 40);
+      const num =
+        window.outerWidth > 992
+          ? setTop(0)
+          : setTop(document.querySelector(".header").offsetHeight + 40);
       setLoading(false);
     });
   }, [events]);
