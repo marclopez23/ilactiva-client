@@ -24,6 +24,7 @@ const HomePrivate = () => {
   const { user } = useAuth();
   console.log(eventsList);
   useEffect(() => {
+    console.log(events)
     setLoading(true);
     setEvents(
       events

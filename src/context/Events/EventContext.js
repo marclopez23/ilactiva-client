@@ -19,7 +19,6 @@ function EventProvider({ children }) {
   useEffect(() => {
     getEvents().then(({ data }) => {
       setEvents([...data]);
-      console.log(data);
     });
   }, []);
 
