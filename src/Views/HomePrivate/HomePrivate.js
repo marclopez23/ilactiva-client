@@ -26,35 +26,34 @@ const HomePrivate = () => {
 
   useEffect(() => {
     setLoading(true);
-    getEvents().then(({ data }) => {
-      console.log(data);
-      setEvents([...data]);
-      setLiked([
-        ...data
-          .filter(
-            (event) =>
-              new Date() < new Date(event.date) &&
-              event.creator !== user.id &&
-              user.category.includes(event.category)
-          )
-          .filter(
-            (event) => user.neighbourhood === event.creator.neighbourhood
-          ),
-      ]);
-      setCommerceEvents([
-        ...data
-          .filter(
-            (event) =>
-              new Date() < new Date(event.date) &&
-              event.creator !== user.id &&
-              event.onModel === "Commerce"
-          )
-          .filter(
-            (event) => user.neighbourhood === event.creator.neighbourhood
-          ),
-      ]);
-      setLoading(false);
-    });
+    setEvents(
+      events
+        .filter(
+          (event) =>
+            new Date() < new Date(event.date) && event.creator !== user.id
+        )
+        .filter((event) => user.neighbourhood === event.creator.neighbourhood)
+    );
+    setLiked(
+      events
+        .filter(
+          (event) =>
+            new Date() < new Date(event.date) &&
+            event.creator !== user.id &&
+            user.category.includes(event.category)
+        )
+        .filter((event) => user.neighbourhood === event.creator.neighbourhood)
+    );
+    setCommerceEvents(
+      events
+        .filter(
+          (event) =>
+            new Date() < new Date(event.date) &&
+            event.creator !== user.id &&
+            event.onModel === "Commerce"
+        )
+        .filter((event) => user.neighbourhood === event.creator.neighbourhood)
+    );
 
     getCommerces().then(({ data: { commerces } }) => {
       setCommerces(
@@ -65,12 +64,12 @@ const HomePrivate = () => {
         )
       );
 
-      const num =
-        window.outerWidth > 992
-          ? setTop(0)
-          : setTop(document.querySelector(".header").offsetHeight + 40);
+      window.outerWidth > 992
+        ? setTop(0)
+        : setTop(document.querySelector(".header").offsetHeight + 40);
+      setLoading(false);
     });
-  }, []);
+  }, [events]);
 
   useEffect(() => {
     const num = window.outerWidth > 1200 ? 4 : 9;
@@ -103,11 +102,6 @@ const HomePrivate = () => {
               <div className="eventsList">
                 {eventsList.length > 0 ? (
                   eventsList
-                    .filter(
-                      (event) =>
-                        new Date() < new Date(event.date) &&
-                        event.creator !== user.id
-                    )
                     .sort(
                       (a, b) =>
                         new Date(a.date).getTime() - new Date(b.date).getTime()
