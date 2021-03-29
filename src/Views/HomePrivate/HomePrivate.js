@@ -3,6 +3,7 @@ import { Route, Link } from "react-router-dom";
 import { useEvents } from "../../context/Events/EventsContext.utils";
 import { getCommerces } from "../../service/commerce.service.js";
 import "./HomePrivate.scss";
+import { getEvents } from "../../service/event.service";
 import { useAuth } from "../../context/Auth/AuthContext.utils";
 import Header from "../../components/Header/Header";
 import EventCard from "../../components/EventCard/EventCard";
@@ -24,9 +25,12 @@ const HomePrivate = () => {
   const { user } = useAuth();
   console.log(eventsList);
   useEffect(() => {
-    console.log(events)
+    console.log("events", events);
     setLoading(true);
-    setEvents(
+     getEvents().then(({ data }) => {
+       setEvents([...data]);
+     });
+    /* setEvents(
       events
         .filter(
           (event) =>
@@ -53,7 +57,7 @@ const HomePrivate = () => {
             event.onModel === "Commerce"
         )
         .filter((event) => user.neighbourhood === event.creator.neighbourhood)
-    );
+    );*/
     getCommerces().then(({ data: { commerces } }) => {
       setCommerces(
         commerces.filter(
