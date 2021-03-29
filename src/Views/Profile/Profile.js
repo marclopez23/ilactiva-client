@@ -16,7 +16,6 @@ const Profile = () => {
   const [user, setUser] = useState({});
   const [topMargin, setTop] = useState(0);
   const [isLoading, setLoading] = useState(true);
-  
 
   const commerce = {
     info: "Información",
@@ -41,7 +40,7 @@ const Profile = () => {
           : setTop(document.querySelector(".perfilHeader").offsetHeight + 40);
     });
   }, []);
-  
+
   return (
     <main className="perfil" style={{ marginTop: topMargin }}>
       {isLoading && <Loader />}
@@ -135,7 +134,7 @@ const Profile = () => {
               </Link>
             </Route>
             <button className="logout" onClick={() => handleLogout()}>
-              Cerrar sessión
+              Cerrar sesión
             </button>
           </section>
         </>

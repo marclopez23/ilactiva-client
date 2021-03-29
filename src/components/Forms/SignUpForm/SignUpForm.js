@@ -46,16 +46,16 @@ const SignUpForm = ({ onSubmit }) => {
   ];
 
   const categories = [
-    { category: "talleres", img: talleres },
-    { category: "charlas", img: charlas },
-    { category: "cine", img: cine },
-    { category: "deportes", img: deportes },
-    { category: "exposiciones", img: exposiciones },
-    { category: "infantil", img: infantil },
-    { category: "música", img: musica },
-    { category: "quedadas", img: quedadas },
-    { category: "Visitas y tours", img: visitas },
-    { category: "espectaculos", img: espectaculos },
+    { category: "talleres", img: talleres, text: "Talleres" },
+    { category: "charlas", img: charlas, text: "Charlas" },
+    { category: "cine", img: cine, text: "Cine" },
+    { category: "deportes", img: deportes, text: "Deportes" },
+    { category: "exposiciones", img: exposiciones, text: "Rxposiciones" },
+    { category: "infantil", img: infantil, text: "Infantil" },
+    { category: "música", img: musica, text: "Música" },
+    { category: "quedadas", img: quedadas, text: "Quedadas" },
+    { category: "Visitas y tours", img: visitas, text: "Visitas y tours" },
+    { category: "espectaculos", img: espectaculos, text: "Espectáculos" },
   ];
 
   const [info, setInfo] = useState(initialState);
@@ -160,8 +160,8 @@ const SignUpForm = ({ onSubmit }) => {
       <form action="" onSubmit={handleSubmit}>
         {step === 1 && (
           <div className="personal-info">
-            <SimpleHeader title="Cuéntanos sobre tí" />
-            <h1 className="headline">Cuéntanos sobre tí</h1>
+            <SimpleHeader title="Cuéntanos sobre ti" />
+            <h1 className="headline">Cuéntanos sobre ti</h1>
             {info.profileImg === "" && !imageReady ? (
               <input
                 type="file"
@@ -229,7 +229,7 @@ const SignUpForm = ({ onSubmit }) => {
               <ul className="body1">
                 <li>Tiene que contener una mayúscula</li>
                 <li>Tiene que contener un número</li>
-                <li>Tiene que tener 8 carácteres como mínimo</li>
+                <li>Tiene que tener 8 caracteres como mínimo</li>
               </ul>
             </article>
             <FormFooter
@@ -245,8 +245,8 @@ const SignUpForm = ({ onSubmit }) => {
         )}
         {step === 2 && (
           <div className="location">
-            <SimpleHeader title="¿En que distrito vives?" />
-            <h1 className="headline">¿En que distrito vives?</h1>
+            <SimpleHeader title="¿En qué distrito vives?" />
+            <h1 className="headline">¿En qué distrito vives?</h1>
             {distritos.map((distrito) => (
               <article
                 className={`distrito${
@@ -273,9 +273,9 @@ const SignUpForm = ({ onSubmit }) => {
         )}
         {step === 3 && (
           <div className="category">
-            <SimpleHeader title="¿En que actividades te gustaria participar?" />
+            <SimpleHeader title="¿En qué actividades te gustaría participar?" />
             <h1 className="headline">
-              ¿En que actividades te gustaria participar?
+              ¿En qué actividades te gustaría participar?
             </h1>
             <article
               style={{
@@ -290,9 +290,10 @@ const SignUpForm = ({ onSubmit }) => {
                 display: number === categories.length ? "flex" : "none",
               }}
             >
-              {categories.map(({ category, img }) => (
+              {categories.map(({ category, img, text }) => (
                 <CategorySelector
                   title={category}
+                  text={text}
                   img={img}
                   onClick={() => handleCategory(category)}
                   key={category}
@@ -341,7 +342,7 @@ const SignUpForm = ({ onSubmit }) => {
               <input
                 className="send"
                 type="submit"
-                value="Resgistrarme"
+                value="Registrarme"
                 disabled={!imageReady}
               />
             </div>

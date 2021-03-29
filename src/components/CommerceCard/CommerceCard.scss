@@ -6,9 +6,10 @@
 .commerceCard {
   background-color: $blanco;
   border-radius: 12px;
-  width: 175px;
+  width: 220px;
   margin-left: 1rem;
   padding: 1rem;
+  min-height: 235px;
   img {
     width: 75px;
     height: 75px;
@@ -25,5 +26,12 @@
     @include primaryButton;
     display: block;
     width: 100%;
+  }
+  @include desktop {
+    .commerceCard h3 {
+      text-align: center;
+      margin: 1rem 0;
+      font-size: 0.8rem;
+    }
   }
 }

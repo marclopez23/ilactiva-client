@@ -7,7 +7,7 @@
   border-radius: 12px;
   margin: 1rem 0 1rem 1rem;
   width: 250px;
-  height: 268px;
+  min-height: 300px;
   @include cardEvento;
   .eventImg {
     height: 140px;

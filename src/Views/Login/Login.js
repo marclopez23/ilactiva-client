@@ -26,7 +26,7 @@ const Login = () => {
       </article>
       <Route>
         <Link to="/registrarme" className="enlace link">
-          No tienes cuenta? Registrate
+          No tienes cuenta? Regístrate
         </Link>
       </Route>
     </main>

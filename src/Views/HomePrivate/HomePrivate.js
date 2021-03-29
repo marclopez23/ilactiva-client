@@ -85,7 +85,7 @@ const HomePrivate = () => {
           <section className="contenidoHome" style={{ marginTop: topMargin }}>
             <h4 className="barrio">
               <img src={marker} alt="" className="marker" />
-              Lo que esta pasando en <span>{user.neighbourhood}</span>
+              Lo que está pasando en <span>{user.neighbourhood}</span>
             </h4>
             <article className="proximas">
               <div className="topSection">
@@ -120,7 +120,7 @@ const HomePrivate = () => {
                       )
                     )
                 ) : (
-                  <Empty txt="No hay ningún evento que se ajuste a tus gustos" />
+                  <Empty txt="No hay ningún evento en tu zona" />
                 )}
               </div>
             </article>
@@ -184,7 +184,7 @@ const HomePrivate = () => {
                       )
                     )
                 ) : (
-                  <Empty txt="No hay ningún evento que se ajuste a tus gustos" />
+                  <Empty txt="No hay ningún comercio en tu zona" />
                 )}
               </div>
             </article>
