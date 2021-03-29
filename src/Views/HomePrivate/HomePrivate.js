@@ -23,10 +23,11 @@ const HomePrivate = () => {
   const [max, setMax] = useState(9);
   const { events } = useEvents();
   const { user } = useAuth();
-  console.log(eventsList, likedEvents, commerceEvents);
+
   useEffect(() => {
     setLoading(true);
     getEvents().then(({ data }) => {
+      console.log(data);
       setEvents([
         ...data
           .filter(
