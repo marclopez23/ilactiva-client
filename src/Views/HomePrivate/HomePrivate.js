@@ -112,6 +112,10 @@ const HomePrivate = () => {
                       (a, b) =>
                         new Date(a.date).getTime() - new Date(b.date).getTime()
                     )
+                    .filter(
+                      (event) =>
+                        user.neighbourhood === event.creator.neighbourhood
+                    )
                     .slice(0, max)
                     .map((evento, index) =>
                       index === 8 || index === eventsList.length - 1 ? (
