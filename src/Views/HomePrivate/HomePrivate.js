@@ -22,6 +22,7 @@ const HomePrivate = () => {
   const [max, setMax] = useState(9);
   const { events } = useEvents();
   const { user } = useAuth();
+  console.log(eventsList);
   useEffect(() => {
     setLoading(true);
     setEvents(
