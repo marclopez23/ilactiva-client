@@ -19,24 +19,22 @@ function EventProvider({ children }) {
   useEffect(() => {
     getEvents().then(({ data }) => {
       setEvents([...data]);
+      console.log(data);
     });
   }, []);
 
   const bringEvent = async (id) => {
     try {
-      
       const fetchEvent = await getEvent(id);
       return fetchEvent;
-    } catch (e) {
-      
-    }
+    } catch (e) {}
   };
 
   const newEvent = useCallback(async (info) => {
     try {
       const postEvent = await createEvent(info);
       const { event: newEvent } = postEvent.data;
-      
+
       setEvents((state) => [...state, newEvent]);
       return newEvent;
     } catch (e) {
@@ -50,7 +48,6 @@ function EventProvider({ children }) {
         data: { event: evento },
       } = await joinEvent(eventId);
       const currentEventIndex = user.eventsJoined.includes(eventId);
-      
 
       if (currentEventIndex) {
         setUser((state) => ({
@@ -80,7 +77,6 @@ function EventProvider({ children }) {
         });
       }
     } catch (e) {
-      
       return "Algo ha salido mal, porfavor vuelve a intentarlo";
     }
   };
@@ -99,9 +95,7 @@ function EventProvider({ children }) {
       }));
       setEvents((state) => state.filter((evento) => evento._id !== id));
       history.goBack();
-    } catch (e) {
-      
-    }
+    } catch (e) {}
   };
 
   const eventEdit = async (id, info) => {
@@ -109,12 +103,10 @@ function EventProvider({ children }) {
       const {
         data: { updatedEvent },
       } = await editEvent(id, info);
-      
+
       const newList = events.filter((event) => event._id !== id);
       setEvents([...newList, updatedEvent]);
-    } catch (e) {
-     
-    }
+    } catch (e) {}
   };
 
   return (
