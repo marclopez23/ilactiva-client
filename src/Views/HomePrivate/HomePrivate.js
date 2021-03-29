@@ -23,9 +23,7 @@ const HomePrivate = () => {
   const [max, setMax] = useState(9);
   const { events } = useEvents();
   const { user } = useAuth();
-  console.log(eventsList);
   useEffect(() => {
-    console.log("events", events);
     setLoading(true);
     getEvents().then(({ data }) => {
       setEvents([
@@ -64,34 +62,7 @@ const HomePrivate = () => {
       ]);
       setLoading(false);
     });
-    /* setEvents(
-      events
-        .filter(
-          (event) =>
-            new Date() < new Date(event.date) && event.creator !== user.id
-        )
-        .filter((event) => user.neighbourhood === event.creator.neighbourhood)
-    );
-    setLiked(
-      events
-        .filter(
-          (event) =>
-            new Date() < new Date(event.date) &&
-            event.creator !== user.id &&
-            user.category.includes(event.category)
-        )
-        .filter((event) => user.neighbourhood === event.creator.neighbourhood)
-    );
-    setCommerceEvents(
-      events
-        .filter(
-          (event) =>
-            new Date() < new Date(event.date) &&
-            event.creator !== user.id &&
-            event.onModel === "Commerce"
-        )
-        .filter((event) => user.neighbourhood === event.creator.neighbourhood)
-    );*/
+
     getCommerces().then(({ data: { commerces } }) => {
       setCommerces(
         commerces.filter(
