@@ -28,16 +28,7 @@ const HomePrivate = () => {
     setLoading(true);
     getEvents().then(({ data }) => {
       console.log(data);
-      setEvents([
-        ...data
-          .filter(
-            (event) =>
-              new Date() < new Date(event.date) && event.creator !== user.id
-          )
-          .filter(
-            (event) => user.neighbourhood === event.creator.neighbourhood
-          ),
-      ]);
+      setEvents([...data]);
       setLiked([
         ...data
           .filter(
@@ -79,7 +70,7 @@ const HomePrivate = () => {
           ? setTop(0)
           : setTop(document.querySelector(".header").offsetHeight + 40);
     });
-  }, [events]);
+  }, []);
 
   useEffect(() => {
     const num = window.outerWidth > 1200 ? 4 : 9;
@@ -112,11 +103,20 @@ const HomePrivate = () => {
               <div className="eventsList">
                 {eventsList.length > 0 ? (
                   eventsList
+                    .filter(
+                      (event) =>
+                        new Date() < new Date(event.date) &&
+                        event.creator !== user.id
+                    )
                     .sort(
                       (a, b) =>
                         new Date(a.date).getTime() - new Date(b.date).getTime()
                     )
                     .slice(0, max)
+                    .filter(
+                      (event) =>
+                        user.neighbourhood === event.creator.neighbourhood
+                    )
                     .map((evento, index) =>
                       index === 8 || index === eventsList.length - 1 ? (
                         <EventCard
