@@ -45,16 +45,16 @@ const EventForm = ({ onSubmit }) => {
     maxUsers: 0,
   };
   const categories = [
-    { category: "talleres", img: talleres },
-    { category: "charlas", img: charlas },
-    { category: "cine", img: cine },
-    { category: "deportes", img: deportes },
-    { category: "exposiciones", img: exposiciones },
-    { category: "infantil", img: infantil },
-    { category: "música", img: musica },
-    { category: "quedadas", img: quedadas },
-    { category: "Visitas y tours", img: visitas },
-    { category: "espectaculos", img: espectaculos },
+    { category: "talleres", img: talleres, text: "Talleres" },
+    { category: "charlas", img: charlas, text: "Charlas" },
+    { category: "cine", img: cine, text: "Cine" },
+    { category: "deportes", img: deportes, text: "Deportes" },
+    { category: "exposiciones", img: exposiciones, text: "Rxposiciones" },
+    { category: "infantil", img: infantil, text: "Infantil" },
+    { category: "música", img: musica, text: "Música" },
+    { category: "quedadas", img: quedadas, text: "Quedadas" },
+    { category: "Visitas y tours", img: visitas, text: "Visitas y tours" },
+    { category: "espectaculos", img: espectaculos, text: "Espectáculos" },
   ];
 
   const [info, setInfo] = useState(initialState);
@@ -172,13 +172,14 @@ const EventForm = ({ onSubmit }) => {
               >
                 <SimpleHeader title="Escoge la categoría" />
 
-                {categories.map(({ category, img }) => (
+                {categories.map(({ category, img, text }) => (
                   <CategorySelector
                     title={category}
                     img={img}
                     onClick={() => handleCategory(category)}
                     key={category}
                     load={checkLoader}
+                    text={text}
                     isActive={
                       info.category !== undefined &&
                       info.category.includes(category)

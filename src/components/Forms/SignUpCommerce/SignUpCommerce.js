@@ -207,7 +207,7 @@ const SignUpForm = ({ onSubmit }) => {
               <ul className="body1">
                 <li>Tiene que contener una mayúscula</li>
                 <li>Tiene que contener un número</li>
-                <li>Tiene que tener 8 carácteres como mínimo</li>
+                <li>Tiene que tener 8 caracteres como mínimo</li>
               </ul>
             </article>
             <FormFooter
@@ -223,8 +223,8 @@ const SignUpForm = ({ onSubmit }) => {
         )}
         {step === 2 && (
           <div className="location">
-            <SimpleHeader title="¿Dónde y cuando te econtrarán?" />
-            <h1 className="headline">¿Dónde y cuando te econtrarán?</h1>
+            <SimpleHeader title="¿Dónde y cuándo te encontrarán?" />
+            <h1 className="headline">¿Dónde y cuándo te encontrarán?</h1>
             <p>
               Puedes incluir los distintos horarios que tienes en tu negocio.
             </p>
@@ -252,7 +252,7 @@ const SignUpForm = ({ onSubmit }) => {
               ))}
             </div>
             <label htmlFor="neighbourhood">
-              ¿En que distrito se ubica el negocio?
+              ¿En qué distrito se ubica el negocio?
             </label>
             <select
               name="neighbourhood"
@@ -297,7 +297,7 @@ const SignUpForm = ({ onSubmit }) => {
           <div className="category">
             <SimpleHeader title="¿Qué puedes ofrecer a tus vecinos?" />
             <h1 className="headline">¿Qué puedes ofrecer a tus vecinos?</h1>
-            <label htmlFor="category">¿Qué tipo de negoció tienes?</label>
+            <label htmlFor="category">¿Qué tipo de negocio tienes?</label>
             <select
               name="category"
               id="category"
@@ -348,7 +348,7 @@ const SignUpForm = ({ onSubmit }) => {
             <SimpleHeader title="Más información" />
             <h1 className="headline">Más información</h1>
             <label htmlFor="description">
-              ¿Como le explicarias tu negocio a los usuarios?
+              ¿Cómo le explicarías tu negocio a los usuarios?
             </label>
             <textarea
               rows="5"
@@ -449,7 +449,7 @@ const SignUpForm = ({ onSubmit }) => {
               <input
                 className="send"
                 type="submit"
-                value="Resgistrarme"
+                value="Registrarme"
                 disabled={!imageReady}
               />
             </div>
