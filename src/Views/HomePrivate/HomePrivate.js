@@ -63,12 +63,11 @@ const HomePrivate = () => {
             user.neighbourhood === commerce.neighbourhood
         )
       );
-
+      setLoading(false);
       const num =
         window.outerWidth > 992
           ? setTop(0)
           : setTop(document.querySelector(".header").offsetHeight + 40);
-      setLoading(false);
     });
   }, [events]);
 
