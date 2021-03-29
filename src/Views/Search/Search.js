@@ -57,7 +57,6 @@ const Search = () => {
     setResult([...eventos.filter((evento) => evento.category.includes(cat))]);
   };
   const checkLoader = () => {
-    console.log("hola");
     const imageLoaded = number + 1;
 
     if (imageLoaded <= categories.length) {
