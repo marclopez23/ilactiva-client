@@ -27,9 +27,43 @@ const HomePrivate = () => {
   useEffect(() => {
     console.log("events", events);
     setLoading(true);
-     getEvents().then(({ data }) => {
-       setEvents([...data]);
-     });
+    getEvents().then(({ data }) => {
+      setEvents([
+        ...data
+          .filter(
+            (event) =>
+              new Date() < new Date(event.date) && event.creator !== user.id
+          )
+          .filter(
+            (event) => user.neighbourhood === event.creator.neighbourhood
+          ),
+      ]);
+      setLiked([
+        ...data
+          .filter(
+            (event) =>
+              new Date() < new Date(event.date) &&
+              event.creator !== user.id &&
+              user.category.includes(event.category)
+          )
+          .filter(
+            (event) => user.neighbourhood === event.creator.neighbourhood
+          ),
+      ]);
+      setCommerceEvents([
+        ...data
+          .filter(
+            (event) =>
+              new Date() < new Date(event.date) &&
+              event.creator !== user.id &&
+              event.onModel === "Commerce"
+          )
+          .filter(
+            (event) => user.neighbourhood === event.creator.neighbourhood
+          ),
+      ]);
+      setLoading(false);
+    });
     /* setEvents(
       events
         .filter(
@@ -66,7 +100,7 @@ const HomePrivate = () => {
             user.neighbourhood === commerce.neighbourhood
         )
       );
-      setLoading(false);
+
       const num =
         window.outerWidth > 992
           ? setTop(0)
