@@ -22,18 +22,19 @@ It is an app that will allow neighbors and local businesses to create events. Th
 - **Delete event** As a user I can delete a event
 - **Join event** As a user I can join to an event.
 - **Unsubscribe event** As a user I can unsubscribe from an event
-- **Follow commerce** As a user I can follow a commerce.
-- **Unollow commerce** As a user I can unfollow a commerce.
+- **Follow commerce** As a user I can follow a commerce
+- **Unollow commerce** As a user I can unfollow a commerce
 - **View User profile** As a user I can see my profile
 - **Edit User profile** As a user I can edit my profile
+- **Commerce profile** As a user I want to see the commerces profiles
+- **My Activities** As a user I want to see my joined and created events
+- **My folowe commerces** As a user I want to see my followed commerces
 
 ## Backlog
 
 - Show event stats
 - Send emails with notifications
 - Geolocalize events by neighborhood
-- Create a list of created event
-- Create a list of attended event
 - Light/Dark mode
 
 <br>
@@ -44,68 +45,161 @@ It is an app that will allow neighbors and local businesses to create events. Th
 
 | Path               | Component       | Permissions                | Behavior                                                         |
 | ------------------ | --------------- | -------------------------- | ---------------------------------------------------------------- |
-| `/`                | HomePage        | public `<Route>`           | Home page / Landing Page                                         |
-| `/signup`          | SignupPage      | anon only `<AnonRoute>`    | Signup form, link to login, navigate to dashboard after signup   |
-| `/login`           | LoginPage       | anon only `<AnonRoute>`    | Login form, link to signup, navigate to dashboard after login    |
-| `/dashboard`       | EventsPage      | user only `<PrivateRoute>` | Page that shows all created events                               |
-| `/events/add`      | AddEventForm    | user only `<PrivateRoute>` | New project form, adds a new ticket and redirects to ticket page |
-| `/events/edit/:id` | EditEventForm   | user only `<PrivateRoute>` | Edit the project info                                            |
-| `/events/:id`      | EventDetailPage | user only `<PrivateRoute>` | Page with the details of a event                                 |
-| `/profile`         | ProfilePage     | user only `<PrivateRoute>` | Shows the user profile, an edit options                          |
-| `/commerce/:id`    | ProfilePage     | user only `<PrivateRoute>` | Shows the commerce profile, an their events                      |
+| `/`                | Home / HomePrivate       | public / user  `<Route>` / `<PrivateRoute>`      | Home page / Landing Page           |
+| `/registrarme`          | SignUp    | anon only `<AnonRoute>`    | Signup form, link to login, navigate to Home Private  after signup   |
+| `/iniciar-sesion`           | Login    | anon only `<AnonRoute>`    | Login form, link to signup, navigate to Home Private after login    |
+| `/eventos`       | Events   | user only `<PrivateRoute>` | Page where the user can select to see the events joined or created                             |
+| `/crear-evento`      | CreateEvent   | user only `<PrivateRoute>` | New event form, adds a new event and redirects to event connfirmation |
+| `/evento/editar/:id` | EditEvent   | user only `<PrivateRoute>` | Edit the event info                                            |
+| `/evento/creado` | EventConfirmation   | user only `<PrivateRoute>` | Screen to confirm to the user that the event is created              |
+| `/evento/:id`      | Event | user only `<PrivateRoute>` | Page with the details of a event where the user can join                                 |
+| `/eventos/:query/`      | UserEvents | user only `<PrivateRoute>` | Page with a list of user joined or created events                               |
+| `/eventos/:query/:cuando`| MoreEvents | user only `<PrivateRoute>` | Page with a list of user joined or created events but filter for next or past events   |
+| `/perfil`         | Profile   | user only `<PrivateRoute>` | Shows the user profile                        |
+| `/perfil/editar/:id` | EditProfile   | user only `<PrivateRoute>` | Page where the user can edit the profile info                      |
+| `/comercios/:id`    | CommercePage     | user only `<PrivateRoute>` | Shows the commerce profile, an their events                      |
+| `/comercios/seguidos`    | FollowedCommerces     | user only `<PrivateRoute>` | Shows the commerces followed by the user                     |
+| `/buscar`    | Search    | user only `<PrivateRoute>` | Page where the user can search events by category                    |
+| `/eventos-:filtro`    | EventsList    | user only `<PrivateRoute>` | Page where the user can search events by a filter                   |
+| `*`    | ErrorPage   | publlic | 404 or ErrorBoundary Page                 |
 
 ## Components
 
-- HomePage
+- Home
 
-- LoginPage
-
-- SignupPage
-
-- EventsPage
-
+- HomePrivate
   - EventCard
+  - EventCardLarge
+  - Header
+  - CommerceCard
 
-- AddEventForm
-- EditEventForm
+- Login
+  - LoginForm
 
-- EventDetailPage
+- Signup
+  - SimpleHeader
+  - SignUpForm
+    - CategorySelector
+    - ConfirmationForm
+    - FormFooter
+  - SignUpCommerce
+    - Tag
+    - ConfirmationForm
+    - FormFooter
 
-- ProfilePage
+- Events
+  - Header
 
-  - EditProfileForm
+- CreateEvent
+ - EventForm
+   - FormFooter
+
+- EditEvent
+ - SimpleHeader
+
+- EventConfirmation 
+
+- Event
+
+- UserEvents
+  - SimpleHeader
+  - EventCardLarge
+
+- MoreEvents
+  - SimpleHeader
+  - EventCardLarge
+
+- Profile
+  - ProfileHeader
+  - Tag
+  - ListButton
+  
+- EditProfile
+  - Tag
+  - CategorySelector
+  - Loader
+  - SimpleHeader
+
+- CommercePage
+  - ProfileHeader
+  - Tag
+  - EventCardLarge
+ 
+- FollowedCommerces
+  - CommerceCard
+  - SimpleHeader
+
+- Search
+  - CategorySelector
+  - EventCardLarge
+  - Tag
+
+- EventsList
+  - SimpleHeader
+  - EventCardLarge
+
+- ErrorPage
 
 - Routes
-
   - AnonRoute
   - PrivateRoute
 
 - Common
   - Navbar
   - Footer
-  - Button...
+  - Button
+  - Menu
+  - Loader
+  - Footer
+  - ErrorBoundary
+  - ScrollToTop
 
 ## Services
 
 - Auth Service
-
   - authApi.login(user)
   - authApi.signup(user)
   - authApi.logout()
 
 - Events Service
-
-  - eventsApi.list()
-  - eventsApi.addEvent(event)
-  - eventsApi.getEventDetails(eventId)
-  - eventsApi.editEvent(eventId, eventBody)
+  - eventsApi.getEvents()
+  - eventsApi.createEvent(info)
+  - eventsApi.getEvent(id)
+  - eventsApi.editEvent(id, info)
   - eventsApi.deletEevent(eventId)
+  - eventsApi.joinEvent(eventId) -> This also works for unsubscribe for an event
 
 - User Service
-  - usersApi.editUser(userId, userBody)
-  - userApi.followCommerce(userId, commerceId)
+  - usersApi.get()
+  - usersApi.edit(id, info)
+  - userApi.followCommerce(commerceId) -> This also works for unfollow commerces
+
+- Commerces Service
+  - commerceApi.getCommerces()
+  - commerceApi.getCommerce(id)
+
+- Upload Image Service
+  - projectApi.uploadFileService(file)
 
 <br>
+
+## Contexts
+
+- AuthContext
+  - user
+  - handleLogin()
+  - handleLogout()
+  - handleSignup()
+  - setUser()
+
+- EventContext
+  - events
+  - bringEvent(id)
+  - newEvent(id)
+  - setEvents()
+  - registerEvent(id)
+  - quitEvent(id)
+  - eventEdit(id, info)
 
 # Server / Backend
 
