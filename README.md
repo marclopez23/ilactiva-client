@@ -2,6 +2,10 @@
 
 <br>
 
+### Deplloy Link
+
+[Link](https://illactiva.netlify.app/)
+
 ## Description
 
 It is an app that will allow neighbors and local businesses to create events. The intention is to create these activities within the neighborhoods to improve the disconnection that currently exists in big cities and to promote local commerce.
@@ -328,7 +332,7 @@ Delte model (shallow deleting)
 | PATCH       | `/api/events/:join/:eventId`      | {eventId}  | 200            | 400          |                                           
 | DELETE      | `/events/:eventId`      | {eventId}                  | 200            | 400          | 
 | GET         | `/user`                 | {}                    | 200            | 400          | 
-| PATCH       | `/user/edit/:userId`         | {email, name, direction, category, profileImg, tags,schedule, description, neighbourhood, facebook, twitter, instagram, web}        |                |              | 
+| PATCH       | `/user/edit/:userId`         | {email, name, direction, category, profileImg, tags,schedule, description, neighbourhood, facebook, twitter, instagram, web}        |    200            |    400          | 
 | PATCH      | `/user/follow/:commerceId` | {commerceId}            |    200            |     400         |
 | GET         | `/commerces`             | {}                    | 200            | 400          | 
 | GET         | `/commerces/:commerceId` | {commerceId}            |  200              |  400            |
