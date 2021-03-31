@@ -1,4 +1,4 @@
-# Illactiva
+![Illactiva](https://github.com/marclopez23/illactiva-client/blob/main/src/assets/logo.png)
 
 <br>
 
@@ -28,7 +28,7 @@ It is an app that will allow neighbors and local businesses to create events. Th
 - **Edit User profile** As a user I can edit my profile
 - **Commerce profile** As a user I want to see the commerces profiles
 - **My Activities** As a user I want to see my joined and created events
-- **My folowe commerces** As a user I want to see my followed commerces
+- **My folowed commerces** As a user I want to see my followed commerces
 
 ## Backlog
 
