@@ -2,10 +2,6 @@
 
 <br>
 
-## M3 Final Project
-
-<br>
-
 ## Description
 
 It is an app that will allow neighbors and local businesses to create events. The intention is to create these activities within the neighborhoods to improve the disconnection that currently exists in big cities and to promote local commerce.
@@ -209,75 +205,135 @@ User model
 
 ```javascript
 {
-  name: {type: String, required: true },
-  email: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
-  direction: {type: String, required: true},
-  category: {type: String, required: true, enum:["talleres", "deporte", "exposiciones", "Visitas y tours", "infatil", "quedadas", "cine", "espectáculos", "charlas", "música", "otros"] },
-  profileImg: {type: String },
-  eventsJoined: [ { type: mongoose.Schema.Types.ObjectId, ref: "Event" } ],
-  eventsCreated: [ { type: mongoose.Schema.Types.ObjectId, ref: "Event" } ]
-}
+    email: {
+      type: String,
+      require: true,
+      unique: true,
+      match: EMAIL_REGEX,
+    },
+    hashedPassword: {
+      type: String,
+      require: true,
+      select: false,
+    },
+    name: { type: String, required: true },
+    neighbourhood: { type: String, required: true },
+    category: {
+      type: [String],
+      required: true,
+    },
+    profileImg: { type: String },
+    eventsJoined: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
+    eventsCreated: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
+    following: [{ type: mongoose.Schema.Types.ObjectId, ref: "Commerce" }],
+  }
 ```
 
 Commerce model
 
 ```javascript
 {
-  name: {type: String, required: true, unique: true},
-  description: {type: String, required: true},
-  email: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
-  direction: {type: String, required: true},
-  category: {type: String, enum:["restauración", "cultura", "moda", "asociación", "deporte", "salud", "electrónica", "otros", "comida"], required: true },
-  tags: {type: Array, required: true },
-  schedule: {type: String, required: true},
-  profileImg: {type: String },
-  eventsCreated: [ { type: mongoose.Schema.Types.ObjectId, ref: "Envent" } ]
-}
+    email: {
+      type: String,
+      require: true,
+      unique: true,
+      match: EMAIL_REGEX,
+    },
+    hashedPassword: {
+      type: String,
+      require: true,
+      select: false,
+    },
+    name: { type: String, required: true },
+    direction: { type: String, required: true },
+    neighbourhood: { type: String, required: true },
+    category: {
+      type: String,
+      required: true,
+    },
+    tags: { type: [String], required: true },
+    schedule: { type: [String], required: true },
+    profileImg: { type: String },
+    eventsCreated: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
+    eventsJoined: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
+    following: [{ type: mongoose.Schema.Types.ObjectId, ref: "Commerce" }],
+    web: { type: String },
+    instagram: { type: String },
+    twitter: { type: String },
+    facebook: { type: String },
+    description: { type: String, required: true },
+  }
 ```
 
 Event model
 
 ```javascript
 {
-  creator: [ { type: mongoose.Schema.Types.ObjectId, refPath: "onModel" } ],
-  onModel: {
-    type: String,
-    required: true,
-    enum: ['User', 'Commerce']
-  },
-  title: {type: String, required: true },
-  description: {type: String, required: true },
-  eventImg: { type: String },
-  category: {type: String, required: true, enum:["talleres", "deporte", "exposiciones", "Visitas y tours", "infatil", "quedadas", "cine", "espectáculos", "charlas", "música", "otros"] },
-  free: {type: boolean, required: true},
-  likes: {type: Number },
-  price: {type: Number},
-  location: {type: String, required: true },
-  date: {type: Date, required: true },
-  resgisteredUsers: [ { type: mongoose.Schema.Types.ObjectId, ref: "User" } ],
-},
+    creator: { type: mongoose.Schema.Types.ObjectId, refPath: "onModel" },
+    onModel: {
+      type: String,
+      required: true,
+      enum: ["User", "Commerce"],
+    },
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+    eventImg: { type: String },
+    category: {
+      type: String,
+      required: true,
+    },
+    free: { type: Boolean, required: true },
+    likes: { type: Number },
+    price: { type: String },
+    date: { type: Date, required: true },
+    hour: { type: String, required: true },
+    end: { type: String, required: true },
+    place: { type: String, required: true },
+    maxUsers: { type: String, required: true },
+    resgisteredUsers: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
+  }
 ```
 
 <br>
 
+Delte model (shallow deleting)
+
+```javascript
+ {
+    collectionName: {
+      type: String,
+      required: true,
+    },
+    deletedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    item: {
+      type: Object,
+    },
+  }
+```
+
 ## API Endpoints (backend routes)
 
-| HTTP Method | URL                         | Request Body          | Success status | Error Status | Description                                                                                                                     |
-| ----------- | --------------------------- | --------------------- | -------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| POST        | `/auth/signup`              | {email, password ...} | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
-| POST        | `/auth/login`               | {email, password}     | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session              |
-| POST        | `/auth/logout`              | (empty)               | 204            | 400          | Logs out the user                                                                                                               |
-| GET         | `/api/events`               |                       |                | 400          | Sends all events                                                                                                                |
-| GET         | `/api/events/:eventId`      | {id}                  |                |              | Sends one specific event                                                                                                        |
-| POST        | `/api/events`               | {title, description}  | 201            | 400          | Create and saves a new event in the DB                                                                                          |
-| PUT         | `/api/events/:eventId`      | {title, description}  | 200            | 400          | Edits event in the DB                                                                                                           |
-| DELETE      | `/api/events/:eventId`      | {id}                  | 201            | 400          | Deletes event                                                                                                                   |
-| GET         | `/api/user`                 | {}                    | 201            | 400          | Sends user detauls                                                                                                              |
-| PUT         | `/api/user/:userId`         | {username ...}        |                |              | Edits user                                                                                                                      |
-| GET         | `/api/commerce`             | {}                    | 201            | 400          | Sends commerce detauls                                                                                                          |
-| PUT         | `/api/commerce/:commerceId` | {name ...}            |                |              | Edits commerce                                                                                                                  |
+| HTTP Method | URL                         | Request Body          | Success status | Error Status | 
+| ----------- | --------------------------- | --------------------- | -------------- | ------------ |
+| POST        | `/auth/signup`              | {password, email, name, direction, category, profileImg, isCommerce, tags,schedule, description, neighbourhood, facebook, twitter, instagram, web,} | 200            | 400        | 
+| POST        | `/auth/login`               | {email, password}     | 200            | 401        | 
+| POST        | `/auth/logout`              |            | 200            | 400          | 
+| GET         | `/events`               | {}                       |  200              | 400 / 401          | 
+| GET         | `/events/:eventId`      | {id}                  | 200                |              | 
+| PATCH         | `/events/edit/:eventId`| {eventId, title, description, category, free, date, hour, place, end}      |   200             |    400          | 
+| POST        | `/events/create`        | {title, description, category, free, date, hour, place, end}  | 200           | 400          | 
+| PATCH       | `/api/events/:join/:eventId`      | {eventId}  | 200            | 400          |                                           
+| DELETE      | `/events/:eventId`      | {eventId}                  | 200            | 400          | 
+| GET         | `/user`                 | {}                    | 200            | 400          | 
+| PATCH       | `/user/edit/:userId`         | {email, name, direction, category, profileImg, tags,schedule, description, neighbourhood, facebook, twitter, instagram, web}        |                |              | 
+| PATCH      | `/user/follow/:commerceId` | {commerceId}            |    200            |     400         |
+| GET         | `/commerces`             | {}                    | 200            | 400          | 
+| GET         | `/commerces/:commerceId` | {commerceId}            |  200              |  400            |
+
+<br>
 
 <br>
 
